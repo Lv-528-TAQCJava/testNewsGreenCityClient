@@ -5,7 +5,11 @@ import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EcoNewsListPO extends  BasePageObject {
+/**
+ * The main part of news list page
+ * https://ita-social-projects.github.io/GreenCityClient/#/news
+ */
+public class EcoNewsListPO extends BasePageObject {
     private Label itemsFound;
 
     public EcoNewsListPO(WebDriver driver) {

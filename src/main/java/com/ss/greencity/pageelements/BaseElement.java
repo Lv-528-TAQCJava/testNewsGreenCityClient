@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * A template for any web element
+ */
 public abstract class BaseElement {
     protected By path;
     protected WebElement element;

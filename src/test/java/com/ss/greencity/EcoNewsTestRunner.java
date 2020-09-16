@@ -51,7 +51,7 @@ public class EcoNewsTestRunner {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         //newsList.goToUrl("https://ita-social-projects.github.io/GreenCityClient/#/news");
         String numberOfItems = newsList.getItemsFound().getText();
-        assertTrue(numberOfItems, numberOfItems.equals("189 items found"));
+        assertTrue(numberOfItems.equals("189 items found"));
     }
 
 
