@@ -1,5 +1,6 @@
 package com.ss.greencity;
 
+import com.ss.greencity.pageobjects.EcoNewsListPO;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +44,14 @@ public class EcoNewsTestRunner {
     @After
     public void tearDown() {
         //logout and so on
+    }
+
+    @Test
+    public void numberOfItemsFoundTest() {
+        EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        //newsList.goToUrl("https://ita-social-projects.github.io/GreenCityClient/#/news");
+        String numberOfItems = newsList.getItemsFound().getText();
+        assertTrue(numberOfItems, numberOfItems.equals("189 items found"));
     }
 
 
