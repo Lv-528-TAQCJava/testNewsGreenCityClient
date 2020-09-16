@@ -13,7 +13,7 @@ import java.util.List;
 public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     @Test
     public void openFirstNews() {
-        WebElement firstNews = driver.findElements(By.cssSelector("img.list-image-content")).get(0);
+        WebElement firstNews = driver.findElements(allNewsCards).get(0);
         firstNews.click();
         WebElement newsContent = driver.findElement(By.cssSelector("div.news-content"));
         String text = newsContent.getText();

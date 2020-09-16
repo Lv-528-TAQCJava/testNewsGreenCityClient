@@ -1,6 +1,7 @@
 package com.ss.greencity;
 
 import org.junit.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class EcoNewsTestRunner {
     protected static WebDriver driver;
+    protected By allNewsCards = By.cssSelector("img.list-image-content");
     public EcoNewsTestRunner() {
 
     }
