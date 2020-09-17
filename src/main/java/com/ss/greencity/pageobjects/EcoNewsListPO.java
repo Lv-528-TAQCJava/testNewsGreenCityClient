@@ -5,7 +5,9 @@ import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ import java.util.List;
 public class EcoNewsListPO extends BasePageObject {
     private Label itemsFound;
     private NewsCardPO firstNewsCard;
-    private List<Button> filters; //I'm not sure it's simple to use List here.
+    private ArrayList<Button> filters; //I'm not sure it's simple to use List here.
     //Probably we need to have each filter Button separately
 
     public EcoNewsListPO(WebDriver driver) {
@@ -30,5 +32,14 @@ public class EcoNewsListPO extends BasePageObject {
     public NewsCardPO getFirstNewsCard() {
         firstNewsCard = new NewsCardPO(driver, 1);
         return firstNewsCard;
+    }
+
+    public List<Button> getFilters() {
+        ArrayList<WebElement> filters0 = (ArrayList<WebElement>) driver.findElements(EcoNewsLocators.FILTERS_LIST.getPath());
+        filters = new ArrayList<Button>();
+        for (WebElement b: filters0) {
+            filters.add(new Button(b));
+        }
+        return filters;
     }
 }
