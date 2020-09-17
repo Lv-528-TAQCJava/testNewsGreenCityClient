@@ -45,6 +45,15 @@ public class EcoNewsListPO extends BasePageObject {
         return firstNewsCard;
     }
 
+    public List<Button> getFilters() {
+        ArrayList<WebElement> filters0 = (ArrayList<WebElement>) driver.findElements(EcoNewsLocators.FILTERS_LIST.getPath());
+        filters = new ArrayList<Button>();
+        for (WebElement b: filters0) {
+            filters.add(new Button(b));
+        }
+        return filters;
+    }
+
     public List<NewsCardPO> getAllNews() {
         int allNewsCount;
         JavascriptExecutor js = (JavascriptExecutor) driver;
