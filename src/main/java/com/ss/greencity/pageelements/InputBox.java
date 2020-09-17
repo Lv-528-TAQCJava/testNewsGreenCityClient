@@ -24,6 +24,9 @@ public class InputBox extends BaseElement {
     public void clear() {
         this.element.clear();
     }
+    public void setData(String value) {
+        this.element.sendKeys(value);
+    }
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
     }
