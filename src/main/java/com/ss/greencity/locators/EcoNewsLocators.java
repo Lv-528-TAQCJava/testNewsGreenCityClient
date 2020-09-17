@@ -7,7 +7,12 @@ import org.openqa.selenium.By;
  */
 public enum EcoNewsLocators implements Locator {
 
-    ITEMS_FOUND(By.cssSelector("div.main-wrapper")); //block with number of found news
+    ITEMS_FOUND(By.cssSelector("div.main-wrapper")), //block with number of found news
+    FILTERS_LIST(By.cssSelector("ul.ul-eco-buttons>a>li")), //list of buttons "Filter by"
+    NEWS_LIST(By.cssSelector("ul.list>li")), //list of loaded news cards. Mind that they load on scrolling
+    GALLERY_VIEW(By.cssSelector("div.gallery-view")), //button to present news cards as gallery
+    LIST_VIEW(By.cssSelector("div.list-view")), //button to present news cards as list
+    FIRST_NEWS_CARD(By.cssSelector("ul.list>li:nth-of-type(1)"));
 
     EcoNewsLocators(By path) {
         this.path = path;

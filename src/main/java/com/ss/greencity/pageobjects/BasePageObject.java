@@ -3,7 +3,7 @@ package com.ss.greencity.pageobjects;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Abstract
+ * A template for any page object
  */
 public abstract class BasePageObject {
     protected WebDriver driver;

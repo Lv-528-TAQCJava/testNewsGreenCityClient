@@ -5,9 +5,13 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.w3c.dom.NodeList;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -46,6 +50,7 @@ public class EcoNewsTestRunner {
         //logout and so on
     }
 
+    @Ignore //Renewed and moved to EcoNewsOpenNewsTest
     @Test
     public void numberOfItemsFoundTest() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
@@ -55,7 +60,7 @@ public class EcoNewsTestRunner {
             e.printStackTrace();
         }
         String numberOfItems = newsList.getItemsFound().getText();
-        assertTrue(numberOfItems, numberOfItems.equals("189 items found"));
+        assertTrue(numberOfItems.equals("189 items found"));
     }
 
 
