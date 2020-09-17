@@ -23,6 +23,7 @@ public class Label extends BaseElement {
     public String getText() {
         return this.element.getText();
     }
+
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
     }

@@ -6,6 +6,10 @@ import com.ss.greencity.locators.NewsCardLocators;
 import com.ss.greencity.pageelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An object of a news card (brief presentation of one of news pieces)
@@ -13,18 +17,34 @@ import org.openqa.selenium.WebDriver;
  */
 public class NewsCardPO extends BasePageObject {
     private int numberInList; //I have no another idea how to refer to a specific NewsCard, since we anyway have a list of them
+
     private Image image;
-    private Label category;
+    private List<Label> categories;
     private Label heading;
     private Label text;
-    private Label date; //I'm not sure we really need this, but possible test case:
-    // date/author in news card similar to date/author on single news page
+    private Label date;
     private Label author;
     private Button clickableArea; //in fact, all the card is a button
 
-    protected NewsCardPO(WebDriver driver, int numberInList) {
-        super(driver);
+    protected NewsCardPO(WebElement element, int numberInList) {
+        super(element);
         this.numberInList = numberInList;
+        init();
+    }
+
+    private void init() {
+        image = new Image(element, NewsCardLocators.IMAGE);
+
+        List<WebElement> tags = element.findElements(NewsCardLocators.CATEGORIES.getPath());
+        categories = new ArrayList<Label>();
+        for(WebElement tag : tags) {
+            categories.add(new Label(tag));
+        }
+
+        heading = new Label(element.findElement(NewsCardLocators.HEADING.getPath()));
+        text = new Label(element.findElement(NewsCardLocators.TEXT.getPath()));
+        date = new Label(element.findElement(NewsCardLocators.DATE.getPath()));
+        author = new Label(element.findElement(NewsCardLocators.AUTHOR.getPath()));
     }
 
     public Button getClickableArea() {
@@ -42,6 +62,10 @@ public class NewsCardPO extends BasePageObject {
      */
     private String cssSelectorToString(By selector) {
         return selector.toString().replace("By.cssSelector: ", "");
+    }
+
+    public List<Label> getTags() {
+        return  categories;
     }
 
 }

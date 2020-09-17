@@ -1,6 +1,9 @@
 package com.ss.greencity;
 
+import com.ss.greencity.pageelements.Button;
+import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
+import com.ss.greencity.pageobjects.NewsCardPO;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
+//import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -54,13 +58,36 @@ public class EcoNewsTestRunner {
     @Test
     public void numberOfItemsFoundTest() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        String numberOfItems = newsList.getItemsFound().getText();
+        assertTrue(numberOfItems.equals("189 items found"));
+    }
+
+    @Test
+    public void oneFilterAppliedTest() {
+        EcoNewsListPO news = new EcoNewsListPO(driver);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String numberOfItems = newsList.getItemsFound().getText();
-        assertTrue(numberOfItems.equals("189 items found"));
+        news.getFilterButton("Ads").click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NewsCardPO> allnews = news.getAllNews();
+        int correctlyTaggedCount = 0;
+
+        for(NewsCardPO newsCard: allnews) {
+            for (Label tag : newsCard.getTags()) {
+                if(tag.getText().equals("ADS")) {
+                    correctlyTaggedCount++;
+                    break;
+                }
+            }
+        }
+        assertEquals("Count of correctly tagged news", allnews.size(), correctlyTaggedCount);
     }
 
 

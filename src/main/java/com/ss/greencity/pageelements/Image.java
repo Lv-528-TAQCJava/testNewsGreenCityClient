@@ -9,15 +9,15 @@ import org.openqa.selenium.WebElement;
  */
 public class Image extends BaseElement {
 
-    protected Image(WebDriver driver, Locator locator) {
+    public Image(WebDriver driver, Locator locator) {
         super(driver, locator);
     }
 
-    protected Image(WebElement elementToParse, Locator locator) {
+    public Image(WebElement elementToParse, Locator locator) {
         super(elementToParse, locator);
     }
 
-    protected Image(WebElement element) {
+    public Image(WebElement element) {
         super(element);
     }
 
