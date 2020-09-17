@@ -31,7 +31,8 @@ public class EcoNewsTestRunner {
 
     @BeforeClass
     public static void setUpClass() {
-        System.setProperty("webdriver.chrome.driver", "src/test/driver/chromedriver.exe");
+        String webDriverPath = System.getenv("webDriverPath");
+        System.setProperty("webdriver.chrome.driver", webDriverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1500, TimeUnit.MILLISECONDS);
