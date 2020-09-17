@@ -1,0 +1,30 @@
+package com.ss.greencity.pageelements;
+
+
+import com.ss.greencity.locators.Locator;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+/**
+ * Functionality for performing actions with input box
+ */
+public class InputBox extends BaseElement {
+    public InputBox(WebDriver driver, Locator locator) {
+        super(driver, locator);
+    }
+    public InputBox(WebElement element, Locator locator) {
+        super(element, locator);
+    }
+    public InputBox(WebElement element) {
+        super(element);
+    }
+    public void click() {
+        this.element.click();
+    }
+    public void clear() {
+        this.element.clear();
+    }
+    public String getAttribute(String attribute) {
+        return this.element.getAttribute(attribute);
+    }
+}
