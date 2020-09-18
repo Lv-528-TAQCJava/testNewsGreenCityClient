@@ -22,6 +22,9 @@ public class EcoNewsListPO extends BasePageObject {
     private List<Button> filters; //I'm not sure it's simple to use List here.
     //Probably we need to have each filter Button separately
 
+    private Button galleryViewButton;
+    private Button listViewButton;
+
     public EcoNewsListPO(WebDriver driver) {
         super(driver);
         init();
@@ -38,6 +41,20 @@ public class EcoNewsListPO extends BasePageObject {
     public Label getItemsFound() {
         itemsFound = new Label(driver, EcoNewsLocators.ITEMS_FOUND);
         return itemsFound;
+    }
+
+    public Button getGalleryViewButton() {
+        if (galleryViewButton == null){
+            galleryViewButton = new Button(driver, EcoNewsLocators.GALLERY_VIEW);
+        }
+        return galleryViewButton;
+    }
+
+    public Button getListViewButton() {
+        if (listViewButton == null){
+            listViewButton = new Button(driver, EcoNewsLocators.LIST_VIEW);
+        }
+        return listViewButton;
     }
 
     public NewsCardPO getFirstNewsCard() {
