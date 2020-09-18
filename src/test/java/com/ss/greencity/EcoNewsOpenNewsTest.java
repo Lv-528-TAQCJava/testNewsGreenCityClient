@@ -3,6 +3,7 @@ package com.ss.greencity;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
 import com.ss.greencity.pageobjects.EcoNewsPO;
 import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.SignUpPO;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        closeSignUpForm();
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue("Verifying that news content is not empty", text.length() > 0);
@@ -48,10 +50,12 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         card.getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        closeSignUpForm();
         Assert.assertEquals("Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
         Assert.assertEquals("Verifying that author is equal in a news card and in news page",
                 authorInCard, pieceOfNews.getAuthor());
 
     }
+
 }

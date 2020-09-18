@@ -13,7 +13,7 @@ public class EcoNewsPO extends BasePageObject {
     WebElement newsText;
     By dateSelector = By.cssSelector("div.news-info-date");
     WebElement date;
-    By authorSelector = By.cssSelector("news-info-author");
+    By authorSelector = By.cssSelector("div.news-info-author");
     WebElement author;
 
     public EcoNewsPO(WebDriver driver) {
@@ -31,6 +31,6 @@ public class EcoNewsPO extends BasePageObject {
     }
     public String getAuthor() {
         author = driver.findElement(authorSelector);
-        return date.getText().replace("by ", "");
+        return author.getText().replace("by ", "");
     }
 }

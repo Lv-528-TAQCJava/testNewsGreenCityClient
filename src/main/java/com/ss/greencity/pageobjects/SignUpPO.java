@@ -66,4 +66,8 @@ public class SignUpPO extends BasePageObject{
          return label.getText();
      }
 
+     public void closeForm() {
+        driver.findElement(CLOSE_FORM_BUTTON.getPath());
+     }
+
 }

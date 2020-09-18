@@ -58,7 +58,7 @@ public class EcoNewsListPO extends BasePageObject {
     }
 
     public NewsCardPO getFirstNewsCard() {
-        firstNewsCard = new NewsCardPO(driver.findElements(EcoNewsLocators.NEWS_LIST.getPath()).get(0), 1);
+        firstNewsCard = new NewsCardPO(driver.findElements(EcoNewsLocators.NEWS_LIST.getPath()).get(0));
         return firstNewsCard;
     }
 
@@ -83,7 +83,7 @@ public class EcoNewsListPO extends BasePageObject {
 
         List<NewsCardPO> allNews = new ArrayList<NewsCardPO>();
         for(int i = 0; i < loadedNews.size(); i++) {
-            allNews.add(new NewsCardPO(loadedNews.get(i), i));
+            allNews.add(new NewsCardPO(loadedNews.get(i)));
         }
 
         return allNews;

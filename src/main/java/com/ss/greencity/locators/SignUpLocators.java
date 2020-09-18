@@ -9,7 +9,8 @@ public enum SignUpLocators implements Locator {
     PASSWORD_FIELD(By.cssSelector("input[name='form-control password']")),
     CONFIRM_PASSWORD_FIELD(By.cssSelector("input[name='form-control password-confirm']")),
     SIGN_UP_USER_BTN(By.cssSelector("button.primary-global-button")),
-    EMAIL_ALERT_MESSAGE(By.cssSelector(" Please check that your e-mail address is indicated correctly "));
+    EMAIL_ALERT_MESSAGE(By.cssSelector(" Please check that your e-mail address is indicated correctly ")),
+    CLOSE_FORM_BUTTON(By.cssSelector("img.cross-btn"));
 
     private By path;
 
