@@ -54,42 +54,4 @@ public class EcoNewsTestRunner {
     public void tearDown() {
         //logout and so on
     }
-
-    @Ignore //Renewed and moved to EcoNewsOpenNewsTest
-    @Test
-    public void numberOfItemsFoundTest() {
-        EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        String numberOfItems = newsList.getItemsFound().getText();
-        assertTrue(numberOfItems.equals("189 items found"));
-    }
-
-    @Test
-    public void oneFilterAppliedTest() {
-        EcoNewsListPO news = new EcoNewsListPO(driver);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        news.getFilterButton("Ads").click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<NewsCardPO> allnews = news.getAllNews();
-        int correctlyTaggedCount = 0;
-
-        for(NewsCardPO newsCard: allnews) {
-            for (Label tag : newsCard.getTags()) {
-                if(tag.getText().equals("ADS")) {
-                    correctlyTaggedCount++;
-                    break;
-                }
-            }
-        }
-        assertEquals("Count of correctly tagged news", allnews.size(), correctlyTaggedCount);
-    }
-
-
 }
