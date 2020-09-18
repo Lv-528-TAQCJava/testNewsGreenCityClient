@@ -67,8 +67,8 @@ public class EcoNewsTestRunner {
                 .setUserName("vrtrtbr")
                 .setPassword("Aa123456_")
                 .setConfirmedPassword("Aa123456_")
-                .clickSignUpUserButton()
+                //.clickSignUpUserButton()
                 .alertEmailMessage();
-        Assert.assertEquals(actualResult," Please check that your e-mail address is indicated correctly ");
+        Assert.assertEquals(actualResult,"Please check that your e-mail address is indicated correctly");
     }
 }
