@@ -50,7 +50,7 @@ public class NewsCardPO extends BasePageObject {
     public Button getClickableArea() {
         String globalPath = cssSelectorToString(EcoNewsLocators.NEWS_LIST.getPath()) + ">"
                 + cssSelectorToString(NewsCardLocators.CLICKABLE_AREA.getPath());
-        clickableArea = new Button(driver, () -> By.cssSelector(globalPath));
+        clickableArea = new Button(element, () -> By.cssSelector(globalPath));
         return clickableArea;
     }
 
@@ -68,4 +68,13 @@ public class NewsCardPO extends BasePageObject {
         return  categories;
     }
 
+    public Label getDate() {
+        date = new Label(element.findElement(NewsCardLocators.DATE.getPath()));;
+        return date;
+    }
+
+    public Label getAuthor() {
+        author = new Label(element.findElement(NewsCardLocators.AUTHOR.getPath()));
+        return author;
+    }
 }
