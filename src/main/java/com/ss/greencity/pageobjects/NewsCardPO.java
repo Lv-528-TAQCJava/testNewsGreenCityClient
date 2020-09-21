@@ -25,6 +25,7 @@ public class NewsCardPO extends BasePageObject {
     private Label date;
     private Label author;
     private Button clickableArea; //in fact, all the card is a button
+    private String className;
 
     protected NewsCardPO(WebElement element, int numberInList) {
         super(element);
@@ -52,6 +53,11 @@ public class NewsCardPO extends BasePageObject {
                 + cssSelectorToString(NewsCardLocators.CLICKABLE_AREA.getPath());
         clickableArea = new Button(driver, () -> By.cssSelector(globalPath));
         return clickableArea;
+    }
+
+    public String getClassName(){
+        className = element.getAttribute("class");
+        return className;
     }
 
     /**
