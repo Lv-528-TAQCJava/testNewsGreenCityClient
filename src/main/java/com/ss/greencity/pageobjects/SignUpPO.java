@@ -64,9 +64,29 @@ public class SignUpPO extends BasePageObject{
          button.click();
          return this;
      }
+
      public String alertEmailMessage() {
          Label label= new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
          return label.getText();
      }
 
+     public String alertUserNameMessage() {
+        Label label = new Label(driver.findElement(USERNAME_ALERT_MESSAGE.getPath()));
+        return label.getText();
+     }
+
+     public String alertPasswordMessage() {
+        Label label = new Label(driver.findElement(PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+     }
+
+    public String alertConfirmPasswordMessage() {
+        Label label = new Label(driver.findElement(CONFIRM_PASSWORD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+    }
+
+    public String signedUpMessage() {
+        Label label = new Label(driver.findElement(SIGNED_UP_USER_MESSAGE.getPath()));
+        return label.getText();
+    }
 }
