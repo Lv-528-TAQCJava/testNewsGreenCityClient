@@ -3,8 +3,13 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.ss.greencity.locators.SignUpLocators.*;
 
@@ -18,9 +23,8 @@ public class SignUpPO extends BasePageObject{
         super(driver);
 
     }
-    private void init() {
 
-    }
+
     public SignUpPO clickSignUpButton() {
         try {
             Thread.sleep(2000);
@@ -70,6 +74,21 @@ public class SignUpPO extends BasePageObject{
          return label.getText();
      }
 
+     public String alertEmptyEmailMessage() {
+        Label label = new Label(driver.findElement(EMPTY_EMAIL_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+     }
+
+     public String alertEmptyUsernameMessage() {
+        Label label = new Label(driver.findElement(EMPTY_USERNAME_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+     }
+
+     public String alertEmptyPasswordMessage() {
+        Label label = new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+     }
+
      public String alertUserNameMessage() {
         Label label = new Label(driver.findElement(USERNAME_ALERT_MESSAGE.getPath()));
         return label.getText();
@@ -86,6 +105,7 @@ public class SignUpPO extends BasePageObject{
     }
 
     public String signedUpMessage() {
+
         Label label = new Label(driver.findElement(SIGNED_UP_USER_MESSAGE.getPath()));
         return label.getText();
     }
