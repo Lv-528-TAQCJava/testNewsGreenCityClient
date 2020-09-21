@@ -6,6 +6,8 @@ import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static com.ss.greencity.locators.SignUpLocators.*;
 
 /**
@@ -66,8 +68,12 @@ public class SignUpPO extends BasePageObject{
          return label.getText();
      }
 
-     public void closeForm() {
-        driver.findElement(CLOSE_FORM_BUTTON.getPath());
+     public boolean closeForm() {
+         List<WebElement> close = driver.findElements(CLOSE_FORM_BUTTON.getPath()); //using .findElements in order not to throw exception
+         if (close.size() > 0) {
+             close.get(0).click();
+         }
+         return close.size() > 0;
      }
 
 }

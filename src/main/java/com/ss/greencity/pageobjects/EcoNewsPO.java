@@ -31,6 +31,6 @@ public class EcoNewsPO extends BasePageObject {
     }
     public String getAuthor() {
         author = driver.findElement(authorSelector);
-        return author.getText().replace("by ", "");
+        return author.getText(); //Mind that this starts with "by..."
     }
 }

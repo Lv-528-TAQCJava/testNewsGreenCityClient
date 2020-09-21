@@ -49,12 +49,15 @@ public class EcoNewsTestRunner {
     protected void closeSignUpForm() {
         try { //Here usually the sign up form appears
             Thread.sleep(500);
-            SignUpPO signUpForm = new SignUpPO(driver);
-            signUpForm.closeForm();
-            System.out.println("Sign up form appeared...");
-            //Thread.sleep(500);
-        } catch (NullPointerException | InterruptedException er) {
+        } catch (InterruptedException er) {
             System.out.println(er.toString());
         }
+            SignUpPO signUpForm = new SignUpPO(driver);
+            boolean formAppeared = signUpForm.closeForm();
+            if (formAppeared) {
+                System.out.println("Sign up form appeared...");
+            }
+            //Thread.sleep(500);
+
     }
 }

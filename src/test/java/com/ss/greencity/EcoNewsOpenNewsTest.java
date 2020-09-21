@@ -53,8 +53,8 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         closeSignUpForm();
         Assert.assertEquals("Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
-        Assert.assertEquals("Verifying that author is equal in a news card and in news page",
-                authorInCard, pieceOfNews.getAuthor());
+        Assert.assertTrue("Verifying that author is equal in a news card and in news page",
+                pieceOfNews.getAuthor().contains(authorInCard));
 
     }
 
