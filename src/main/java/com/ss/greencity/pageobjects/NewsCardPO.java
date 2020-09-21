@@ -16,8 +16,6 @@ import java.util.List;
  * Mind that additional news cards load on scrolling!
  */
 public class NewsCardPO extends BasePageObject {
-    private int numberInList; //I have no another idea how to refer to a specific NewsCard, since we anyway have a list of them
-
     private Image image;
     private List<Label> categories;
     private Label heading;
@@ -26,9 +24,8 @@ public class NewsCardPO extends BasePageObject {
     private Label author;
     private Button clickableArea; //in fact, all the card is a button
 
-    protected NewsCardPO(WebElement element, int numberInList) {
+    protected NewsCardPO(WebElement element) {
         super(element);
-        this.numberInList = numberInList;
         init();
     }
 
@@ -48,9 +45,7 @@ public class NewsCardPO extends BasePageObject {
     }
 
     public Button getClickableArea() {
-        String globalPath = cssSelectorToString(EcoNewsLocators.NEWS_LIST.getPath()) + ">"
-                + cssSelectorToString(NewsCardLocators.CLICKABLE_AREA.getPath());
-        clickableArea = new Button(driver, () -> By.cssSelector(globalPath));
+        clickableArea = new Button(element.findElement(NewsCardLocators.CLICKABLE_AREA.getPath()));
         return clickableArea;
     }
 
@@ -68,4 +63,13 @@ public class NewsCardPO extends BasePageObject {
         return  categories;
     }
 
+    public Label getDate() {
+        date = new Label(element.findElement(NewsCardLocators.DATE.getPath()));;
+        return date;
+    }
+
+    public Label getAuthor() {
+        author = new Label(element.findElement(NewsCardLocators.AUTHOR.getPath()));
+        return author;
+    }
 }

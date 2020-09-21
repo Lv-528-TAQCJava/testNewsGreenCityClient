@@ -2,6 +2,8 @@ package com.ss.greencity;
 
 import com.ss.greencity.pageobjects.EcoNewsListPO;
 import com.ss.greencity.pageobjects.EcoNewsPO;
+import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.SignUpPO;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,24 +29,33 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         assertTrue("Verifying that there are at least 100 news",n >= 100);
     }
 
-    @Ignore //Old variant
-    @Test
-    public void openFirstNews0() {
-        WebElement firstNews = driver.findElements(allNewsCards).get(0);
-        firstNews.click();
-        WebElement newsContent = driver.findElement(By.cssSelector("div.news-content"));
-        String text = newsContent.getText();
-        Assert.assertTrue("Verifying that news content is not empty", text.length() > 0);
-    }
-
     @Test
     public void openFirstNews() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        closeSignUpForm();
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue("Verifying that news content is not empty", text.length() > 0);
     }
+
+    @Test
+    public void checkAuthorAndDate() {
+        EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        NewsCardPO card = newsList.getFirstNewsCard();
+        String dateInCard = card.getDate().getText();
+        String authorInCard = card.getAuthor().getText();
+        card.getClickableArea().click();
+
+        EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        closeSignUpForm();
+        Assert.assertEquals("Verifying that date is equal in a news card and in news page",
+                dateInCard, pieceOfNews.getDate());
+        Assert.assertTrue("Verifying that author is equal in a news card and in news page",
+                pieceOfNews.getAuthor().contains(authorInCard));
+
+    }
+
 }
