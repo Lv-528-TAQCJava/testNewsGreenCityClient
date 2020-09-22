@@ -12,7 +12,9 @@ public enum EcoNewsLocators implements Locator {
     NEWS_LIST(By.cssSelector("ul.list>li")), //list of loaded news cards. Mind that they load on scrolling
     GALLERY_VIEW(By.cssSelector("div.gallery-view")), //button to present news cards as gallery
     LIST_VIEW(By.cssSelector("div.list-view")), //button to present news cards as list
-    FIRST_NEWS_CARD(By.cssSelector("ul.list>li:nth-of-type(1)"));
+    FIRST_NEWS_CARD(By.cssSelector("ul.list>li:nth-of-type(1)")),
+    CREATE_NEWS(By.id("create-button-text"));
+
 
     EcoNewsLocators(By path) {
         this.path = path;
