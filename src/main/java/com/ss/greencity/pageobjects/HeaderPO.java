@@ -2,8 +2,11 @@ package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.HeaderLocators;
 import com.ss.greencity.pageelements.*;
+import com.ss.greencity.util.Languages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 
 /**
  * Site header, which appears on every page at top.
@@ -16,9 +19,7 @@ public class HeaderPO extends BasePageObject {
     private Button about;
     private Button habits;
     private Image searchBtn;
-    private Button languageBtn;
-    private Button signIn;
-    private Button signUp;
+    private DropdownList languageDropdown;
 
     public String currentLanguage;
 
@@ -32,40 +33,18 @@ public class HeaderPO extends BasePageObject {
     }
 
 
-    public HeaderPO selectLanguage(String languageCode) {
-        getLanguageButton().click();
-        Button b; //the selected language button to click
-        switch (languageCode) {
-            case "En":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_EN.getPath()));
-                b.click();
-                currentLanguage = "En";
-                break;
-            case "Ru":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_RU.getPath()));
-                b.click();
-                currentLanguage = "Ru";
-                break;
-            case "Uk":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_UK.getPath()));
-                b.click();
-                currentLanguage = "Uk";
-                break;
-            default:
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_EN.getPath()));
-                b.click();
-                currentLanguage = "En";
-        }
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public HeaderPO selectLanguage(Languages language) {
+        DropdownList dropdown = getLanguageDropdown();
+        dropdown.click();
+        //ArrayList<Button> langButtons = dropdown.getItems();
+        element.findElement(language.getPath()).click();
+        currentLanguage = language.getCode();
+
         return this;
     }
 
-    public Button getLanguageButton() {
-        languageBtn = new Button(element.findElement(HeaderLocators.LANGUAGE.getPath()));
-        return languageBtn;
+    public DropdownList getLanguageDropdown() {
+        languageDropdown = new DropdownList(element.findElement(HeaderLocators.LANGUAGE.getPath()));
+        return languageDropdown;
     }
 }

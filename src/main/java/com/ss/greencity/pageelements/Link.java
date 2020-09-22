@@ -9,11 +9,11 @@ public class Link extends BaseElement {
         super(driver, locator);
     }
 
-    protected Link(WebElement elementToParse, Locator locator) {
+    public Link(WebElement elementToParse, Locator locator) {
         super(elementToParse, locator);
     }
 
-    protected Link(WebElement element) {
+    public Link(WebElement element) {
         super(element);
     }
 
