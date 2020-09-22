@@ -56,6 +56,11 @@ public class HeaderPO extends BasePageObject {
                 b.click();
                 currentLanguage = "En";
         }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
