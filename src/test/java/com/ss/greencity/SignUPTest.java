@@ -1,5 +1,6 @@
 package com.ss.greencity;
 
+import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageobjects.SignUpPO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,6 +8,8 @@ import org.junit.Test;
 
 
 import java.util.concurrent.TimeUnit;
+
+import static com.ss.greencity.locators.SignUpLocators.*;
 
 public class SignUPTest extends EcoNewsTestRunner{
     /**
@@ -111,6 +114,7 @@ public class SignUPTest extends EcoNewsTestRunner{
         String actualResult = signUpPO
                 .clickSignUpButton()
                 .setEmail("")
+                .clickPanel()
                 .alertEmptyEmailMessage();
         Assert.assertEquals("Email is required",actualResult);
     }
@@ -126,6 +130,7 @@ public class SignUPTest extends EcoNewsTestRunner{
                 .clickSignUpButton()
                 .setEmail("user"+Math.random()*100000+"@selenium.test")
                 .setUserName("")
+                .clickPanel()
                 .alertEmptyUsernameMessage();
         Assert.assertEquals("User name is required",actualResult);
     }
@@ -144,7 +149,6 @@ public class SignUPTest extends EcoNewsTestRunner{
                 .setPassword("")
                 .alertEmptyPasswordMessage();
         Assert.assertEquals("Password is required",actualResult);
-    }
 
     /**
      * Sign up with empty confirm password field
@@ -163,4 +167,5 @@ public class SignUPTest extends EcoNewsTestRunner{
      * Assert.assertEquals("Password is required",actualResult)
      * }
     */
+}
 }

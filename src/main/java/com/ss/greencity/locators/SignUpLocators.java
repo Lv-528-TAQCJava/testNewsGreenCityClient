@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 
 public enum SignUpLocators implements Locator {
     SIGN_UP_BTN(By.cssSelector("li.sign-up-link.ng-star-inserted > div > span")),
+    PANEL(By.cssSelector("div.main-content")),
+    IMAGE_PANEL(By.cssSelector("div.main-image > img")),
     EMAIL_FIELD(By.cssSelector("input[name='email']")),
     USERNAME_FIELD(By.cssSelector("input[name='fistName']")),
     PASSWORD_FIELD(By.cssSelector("input[name='form-control password']")),

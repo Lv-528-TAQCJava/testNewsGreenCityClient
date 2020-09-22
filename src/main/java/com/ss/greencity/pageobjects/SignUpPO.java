@@ -26,43 +26,89 @@ public class SignUpPO extends BasePageObject{
 
 
     public SignUpPO clickSignUpButton() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         WebElement signUpButton = driver.findElement(SIGN_UP_BTN.getPath());
         signUpButton.click();
+        return this;
+    }
+
+    public SignUpPO clickPanel() {
+        WebElement panel = driver.findElement(PANEL.getPath());
+        panel.click();
+        return this;
+    }
+
+    public SignUpPO clickImagePanel() {
+        WebElement imagePanel = driver.findElement(PANEL.getPath());
+        imagePanel.click();
         return this;
     }
 
     public SignUpPO setEmail(String value) {
         InputBox email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
         email.click();
+        //email.clear();
         email.setData(value);
+        return this;
+    }
+
+    public SignUpPO clearEmail() {
+        InputBox email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
+        email.click();
+        email.clear();
         return this;
     }
 
      public SignUpPO setUserName(String value) {
         InputBox username = new InputBox(driver.findElement(USERNAME_FIELD.getPath()));
         username.click();
+        username.clear();
         username.setData(value);
         return this;
+     }
+
+     public SignUpPO clearUsername() {
+         InputBox username = new InputBox(driver.findElement(USERNAME_FIELD.getPath()));
+         username.click();
+         username.clear();
+         return  this;
      }
 
      public SignUpPO setPassword(String value) {
         InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
         password.click();
+        password.clear();
         password.setData(value);
         return this;
+     }
+
+     public SignUpPO clickPassword() {
+         InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+         password.click();
+         return this;
+     }
+
+     public SignUpPO clearPassword() {
+         InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+         password.click();
+         password.clear();
+         return this;
      }
 
      public SignUpPO setConfirmedPassword(String value) {
         InputBox confirmedPassword = new InputBox(driver.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
         confirmedPassword.click();
+        confirmedPassword.clear();
         confirmedPassword.setData(value);
         return this;
      }
+
+     public SignUpPO clearConfirmPassword() {
+         InputBox confirmedPassword = new InputBox(driver.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
+         confirmedPassword.click();
+         confirmedPassword.clear();
+         return this;
+     }
+
      public SignUpPO clickSignUpUserButton() {
          Button button = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
          button.click();
@@ -75,16 +121,19 @@ public class SignUpPO extends BasePageObject{
      }
 
      public String alertEmptyEmailMessage() {
+
         Label label = new Label(driver.findElement(EMPTY_EMAIL_FIELD_ALERT_MESSAGE.getPath()));
         return label.getText();
      }
 
      public String alertEmptyUsernameMessage() {
+
         Label label = new Label(driver.findElement(EMPTY_USERNAME_FIELD_ALERT_MESSAGE.getPath()));
         return label.getText();
      }
 
      public String alertEmptyPasswordMessage() {
+
         Label label = new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
         return label.getText();
      }
@@ -95,7 +144,7 @@ public class SignUpPO extends BasePageObject{
      }
 
      public String alertPasswordMessage() {
-        Label label = new Label(driver.findElement(PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
+         Label label = new Label(driver.findElement(PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
         return label.getText();
      }
 
