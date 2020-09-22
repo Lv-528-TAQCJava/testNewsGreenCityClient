@@ -1,13 +1,9 @@
 package com.ss.greencity;
 
-import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
+import com.ss.greencity.pageobjects.NewsCardPO;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Arrays;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Verifies that news can be displayed in gallery or list view mode.
@@ -28,7 +24,24 @@ public class EcoNewsViewModeTest extends EcoNewsTestRunner {
         newsList.getListViewButton().click();
         String classAttribute = newsList.getListViewButton().getAttribute("class");
         Assert.assertEquals("list-view list-view-active", classAttribute);
+        NewsCardPO news = newsList.getFirstNewsCard();
+        Assert.assertEquals("list-view-li-active ng-star-inserted", news.getClassName());
     }
 
+    @Test
+    public void listViewAfterRefresh() {
+        EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        newsList.getListViewButton().click();
+        driver.navigate().refresh();
+        String classAttribute = newsList.getListViewButton().getAttribute("class");
+        Assert.assertEquals("list-view list-view-active", classAttribute);
+    }
 
+    @Test
+    public void galleryViewAfterRefresh() {
+        EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        driver.navigate().refresh();
+        String classAttribute = newsList.getGalleryViewButton().getAttribute("class");
+        Assert.assertEquals("gallery-view gallery-view-active", classAttribute);
+    }
 }
