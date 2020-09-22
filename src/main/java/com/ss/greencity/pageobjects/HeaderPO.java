@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 /**
  * Site header, which appears on every page at top.
- * It is recommended to use HeaderAnonymousPO or HeaderSignedInPO
+ * It is abstract, use HeaderAnonymousPO or HeaderSignedInPO
  */
-public abstract class HeaderPO extends BasePageObject { //will not make abstract
+public abstract class HeaderPO extends BasePageObject {
     protected Image logo;
     protected Button news;
     protected Button tips;

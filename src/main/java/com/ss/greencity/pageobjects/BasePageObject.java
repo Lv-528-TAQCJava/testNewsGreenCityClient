@@ -11,8 +11,7 @@ public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebElement element;
     protected String url;
-    //protected HeaderPO header; //appears on every page, so could be placed in base class
-    protected HeaderAnonymousPO headerAnon;
+    protected HeaderAnonymousPO headerAnon; //appears on every page, so could be placed in base class
     protected HeaderSignedInPO headerSignedIn;
 
     protected BasePageObject(WebDriver driver) {
@@ -34,10 +33,7 @@ public abstract class BasePageObject {
         this.url = url;
         return this;
     }
-    //public HeaderPO getHeader() {
-    //    header = new HeaderPO(driver.findElement(HeaderLocators.HEADER.getPath()));
-    //    return header;
-    //}
+
     public HeaderAnonymousPO getHeaderAnonymous() {
         headerAnon = new HeaderAnonymousPO(driver.findElement(HeaderLocators.HEADER.getPath()));
         return headerAnon;
