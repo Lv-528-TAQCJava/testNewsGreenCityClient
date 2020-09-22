@@ -29,6 +29,11 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
      */
     @Test
     public void numberOfItemsFoundTest() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         String numberOfItems = newsList.getItemsFound().getText();
         String ns = Arrays.asList(numberOfItems.split(" ")).get(0);
@@ -44,7 +49,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     @Theory
     public void openFirstNews(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        newsList.getHeader().selectLanguage(lang);
+        newsList.getHeaderAnonymous().selectLanguage(lang);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -66,7 +71,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     @Theory
     public void checkAuthorAndDate(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        newsList.getHeader().selectLanguage(lang);
+        newsList.getHeaderAnonymous().selectLanguage(lang);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {

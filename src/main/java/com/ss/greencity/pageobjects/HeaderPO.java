@@ -10,25 +10,26 @@ import java.util.ArrayList;
 
 /**
  * Site header, which appears on every page at top.
+ * It is recommended to use HeaderAnonymousPO or HeaderSignedInPO
  */
-public class HeaderPO extends BasePageObject {
-    private Image logo;
-    private Button news;
-    private Button tips;
-    private Button places;
-    private Button about;
-    private Button habits;
-    private Image searchBtn;
-    private DropdownList languageDropdown;
+public abstract class HeaderPO extends BasePageObject { //will not make abstract
+    protected Image logo;
+    protected Button news;
+    protected Button tips;
+    protected Button places;
+    protected Button about;
+    protected Button habits;
+    protected Image searchBtn;
+    protected DropdownList languageDropdown;
 
     public String currentLanguage;
 
-    protected HeaderPO(WebDriver driver) {
+    public HeaderPO(WebDriver driver) {
         super(driver);
         element = driver.findElement(HeaderLocators.HEADER.getPath());
     }
 
-    protected HeaderPO(WebElement element) {
+    public HeaderPO(WebElement element) {
         super(element);
     }
 
@@ -36,7 +37,6 @@ public class HeaderPO extends BasePageObject {
     public HeaderPO selectLanguage(Languages language) {
         DropdownList dropdown = getLanguageDropdown();
         dropdown.click();
-        //ArrayList<Button> langButtons = dropdown.getItems();
         element.findElement(language.getPath()).click();
         currentLanguage = language.getCode();
 
