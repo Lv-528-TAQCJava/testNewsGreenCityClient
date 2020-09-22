@@ -47,6 +47,12 @@ public class SignInPO extends BasePageObject {
         return this;
     }
 
+    public SignInPO PasswordClick() {
+        InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+        password.click();
+        return this;
+    }
+
     public SignInPO clickSignInUserButton() {
         Button button = new Button(driver.findElement(SIGN_IN_USER_BTN.getPath()));
         button.click();

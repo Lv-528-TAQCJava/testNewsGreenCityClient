@@ -1,5 +1,6 @@
 package com.ss.greencity;
 
+import com.ss.greencity.pageobjects.ProfilePO;
 import com.ss.greencity.pageobjects.SignInPO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .setEmail("user1@selenium.test")
                 .setPassword("11111")
                 .alertPasswordMessage();
-        Assert.assertEquals("Password must be at least 8 characters in length", actualResult);
+        Assert.assertEquals("Password must be at least 8 characters long", actualResult);
     }
 
 
@@ -47,10 +48,11 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
    @Test
     public void signInEmptyEmailTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signUpPO = new SignInPO(driver);
-        String actualResult = signUpPO
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("")
+                .PasswordClick()
                 .alertEmptyEmailMessage();
         Assert.assertEquals("Email is required", actualResult);
     }
@@ -105,20 +107,22 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
 /**
  * Signing in user with valid data
  */
- /*   @Test
+   @Test
     public void signInValidDataTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         SignInPO signInPO = new SignInPO(driver);
-        String actualResult = signInPO
+       ProfilePO profilePO = new ProfilePO(driver);
+                 signInPO
                 .clickSignInButton()
                 .setEmail("aliejua@gmail.com")
                 .setPassword("Aa12345_")
-                .clickSignInUserButton()
-                .signedUpMessage();
-        Assert.assertEquals("Welcome back!", actualResult);
+                .clickSignInUserButton();
+       String actualResult = profilePO.userNameField();
+
+
+        Assert.assertEquals("User123", actualResult);
     }
 
-  */
 }
 
 
