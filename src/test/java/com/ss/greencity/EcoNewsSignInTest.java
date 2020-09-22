@@ -23,87 +23,102 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
 
         Assert.assertEquals("Please check that your e-mail address is indicated correctly", actualResult);
     }
-}
 
     /**
-     * Signing up user with password that contains less then 8 characters
+     * Signing in user with password that contains less then 8 characters
      */
-   /* @Test
+    @Test
     public void signInPasswordTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignUpPO signUpPO = new SignUpPO(driver);
-        String actualResult = signUpPO
-                .clickSignUpButton()
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
+                .clickSignInButton()
                 .setEmail("user1@selenium.test")
-                .setUserName("User1029")
                 .setPassword("11111")
                 .alertPasswordMessage();
         Assert.assertEquals("Password must be at least 8 characters in length", actualResult);
     }
 
-    /**
-     * Signing in user with valid data
-     */
- /*   @Test
-    public void signUpValidDataTest() {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignUpPO signUpPO = new SignUpPO(driver);
-        String actualResult = signUpPO
-                .clickSignUpButton()
-                .setEmail("user" + Math.random() * 100000 + "@selenium.test")
-                .setUserName("User1029")
-                .setPassword("Aa123456_")
-                .setConfirmedPassword("Aa123456_")
-                .clickSignUpUserButton()
-                .signedUpMessage();
-        Assert.assertEquals("Welcome back!", actualResult);
-    }
+
 
     /**
-     * Sign up with empty email field
+     * Sign in with empty email field
      */
-  /*  @Test
-    public void signUpEmptyEmailTest() {
+   @Test
+    public void signInEmptyEmailTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignUpPO signUpPO = new SignUpPO(driver);
+        SignInPO signUpPO = new SignInPO(driver);
         String actualResult = signUpPO
-                .clickSignUpButton()
+                .clickSignInButton()
                 .setEmail("")
                 .alertEmptyEmailMessage();
         Assert.assertEquals("Email is required", actualResult);
     }
 
     /**
-     * Sign up with empty password field
+     * Sign in with empty password field
      */
-  /*  @Test
-    public void signUpEmptyPasswordTest() {
+    @Test
+    public void signInEmptyPasswordTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignUpPO signUpPO = new SignUpPO(driver);
-        String actualResult = signUpPO
-                .clickSignUpButton()
-                .setEmail("user" + Math.random() * 100000 + "@selenium.test")
-                .setUserName("User1029")
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
+                .clickSignInButton()
+                .setEmail("user123@selenium.test")
                 .setPassword("")
                 .alertEmptyPasswordMessage();
         Assert.assertEquals("Password is required", actualResult);
     }
-}
+
+    /**
+     * Sign in with incorrect email
+     */
+    @Test
+    public  void  signInIncorrectEmailTest() {
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
+                .clickSignInButton()
+                .setEmail("email@in.com")
+                .setPassword("12345678")
+                .clickSignInUserButton()
+                .alertBadEmailOrPasswordMessage();
+        Assert.assertEquals("Bad email or password", actualResult);
+    }
+
+    /**
+     * Sign in with incorrect email
+     */
+    @Test
+    public  void  signInIncorrectPasswordTest() {
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
+                .clickSignInButton()
+                .setEmail("aliejua@gmail.com")
+                .setPassword("12345678")
+                .clickSignInUserButton()
+                .alertBadEmailOrPasswordMessage();
+        Assert.assertEquals("Bad email or password", actualResult);
+    }
 
 /**
- * Sign up with empty confirm password field
- *
- * @Test
- * public void signUpEmptyConfirmPasswordTest() {
- * driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
- * SignUpPO signUpPO = new SignUpPO(driver);
- * String actualResult = signUpPO
- * .clickSignUpButton()
- * .setEmail("user"+Math.random()*100000+"@selenium.test")
- * .setUserName("User"+Math.random()*100000)
- * .setPassword("Aa123456_")
- * .setConfirmedPassword("")
- * .alertEmptyPasswordMessage();
- * Assert.assertEquals("Password is required",actualResult)
- * }
+ * Signing in user with valid data
  */
+ /*   @Test
+    public void signInValidDataTest() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        SignInPO signInPO = new SignInPO(driver);
+        String actualResult = signInPO
+                .clickSignInButton()
+                .setEmail("aliejua@gmail.com")
+                .setPassword("Aa12345_")
+                .clickSignInUserButton()
+                .signedUpMessage();
+        Assert.assertEquals("Welcome back!", actualResult);
+    }
+
+  */
+}
+
+

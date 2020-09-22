@@ -63,4 +63,24 @@ public class SignInPO extends BasePageObject {
         Label label= new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
         return label.getText();
     }
+
+    public String alertEmptyEmailMessage() {
+        Label label= new Label(driver.findElement(EMPTY_EMAIL_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+    }
+
+    public String alertEmptyPasswordMessage() {
+        Label label= new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
+        return label.getText();
+    }
+
+    public String alertPasswordMessage() {
+        Label label= new Label(driver.findElement(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
+        return label.getText();
+    }
+
+    public String alertBadEmailOrPasswordMessage() {
+        Label label = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
+        return  label.getText();
+    }
 }

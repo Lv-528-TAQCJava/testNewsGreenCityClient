@@ -9,8 +9,11 @@ public enum SignInLocators implements Locator {
     SIGN_IN_USER_BTN(By.cssSelector("button.primary-global-button")),
     GOOGLE_SIGN_IN_BTN(By.cssSelector("div.google-sign-in-block > button")),
     EMAIL_ALERT_MESSAGE(By.xpath("//div[contains(text(),'e-mail')]")),
-  //  EMAIL_ALERT_MESSAGE(By.cssSelector("div.validation-email-error.ng-star-inserted > div")),
-    CLOSE_FORM_BUTTON(By.cssSelector("img.cross-btn"));
+    EMPTY_EMAIL_FIELD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'Email is required')]")),
+    EMPTY_PASSWORD_FIELD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'Password is required')]")),
+    PASSWORD_LENGTH_ALERT_MESSAGE(By.xpath("//div[contains(text(),'8 characters')]")),
+    INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE(By.xpath("//div[contains(text(),'Bad email or password')]"));
+
 
     private By path;
 
