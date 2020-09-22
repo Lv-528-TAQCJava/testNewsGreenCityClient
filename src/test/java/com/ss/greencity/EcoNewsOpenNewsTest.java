@@ -3,22 +3,29 @@ package com.ss.greencity;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
 import com.ss.greencity.pageobjects.EcoNewsPO;
 import com.ss.greencity.pageobjects.NewsCardPO;
-import com.ss.greencity.pageobjects.SignUpPO;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
 /**
  * Checks opening of news articles
  */
+@RunWith(Theories.class)
 public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
+    @DataPoints
+    public static final String[] languages = {"En", "Ru", "Uk"};
+
+    /**
+     * Verifying that there are at least 100 news
+     */
     @Test
     public void numberOfItemsFoundTest() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
@@ -29,21 +36,32 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         assertTrue("Verifying that there are at least 100 news",n >= 100);
     }
 
-    @Test
-    public void openFirstNews() {
+    /**
+     * Verifying that news content is not empty
+     * @param lang - Theory parameter, the language chosen
+     */
+    @Theory
+    public void openFirstNews(String lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        newsList.getHeader().selectLanguage(lang);
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
         closeSignUpForm();
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
-        Assert.assertTrue("Verifying that news content is not empty", text.length() > 0);
+        Assert.assertTrue(lang + ": Verifying that news content is not empty", text.length() > 0);
     }
 
-    @Test
-    public void checkAuthorAndDate() {
+    /**
+     * Verifying that date and author are equal in a news card and in news page
+     * @param lang - Theory parameter, the language chosen
+     */
+    @Theory
+    public void checkAuthorAndDate(String lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
+        newsList.getHeader().selectLanguage(lang);
+
         NewsCardPO card = newsList.getFirstNewsCard();
         String dateInCard = card.getDate().getText();
         String authorInCard = card.getAuthor().getText();
@@ -51,9 +69,9 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
         closeSignUpForm();
-        Assert.assertEquals("Verifying that date is equal in a news card and in news page",
+        Assert.assertEquals(lang + ": Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
-        Assert.assertTrue("Verifying that author is equal in a news card and in news page",
+        Assert.assertTrue(lang + ": Verifying that author is equal in a news card and in news page",
                 pieceOfNews.getAuthor().contains(authorInCard));
 
     }

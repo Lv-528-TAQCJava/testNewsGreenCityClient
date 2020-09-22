@@ -1,5 +1,6 @@
 package com.ss.greencity.pageobjects;
 
+import com.ss.greencity.locators.HeaderLocators;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +11,7 @@ public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebElement element;
     protected String url;
+    protected HeaderPO header; //appears on every page, so could be placed in base class
 
     protected BasePageObject(WebDriver driver) {
         this.driver = driver;
@@ -29,5 +31,9 @@ public abstract class BasePageObject {
         driver.get(url);
         this.url = url;
         return this;
+    }
+    public HeaderPO getHeader() {
+        header = new HeaderPO(driver.findElement(HeaderLocators.HEADER.getPath()));
+        return header;
     }
 }

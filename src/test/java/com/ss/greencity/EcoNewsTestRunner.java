@@ -52,12 +52,12 @@ public class EcoNewsTestRunner {
         } catch (InterruptedException er) {
             System.out.println(er.toString());
         }
-            SignUpPO signUpForm = new SignUpPO(driver);
-            boolean formAppeared = signUpForm.closeForm();
-            if (formAppeared) {
-                System.out.println("Sign up form appeared...");
-            }
-            //Thread.sleep(500);
+        SignUpPO signUpForm = new SignUpPO(driver);
+        boolean formAppeared = signUpForm.closeForm();
+        if (formAppeared) {
+            System.out.println("Sign up form appeared...");
+        }
+        //Thread.sleep(500);
 
     }
 }
