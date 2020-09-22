@@ -2,70 +2,49 @@ package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.HeaderLocators;
 import com.ss.greencity.pageelements.*;
+import com.ss.greencity.util.Languages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+
 /**
  * Site header, which appears on every page at top.
+ * It is abstract, use HeaderAnonymousPO or HeaderSignedInPO
  */
-public class HeaderPO extends BasePageObject {
-    private Image logo;
-    private Button news;
-    private Button tips;
-    private Button places;
-    private Button about;
-    private Button habits;
-    private Image searchBtn;
-    private Button languageBtn;
-    private Button signIn;
-    private Button signUp;
+public abstract class HeaderPO extends BasePageObject {
+    protected Image logo;
+    protected Button news;
+    protected Button tips;
+    protected Button places;
+    protected Button about;
+    protected Button habits;
+    protected Image searchBtn;
+    protected DropdownList languageDropdown;
 
     public String currentLanguage;
 
-    protected HeaderPO(WebDriver driver) {
+    public HeaderPO(WebDriver driver) {
         super(driver);
         element = driver.findElement(HeaderLocators.HEADER.getPath());
     }
 
-    protected HeaderPO(WebElement element) {
+    public HeaderPO(WebElement element) {
         super(element);
     }
 
 
-    public HeaderPO selectLanguage(String languageCode) {
-        getLanguageButton().click();
-        Button b; //the selected language button to click
-        switch (languageCode) {
-            case "En":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_EN.getPath()));
-                b.click();
-                currentLanguage = "En";
-                break;
-            case "Ru":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_RU.getPath()));
-                b.click();
-                currentLanguage = "Ru";
-                break;
-            case "Uk":
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_UK.getPath()));
-                b.click();
-                currentLanguage = "Uk";
-                break;
-            default:
-                b = new Button(element.findElement(HeaderLocators.LANGUAGE_EN.getPath()));
-                b.click();
-                currentLanguage = "En";
-        }
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public HeaderPO selectLanguage(Languages language) {
+        DropdownList dropdown = getLanguageDropdown();
+        dropdown.click();
+        element.findElement(language.getPath()).click();
+        currentLanguage = language.getCode();
+
         return this;
     }
 
-    public Button getLanguageButton() {
-        languageBtn = new Button(element.findElement(HeaderLocators.LANGUAGE.getPath()));
-        return languageBtn;
+    public DropdownList getLanguageDropdown() {
+        languageDropdown = new DropdownList(element.findElement(HeaderLocators.LANGUAGE.getPath()));
+        return languageDropdown;
     }
 }
