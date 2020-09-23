@@ -5,7 +5,7 @@ import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
 import org.openqa.selenium.WebDriver;
 
-public abstract class FooterPO extends BasePageObject {
+public class FooterPO extends BasePageObject {
 
     public Link getHome() {
         return home;
@@ -31,15 +31,20 @@ public abstract class FooterPO extends BasePageObject {
         return followUs;
     }
 
+    public Link getProfile() {
+        return profile;
+    }
+
     protected Link home;
     protected Link econews;
     protected Link tips;
     protected Link places;
     protected Link about;
+    protected Link profile;
     protected Label followUs;
 
 
-    protected FooterPO(WebDriver driver) {
+    public FooterPO(WebDriver driver) {
         super(driver);
         init();
     }
@@ -50,6 +55,7 @@ public abstract class FooterPO extends BasePageObject {
         tips = new Link(driver.findElement(FooterLocators.TIPS.getPath()));
         places = new Link(driver.findElement(FooterLocators.PLACES.getPath()));
         about = new Link(driver.findElement(FooterLocators.ABOUT.getPath()));
+        profile = new Link(driver.findElement(FooterLocators.PROFILE.getPath()));
         followUs = new Label(driver.findElement(FooterLocators.FOLLOW_US.getPath()));
     }
 }
