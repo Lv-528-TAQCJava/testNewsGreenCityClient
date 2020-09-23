@@ -1,5 +1,6 @@
 package com.ss.greencity;
 
+import com.ss.greencity.pageobjects.ForgetPasswordPO;
 import com.ss.greencity.pageobjects.ProfilePO;
 import com.ss.greencity.pageobjects.SignInPO;
 import org.junit.Assert;
@@ -89,7 +90,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     }
 
     /**
-     * Sign in with incorrect email
+     * Sign in with incorrect password
      */
     @Test
     public  void  signInIncorrectPasswordTest() {
@@ -122,6 +123,25 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
 
         Assert.assertEquals("User123", actualResult);
     }
+
+    /**
+     * Signing in user with valid data
+     */
+    @Test
+    public void forgotPasswordLinkTest() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        SignInPO signInPO = new SignInPO(driver);
+        ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
+        signInPO
+                .clickSignInButton()
+                .clickForgotPassword();
+        String actualResult = forgetPasswordPO.forgotPasswordText();
+
+
+        Assert.assertEquals("Problems sign in?", actualResult);
+    }
+
+
 
 }
 
