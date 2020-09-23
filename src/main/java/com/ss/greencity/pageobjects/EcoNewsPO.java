@@ -2,6 +2,8 @@ package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.EcoNewsLocators;
 import com.ss.greencity.pageelements.Button;
+import com.ss.greencity.pageelements.InputBox;
+import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * https://ita-social-projects.github.io/GreenCityClient/#/news/3077
  */
 public class EcoNewsPO extends BasePageObject {
-    By newsTextSelector = By.cssSelector("div.news-text");
+    By newsTextSelector = By.cssSelector("news-text");
     WebElement newsText;
     By dateSelector = By.cssSelector("div.news-info-date");
     WebElement date;
@@ -41,4 +43,10 @@ public class EcoNewsPO extends BasePageObject {
         createNews.click();
         return this;
     }
+    public EcoNewsPO clickEcoNewsButton(){
+        Button ecoNewsButton = new Button((driver.findElement(EcoNewsLocators.NEWS_BUTTON.getPath())));
+        ecoNewsButton.click();
+        return this;
+    }
+
 }
