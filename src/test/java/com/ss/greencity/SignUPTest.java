@@ -21,7 +21,7 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("rg3.gg5")
+                .setEmail(signUpPO.getInvalidEmail())
                 .alertEmailMessage();
 
         Assert.assertEquals("Please check that your e-mail address is indicated correctly",actualResult);
@@ -35,8 +35,8 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user1@selenium.test")
-                .setUserName("user1")
+                .setEmail(signUpPO.getEmail())
+                .setUserName(signUpPO.getInvalidUsername())
                 .alertUserNameMessage();
         Assert.assertEquals("The name must contain 6-30 characters and can contain letters(a-z), numbers(0-9) and a dot(.)",actualResult);
     }
@@ -49,9 +49,9 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user1@selenium.test")
-                .setUserName("User1029")
-                .setPassword(" ")
+                .setEmail(signUpPO.getEmail())
+                .setUserName(signUpPO.getUsername())
+                .setPassword(signUpPO.getInvalidPasswordSpaces())
                 .alertPasswordMessage();
         Assert.assertEquals( "Password must be at least 8 characters long without spaces",actualResult);
     }
@@ -64,9 +64,9 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user1@selenium.test")
-                .setUserName("User1029")
-                .setPassword("11111")
+                .setEmail(signUpPO.getEmail())
+                .setUserName(signUpPO.getUsername())
+                .setPassword(signUpPO.getInvalidPassword())
                 .alertPasswordMessage();
         Assert.assertEquals("Password must be at least 8 characters in length", actualResult);
     }
@@ -79,10 +79,10 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user1@selenium.test")
-                .setUserName("User1029")
-                .setPassword("Aa123456_")
-                .setConfirmedPassword("Aa123456")
+                .setEmail(signUpPO.getEmail())
+                .setUserName(signUpPO.getUsername())
+                .setPassword(signUpPO.getPassword())
+                .setConfirmedPassword(signUpPO.getInvalidConfirmPassword())
                 .alertConfirmPasswordMessage();
         Assert.assertEquals("Passwords do not match", actualResult);
     }
@@ -95,10 +95,10 @@ public class SignUPTest extends EcoNewsTestRunner{
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user"+Math.random()*100000+"@selenium.test")
-                .setUserName("User1029")
-                .setPassword("Aa123456_")
-                .setConfirmedPassword("Aa123456_")
+                .setEmail(signUpPO.getEmail())
+                .setUserName(signUpPO.getUsername())
+                .setPassword(signUpPO.getPassword())
+                .setConfirmedPassword(signUpPO.getConfirmPassword())
                 .clickSignUpUserButton()
                 .signedUpMessage();
         Assert.assertEquals("Welcome back!",actualResult);
@@ -114,7 +114,7 @@ public class SignUPTest extends EcoNewsTestRunner{
         String actualResult = signUpPO
                 .clickSignUpButton()
                 .setEmail("")
-                .clickPanel()
+                .clickImagePanel()
                 .alertEmptyEmailMessage();
         Assert.assertEquals("Email is required",actualResult);
     }
@@ -130,7 +130,7 @@ public class SignUPTest extends EcoNewsTestRunner{
                 .clickSignUpButton()
                 .setEmail("user"+Math.random()*100000+"@selenium.test")
                 .setUserName("")
-                .clickPanel()
+                .clickImagePanel()
                 .alertEmptyUsernameMessage();
         Assert.assertEquals("User name is required",actualResult);
     }
@@ -140,32 +140,33 @@ public class SignUPTest extends EcoNewsTestRunner{
      */
     @Test
     public void signUpEmptyPasswordTest() {
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         SignUpPO signUpPO = new SignUpPO(driver);
         String actualResult = signUpPO
                 .clickSignUpButton()
-                .setEmail("user"+Math.random()*100000+"@selenium.test")
+                .setEmail("user" + Math.random() * 100000 + "@selenium.test")
                 .setUserName("User1029")
                 .setPassword("")
+                .clickImagePanel()
                 .alertEmptyPasswordMessage();
-        Assert.assertEquals("Password is required",actualResult);
-
+        Assert.assertEquals("Password is required", actualResult);
+    }
     /**
      * Sign up with empty confirm password field
-     *
-     * @Test
-     * public void signUpEmptyConfirmPasswordTest() {
-     * driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-     * SignUpPO signUpPO = new SignUpPO(driver);
-     * String actualResult = signUpPO
-     * .clickSignUpButton()
-     * .setEmail("user"+Math.random()*100000+"@selenium.test")
-     * .setUserName("User"+Math.random()*100000)
-     * .setPassword("Aa123456_")
-     * .setConfirmedPassword("")
-     * .alertEmptyPasswordMessage();
-     * Assert.assertEquals("Password is required",actualResult)
-     * }
-    */
+     */
+     @Test
+     public void signUpEmptyConfirmPasswordTest() {
+     driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+     SignUpPO signUpPO = new SignUpPO(driver);
+     String actualResult = signUpPO
+             .clickSignUpButton()
+             .setEmail("user"+Math.random()*100000+"@selenium.test")
+             .setUserName("User"+Math.random()*100000)
+             .setPassword("Aa123456_")
+             .setConfirmedPassword("")
+             .clickImagePanel()
+             .alertEmptyPasswordMessage();
+     Assert.assertEquals("Password is required",actualResult);
+     }
 }
-}
+
