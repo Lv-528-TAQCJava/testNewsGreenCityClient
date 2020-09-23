@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
+import java.util.List;
+
 import static com.ss.greencity.locators.SignUpLocators.*;
 
 /**
@@ -20,16 +22,17 @@ import static com.ss.greencity.locators.SignUpLocators.*;
  */
 public class SignUpPO extends BasePageObject{
 
-    //create fields with data
-
     public SignUpPO(WebDriver driver) {
         super(driver);
 
     }
-
-
     public SignUpPO clickSignUpButton() {
-        WebElement signUpButton = driver.findElement(SIGN_UP_BTN.getPath());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Button signUpButton = new Button(element.findElement(SIGN_UP_BTN.getPath()));
         signUpButton.click();
         return this;
     }
@@ -42,25 +45,22 @@ public class SignUpPO extends BasePageObject{
     }
 
     public SignUpPO setEmail(String value) {
-        InputBox email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
+        InputBox email= new InputBox(element.findElement(EMAIL_FIELD.getPath()));
         email.click();
-
         email.setData(value);
         return this;
     }
 
-
      public SignUpPO setUserName(String value) {
-        InputBox username = new InputBox(driver.findElement(USERNAME_FIELD.getPath()));
+        InputBox username = new InputBox(element.findElement(USERNAME_FIELD.getPath()));
         username.click();
         username.clear();
         username.setData(value);
         return this;
      }
 
-
      public SignUpPO setPassword(String value) {
-        InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+        InputBox password = new InputBox(element.findElement(PASSWORD_FIELD.getPath()));
         password.click();
         password.clear();
         password.setData(value);
@@ -82,7 +82,7 @@ public class SignUpPO extends BasePageObject{
 
 
      public SignUpPO setConfirmedPassword(String value) {
-        InputBox confirmedPassword = new InputBox(driver.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
+        InputBox confirmedPassword = new InputBox(element.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
         confirmedPassword.click();
         confirmedPassword.clear();
         confirmedPassword.setData(value);
@@ -97,13 +97,12 @@ public class SignUpPO extends BasePageObject{
      }
 
      public SignUpPO clickSignUpUserButton() {
-         Button button = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
+         Button button = new Button(element.findElement(SIGN_UP_USER_BTN.getPath()));
          button.click();
          return this;
      }
-
      public String alertEmailMessage() {
-         Label label= new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
+         Label label= new Label(element.findElement(EMAIL_ALERT_MESSAGE.getPath()));
          return label.getText();
      }
 
@@ -154,4 +153,12 @@ public class SignUpPO extends BasePageObject{
         Label label = new Label(driver.findElement(SIGNED_UP_USER_MESSAGE.getPath()));
         return label.getText();
     }
+     public boolean closeForm() {
+         List<WebElement> close = driver.findElements(CLOSE_FORM_BUTTON.getPath()); //using .findElements in order not to throw exception
+         if (close.size() > 0) {
+             close.get(0).click();
+         }
+         return close.size() > 0;
+     }
+
 }
