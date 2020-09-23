@@ -30,4 +30,8 @@ public abstract class BasePageObject {
         this.url = url;
         return this;
     }
+
+    public void refreshPage(){
+        driver.navigate().refresh();
+    }
 }

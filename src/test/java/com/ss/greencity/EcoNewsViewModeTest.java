@@ -32,7 +32,7 @@ public class EcoNewsViewModeTest extends EcoNewsTestRunner {
     public void listViewAfterRefresh() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getListViewButton().click();
-        driver.navigate().refresh();
+        newsList.refreshPage();
         String classAttribute = newsList.getListViewButton().getAttribute("class");
         Assert.assertEquals("list-view list-view-active", classAttribute);
     }
@@ -40,7 +40,7 @@ public class EcoNewsViewModeTest extends EcoNewsTestRunner {
     @Test
     public void galleryViewAfterRefresh() {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        driver.navigate().refresh();
+        newsList.refreshPage();
         String classAttribute = newsList.getGalleryViewButton().getAttribute("class");
         Assert.assertEquals("gallery-view gallery-view-active", classAttribute);
     }
