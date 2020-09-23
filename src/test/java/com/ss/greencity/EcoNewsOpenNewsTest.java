@@ -58,7 +58,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
-        closeSignUpForm();
+        //closeSignUpForm(); //the form doesn't appear anymore
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue(lang.getCode() + ": Verifying that news content is not empty", text.length() > 0);
@@ -84,7 +84,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         card.getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
-        closeSignUpForm();
+        //closeSignUpForm();
         Assert.assertEquals(lang.getCode() + ": Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
         Assert.assertTrue(lang.getCode() + ": Verifying that author is equal in a news card and in news page",

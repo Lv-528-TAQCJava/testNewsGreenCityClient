@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * https://ita-social-projects.github.io/GreenCityClient/#/news/3077
  */
 public class EcoNewsPO extends BasePageObject {
-    By newsTextSelector = By.cssSelector("news-text");
+    By newsTextSelector = By.cssSelector("div.news-text");
     WebElement newsText;
     By dateSelector = By.cssSelector("div.news-info-date");
     WebElement date;
