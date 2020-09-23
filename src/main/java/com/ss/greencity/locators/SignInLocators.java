@@ -12,7 +12,9 @@ public enum SignInLocators implements Locator {
     EMPTY_EMAIL_FIELD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'Email is required')]")),
     EMPTY_PASSWORD_FIELD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'Password is required')]")),
     PASSWORD_LENGTH_ALERT_MESSAGE(By.xpath("//div[contains(text(),'8 characters')]")),
-    INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE(By.xpath("//div[contains(text(),'Bad email or password')]"));
+    INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE(By.xpath("//div[contains(text(),'Bad email or password')]")),
+    FORGOT_PASSWORD_BTN(By.cssSelector("a.forgot-password"));
+
 
 
     private By path;

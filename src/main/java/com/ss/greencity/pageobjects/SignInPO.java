@@ -3,6 +3,7 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
+import com.ss.greencity.pageelements.Link;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +14,7 @@ import static com.ss.greencity.locators.SignInLocators.*;
 
 /**
  *
- * An object of sign up page
+ * An object of sign in page
  */
 public class SignInPO extends BasePageObject {
 
@@ -62,6 +63,12 @@ public class SignInPO extends BasePageObject {
     public SignInPO clickGoogleSignInButton() {
         Button button = new Button(driver.findElement(GOOGLE_SIGN_IN_BTN.getPath()));
         button.click();
+        return this;
+    }
+
+    public SignInPO clickForgotPassword() {
+        Link link = new Link(driver.findElement(FORGOT_PASSWORD_BTN.getPath()));
+        link.click();
         return this;
     }
 
