@@ -44,16 +44,12 @@ public class EcoNewsListPO extends BasePageObject {
     }
 
     public Button getGalleryViewButton() {
-        if (galleryViewButton == null){
-            galleryViewButton = new Button(driver, EcoNewsLocators.GALLERY_VIEW);
-        }
+        galleryViewButton = new Button(driver, EcoNewsLocators.GALLERY_VIEW);
         return galleryViewButton;
     }
 
     public Button getListViewButton() {
-        if (listViewButton == null){
-            listViewButton = new Button(driver, EcoNewsLocators.LIST_VIEW);
-        }
+        listViewButton = new Button(driver, EcoNewsLocators.LIST_VIEW);
         return listViewButton;
     }
 

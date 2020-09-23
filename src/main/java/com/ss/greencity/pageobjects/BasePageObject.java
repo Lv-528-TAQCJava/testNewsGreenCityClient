@@ -42,4 +42,8 @@ public abstract class BasePageObject {
         headerSignedIn = new HeaderSignedInPO(driver.findElement(HeaderLocators.HEADER.getPath()));
         return headerSignedIn;
     }
+
+    public void refreshPage() {
+        driver.navigate().refresh();
+    }
 }
