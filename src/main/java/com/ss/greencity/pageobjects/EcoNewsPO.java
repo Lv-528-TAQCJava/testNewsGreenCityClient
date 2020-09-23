@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * The main part of a single piece of news page
  * https://ita-social-projects.github.io/GreenCityClient/#/news/3077
  */
-public class EcoNewsPO extends BasePageObject {
+public class EcoNewsPO extends BasePageObject implements IAnonymousPO, ILoggedInPO {
     By newsTextSelector = By.cssSelector("div.news-text");
     WebElement newsText;
     By dateSelector = By.cssSelector("div.news-info-date");

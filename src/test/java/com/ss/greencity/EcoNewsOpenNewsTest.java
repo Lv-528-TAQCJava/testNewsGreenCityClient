@@ -49,7 +49,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     @Theory
     public void openFirstNews(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        newsList.getHeaderAnonymous().selectLanguage(lang);
+        newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -71,7 +71,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     @Theory
     public void checkAuthorAndDate(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
-        newsList.getHeaderAnonymous().selectLanguage(lang);
+        newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {

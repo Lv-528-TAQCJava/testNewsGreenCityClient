@@ -15,12 +15,11 @@ import java.util.List;
  * The main part of news list page
  * https://ita-social-projects.github.io/GreenCityClient/#/news
  */
-public class EcoNewsListPO extends BasePageObject {
+public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILoggedInPO {
     private final String scrollingScript = "window.scrollBy(0,document.body.scrollHeight)";
     private Label itemsFound;
     private NewsCardPO firstNewsCard;
-    private List<Button> filters; //I'm not sure it's simple to use List here.
-    //Probably we need to have each filter Button separately
+    private List<Button> filters;
 
     private Button galleryViewButton;
     private Button listViewButton;
