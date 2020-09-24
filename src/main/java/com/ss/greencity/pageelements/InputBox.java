@@ -21,8 +21,9 @@ public class InputBox extends BaseElement {
         super(element);
     }
 
-    public void click() {
+    public InputBox click() {
         this.element.click();
+        return this;
     }
 
     public void clear() {
