@@ -18,8 +18,9 @@ public class InputBox extends BaseElement {
     public InputBox(WebElement element) {
         super(element);
     }
-    public void click() {
+    public InputBox click() {
         this.element.click();
+        return this;
     }
     public void clear() {
         this.element.clear();
