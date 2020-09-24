@@ -5,9 +5,15 @@ import com.ss.greencity.pageobjects.ProfilePO;
 import com.ss.greencity.pageobjects.SignInPO;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class EcoNewsSignInTest extends EcoNewsTestRunner {
@@ -125,7 +131,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     }
 
     /**
-     * Signing in user with valid data
+     * Clicking Forgot Password
      */
     @Test
     public void forgotPasswordLinkTest() {
@@ -139,6 +145,48 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
 
 
         Assert.assertEquals("Problems sign in?", actualResult);
+    }
+    /**
+     * Signing in user with google id
+     */
+    @Test
+    public void signInGoogleIdTest()  {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        SignInPO signInPO = new SignInPO(driver);
+        ProfilePO profilePO = new ProfilePO(driver);
+        signInPO.clickSignInButton();
+        System.out.println(driver.getCurrentUrl());
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
+        signInPO.clickGoogleSignInButton();
+        String newWindow = (new WebDriverWait(driver, 10))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
+                           }
+                       }
+                );
+
+        driver.switchTo().window(newWindow);
+
+        WebElement email_phone = driver.findElement(By.xpath("//*[@id=\"identifierId\"]"));
+        email_phone.sendKeys("LelekaTestAcc@gmail.com");
+        driver.findElement(By.id("identifierNext")).click();
+        WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
+
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+
+        wait.until(ExpectedConditions.elementToBeClickable(password));
+
+        password.sendKeys("Test1234_");
+        driver.findElement(By.id("passwordNext")).click();
+        driver.switchTo().window(originalWindow);
+        String actualResult = profilePO.userNameField();
+
+        Assert.assertEquals("Prosto Leleka", actualResult);
     }
 
 
