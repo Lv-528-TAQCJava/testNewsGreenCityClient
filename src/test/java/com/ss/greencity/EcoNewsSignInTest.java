@@ -155,7 +155,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
         SignInPO signInPO = new SignInPO(driver);
         ProfilePO profilePO = new ProfilePO(driver);
         signInPO.clickSignInButton();
-        System.out.println(driver.getCurrentUrl());
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
         signInPO.clickGoogleSignInButton();
@@ -171,18 +170,13 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 );
 
         driver.switchTo().window(newWindow);
-
         WebElement email_phone = driver.findElement(By.xpath("//*[@id=\"identifierId\"]"));
         email_phone.sendKeys("LelekaTestAcc@gmail.com");
         driver.findElement(By.id("identifierNext")).click();
         WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
-
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-
-        wait.until(ExpectedConditions.elementToBeClickable(password));
-
         password.sendKeys("Test1234_");
         driver.findElement(By.id("passwordNext")).click();
+
         driver.switchTo().window(originalWindow);
         String actualResult = profilePO.userNameField();
 
