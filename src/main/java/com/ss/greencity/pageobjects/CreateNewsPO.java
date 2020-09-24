@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import static com.ss.greencity.locators.CreateNewsLocators.*;
 
-public class CreateNewsPO extends BasePageObject {
+public class CreateNewsPO extends BasePageObject implements ILoggedInPO {
 
     public CreateNewsPO(WebDriver driver){
         super(driver);
