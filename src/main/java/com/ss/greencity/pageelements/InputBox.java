@@ -12,22 +12,32 @@ public class InputBox extends BaseElement {
     public InputBox(WebDriver driver, Locator locator) {
         super(driver, locator);
     }
+
     public InputBox(WebElement element, Locator locator) {
         super(element, locator);
     }
+
     public InputBox(WebElement element) {
         super(element);
     }
+
     public void click() {
         this.element.click();
     }
+
     public void clear() {
         this.element.clear();
     }
+
     public void setData(String value) {
         this.element.sendKeys(value);
     }
+
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
+    }
+
+    public String getValue() {
+        return element.getAttribute("value");
     }
 }
