@@ -12,6 +12,7 @@ import java.util.List;
 import static com.ss.greencity.locators.SignInLocators.*;
 
 
+
 /**
  *
  * An object of sign in page
@@ -31,6 +32,12 @@ public class SignInPO extends BasePageObject {
         }
         WebElement signInButton = driver.findElement(SIGN_IN_BTN.getPath());
         signInButton.click();
+        return this;
+    }
+
+    public SignInPO clickImagePanel() {
+        WebElement imagePanel = driver.findElement(IMAGE_PANEL.getPath());
+        imagePanel.click();
         return this;
     }
 

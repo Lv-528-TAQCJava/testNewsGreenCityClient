@@ -1,6 +1,7 @@
 package com.ss.greencity;
 
 import com.ss.greencity.pageobjects.ForgetPasswordPO;
+import com.ss.greencity.pageobjects.GoogleSignInPO;
 import com.ss.greencity.pageobjects.ProfilePO;
 import com.ss.greencity.pageobjects.SignInPO;
 import org.junit.Assert;
@@ -17,13 +18,19 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class EcoNewsSignInTest extends EcoNewsTestRunner {
+
+    SignInPO signInPO = new SignInPO(driver);
+    ProfilePO profilePO = new ProfilePO(driver);
+    ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
+    GoogleSignInPO googleSignInPO = new GoogleSignInPO(driver);
+
+
     /**
      * Signing in user with invalid email
      */
     @Test
     public void signInEmailTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("em5.com")
@@ -38,7 +45,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void signInPasswordTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("user1@selenium.test")
@@ -55,11 +61,10 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
    @Test
     public void signInEmptyEmailTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("")
-                .PasswordClick()
+                .clickImagePanel()
                 .alertEmptyEmailMessage();
         Assert.assertEquals("Email is required", actualResult);
     }
@@ -70,11 +75,11 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void signInEmptyPasswordTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("user123@selenium.test")
                 .setPassword("")
+                .clickImagePanel()
                 .alertEmptyPasswordMessage();
         Assert.assertEquals("Password is required", actualResult);
     }
@@ -85,7 +90,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public  void  signInIncorrectEmailTest() {
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("email@in.com")
@@ -101,7 +105,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public  void  signInIncorrectPasswordTest() {
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
         String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("aliejua@gmail.com")
@@ -117,8 +120,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
    @Test
     public void signInValidDataTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
-       ProfilePO profilePO = new ProfilePO(driver);
                  signInPO
                 .clickSignInButton()
                 .setEmail("aliejua@gmail.com")
@@ -136,8 +137,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void forgotPasswordLinkTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
-        ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
         signInPO
                 .clickSignInButton()
                 .clickForgotPassword();
@@ -152,8 +151,6 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void signInGoogleIdTest()  {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        SignInPO signInPO = new SignInPO(driver);
-        ProfilePO profilePO = new ProfilePO(driver);
         signInPO.clickSignInButton();
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
@@ -170,12 +167,11 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 );
 
         driver.switchTo().window(newWindow);
-        WebElement email_phone = driver.findElement(By.xpath("//*[@id=\"identifierId\"]"));
-        email_phone.sendKeys("LelekaTestAcc@gmail.com");
-        driver.findElement(By.id("identifierNext")).click();
-        WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
-        password.sendKeys("Test1234_");
-        driver.findElement(By.id("passwordNext")).click();
+        googleSignInPO
+                .setEmail_Phone("LelekaTestAcc@gmail.com")
+                .clickEmailNextBTN()
+                .setPassword("Test1234_")
+                .clickPasswordNextBTN();
 
         driver.switchTo().window(originalWindow);
         String actualResult = profilePO.userNameField();
