@@ -121,7 +121,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
        String actualResult = profilePO.userNameField();
 
 
-        Assert.assertEquals("User123", actualResult);
+       Assert.assertEquals("User123", actualResult);
     }
 
     /**
