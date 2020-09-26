@@ -20,12 +20,7 @@ public class CommentsPO extends BasePageObject {
         return new Button(driver.findElement(COMMENT_BUTTON.getPath()));
     }
 
-    public String getLastCommentText(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public String getLastCommentText() {
         return driver.findElement(LAST_COMMENT.getPath()).getText();
     }
 }
