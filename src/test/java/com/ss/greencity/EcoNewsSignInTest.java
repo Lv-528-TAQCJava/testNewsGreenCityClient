@@ -4,6 +4,7 @@ import com.ss.greencity.pageobjects.ForgetPasswordPO;
 import com.ss.greencity.pageobjects.GoogleSignInPO;
 import com.ss.greencity.pageobjects.ProfilePO;
 import com.ss.greencity.pageobjects.SignInPO;
+import com.ss.greencity.util.GoogleWindowSwitch;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -152,21 +153,16 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     public void signInGoogleIdTest()  {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         signInPO.clickSignInButton();
+
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
-        signInPO.clickGoogleSignInButton();
-        String newWindow = (new WebDriverWait(driver, 10))
-                .until(new ExpectedCondition<String>() {
-                           public String apply(WebDriver driver) {
-                               Set<String> newWindowsSet = driver.getWindowHandles();
-                               newWindowsSet.removeAll(oldWindowsSet);
-                               return newWindowsSet.size() > 0 ?
-                                       newWindowsSet.iterator().next() : null;
-                           }
-                       }
-                );
 
-        driver.switchTo().window(newWindow);
+        signInPO.clickGoogleSignInButton();
+
+       String newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet);
+
+       driver.switchTo().window(newWindow);
+
         googleSignInPO
                 .setEmail_Phone("LelekaTestAcc@gmail.com")
                 .clickEmailNextBTN()
@@ -174,6 +170,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .clickPasswordNextBTN();
 
         driver.switchTo().window(originalWindow);
+
         String actualResult = profilePO.userNameField();
 
         Assert.assertEquals("Prosto Leleka", actualResult);
