@@ -7,12 +7,7 @@ import com.ss.greencity.pageobjects.SignInPO;
 import com.ss.greencity.util.GoogleWindowSwitch;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 
 import java.util.Set;
@@ -153,31 +148,20 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     public void signInGoogleIdTest()  {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         signInPO.clickSignInButton();
-
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
-
         signInPO.clickGoogleSignInButton();
-
-       String newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet);
-
-       driver.switchTo().window(newWindow);
-
+        String newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet, driver);
+        driver.switchTo().window(newWindow);
         googleSignInPO
                 .setEmail_Phone("LelekaTestAcc@gmail.com")
                 .clickEmailNextBTN()
                 .setPassword("Test1234_")
                 .clickPasswordNextBTN();
-
         driver.switchTo().window(originalWindow);
-
         String actualResult = profilePO.userNameField();
-
         Assert.assertEquals("Prosto Leleka", actualResult);
     }
-
-
-
 }
 
 

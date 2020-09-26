@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public abstract class GoogleWindowSwitch extends EcoNewsTestRunner  {
+ public class GoogleWindowSwitch   {
 
-    public static String  WindowsHandling(Set<String> oldWindowsSet){
+    public static String  WindowsHandling(Set<String> oldWindowsSet, WebDriver driver){
         return (new WebDriverWait(driver, 10))
                 .until(new ExpectedCondition<String>() {
                            public String apply(WebDriver driver1) {
