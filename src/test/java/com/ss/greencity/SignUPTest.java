@@ -1,6 +1,5 @@
 package com.ss.greencity;
 
-import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageobjects.SignUpPO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,8 +7,6 @@ import org.junit.Test;
 
 
 import java.util.concurrent.TimeUnit;
-
-import static com.ss.greencity.locators.SignUpLocators.*;
 
 public class SignUPTest extends EcoNewsTestRunner{
     /**
