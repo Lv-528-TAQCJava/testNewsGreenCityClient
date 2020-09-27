@@ -23,112 +23,172 @@ import static com.ss.greencity.locators.SignUpLocators.*;
  */
 public class SignUpPO extends BasePageObject{
 
-    private final String email = "user"+Math.random()*100000+"@selenium.test";
-    private final String username = "User"+Math.random()*100000;
-    private final String password = "Aa123456_";
-    private final String confirmPassword = "Aa123456_";
-    private final String invalidEmail = "user"+Math.random()*100000+"selenium.test";
-    private final String invalidUsername = "User";
-    private final String invalidPassword = "1111";
-    private final String invalidPasswordSpaces = " ";
-    private final String invalidConfirmPassword = "11";
-    private final String invalidConfirmPasswordSpaces = " ";
+    private InputBox email;
 
-    public String getEmail() {
-        return this.email;
-    }
+    private InputBox username;
 
-    public String getUsername() {
-        return this.username;
-    }
+    private InputBox password;
 
-    public String getPassword() {
-        return this.password;
-    }
+    private InputBox confirmPassword;
 
-    public String getConfirmPassword() {
-        return this.confirmPassword;
-    }
+    private Button signUp;
 
-    public String getInvalidEmail() {
-        return this.invalidEmail;
-    }
+    private WebElement imagePanel;
 
-    public String getInvalidUsername() {
-        return this.invalidUsername;
-    }
+    private Button signUpUser;
 
-    public String getInvalidPassword() {
-        return this.invalidPassword;
-    }
-
-    public String getInvalidConfirmPassword() {
-        return this.invalidConfirmPassword;
-    }
-
-    public String getInvalidPasswordSpaces() {
-        return invalidPasswordSpaces;
-    }
-
-    public String getInvalidConfirmPasswordSpaces() {
-        return invalidConfirmPasswordSpaces;
-    }
 
     public SignUpPO(WebDriver driver) {
         super(driver);
 
     }
+
+    /**
+     * Click Sign Up method
+     */
     public SignUpPO clickSignUpButton() {
-        Button signUpButton = new Button(driver.findElement(SIGN_UP.getPath()));
-        signUpButton.click();
+        this.getSignUpButton().click();
         return this;
     }
 
+    public Button getSignUpButton() {
+        signUp = new Button(driver.findElement(SIGN_UP.getPath()));
+        return this.signUp;
+    }
 
+    /**
+     * Click Image method
+     */
     public SignUpPO clickImagePanel() {
-        WebElement imagePanel = driver.findElement(IMAGE_PANEL.getPath());
-        imagePanel.click();
+        this.getImagePanel().click();
         return this;
     }
+    public WebElement getImagePanel() {
+        imagePanel = driver.findElement(IMAGE_PANEL.getPath());
+        return this.imagePanel;
+    }
 
+    /**
+     * Email methods
+     */
+    public String getEmail() {
+        return "user"+Math.random()*100000+"@selenium.test";
+    }
+
+    public InputBox getEmailInput() {
+        email = new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
+        return this.email;
+    }
     public SignUpPO setEmail(String value) {
-        InputBox email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
-        email.click();
-        email.setData(value);
+        this.getEmailInput().click().setData(value);
         return this;
     }
 
-     public SignUpPO setUserName(String value) {
-        InputBox username = new InputBox(driver.findElement(USERNAME_FIELD.getPath()));
-        username.click();
-        username.clear();
-        username.setData(value);
+    /**
+     * Username methods
+     */
+    public String getUsername() {
+        return "User"+Math.random()*100000;
+    }
+    public InputBox getUsernameInput() {
+        username = new InputBox(driver.findElement(USERNAME_FIELD.getPath()));
+        return this.username;
+    }
+    public SignUpPO setUserName(String value) {
+        this.getUsernameInput().click().setData(value);
         return this;
-     }
+    }
 
-     public SignUpPO setPassword(String value) {
-        InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
-        password.click();
-        password.clear();
-        password.setData(value);
+    /**
+     * Password methods
+     */
+    public String getPassword() {
+        return "Aa123456_";
+    }
+    public InputBox getPasswordInput() {
+        password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+        return this.password;
+    }
+
+    public SignUpPO setPassword(String value) {
+        this.getPasswordInput().click().setData(value);
         return this;
-     }
+    }
 
+    /**
+     * Confirm password methods
+     */
+    public String getConfirmPassword() {
+        return "Aa123456_";
+    }
 
-     public SignUpPO setConfirmedPassword(String value) {
-        InputBox confirmedPassword = new InputBox(driver.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
-        confirmedPassword.click();
-        confirmedPassword.clear();
-        confirmedPassword.setData(value);
+    public InputBox getConfirmPasswordInput() {
+        confirmPassword = new InputBox(driver.findElement(CONFIRM_PASSWORD_FIELD.getPath()));
+        return this.confirmPassword;
+    }
+
+    public SignUpPO setConfirmedPassword(String value) {
+        this.getConfirmPasswordInput().click().setData(value);
         return this;
-     }
+    }
 
+    /**
+     * Invalid email method
+     */
+    public String getInvalidEmail() {
+        return "user"+Math.random()*100000+".selenium.test";
+    }
 
+    /**
+     * Invalid username method
+     */
+    public String getInvalidUsername() {
+        return "User";
+    }
+
+    /**
+     * Invalid password method
+     */
+    public String getInvalidPassword() {
+        return "1111";
+    }
+
+    /**
+     * Invalid confirm password method
+     */
+    public String getInvalidConfirmPassword() {
+        return "1111";
+    }
+
+    /**
+     * Invalid password spaces method
+     */
+    public String getInvalidPasswordSpaces() {
+        return "    ";
+    }
+
+    /**
+     * Invalid confirm password spaces method
+     */
+    public String getInvalidConfirmPasswordSpaces() {
+        return "   ";
+    }
+
+    /**
+     * Sign Up User button method
+     */
      public SignUpPO clickSignUpUserButton() {
-         Button button = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
-         button.click();
+         this.getSignUpUserButton().click();
          return this;
      }
+
+     public Button getSignUpUserButton() {
+         signUpUser = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
+         return this.signUpUser;
+     }
+
+
+
      public String alertEmailMessage() {
          Label label= new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
          return label.getText();
@@ -147,13 +207,8 @@ public class SignUpPO extends BasePageObject{
      }
 
      public String alertEmptyPasswordMessage() {
-         try {
-             Thread.sleep(5000);
-         } catch (InterruptedException e) {
-             e.printStackTrace();
-         }
          Label label = new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
-        return label.getText();
+         return label.getText();
      }
 
      public String alertUserNameMessage() {
