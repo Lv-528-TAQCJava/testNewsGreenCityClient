@@ -237,4 +237,12 @@ public class SignUpPO extends BasePageObject{
         return label.getText();
     }
 
+    public boolean closeForm() {
+        List<WebElement> close = driver.findElements(CLOSE_FORM_BUTTON.getPath()); //using .findElements in order not to throw exception
+        if (close.size() > 0) {
+            close.get(0).click();
+        }
+        return close.size() > 0;
+    }
+
 }
