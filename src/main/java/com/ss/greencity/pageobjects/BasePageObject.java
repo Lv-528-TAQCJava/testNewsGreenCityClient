@@ -1,8 +1,12 @@
 package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.HeaderLocators;
+import com.ss.greencity.pageelements.Link;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 
 /**
  * A template for any page object.
@@ -35,5 +39,19 @@ public abstract class BasePageObject {
 
     public void refreshPage() {
         driver.navigate().refresh();
+    }
+
+    /**
+     * Every page may have links, so it's to BasePageObject
+     * @return An array of all link elements ("a" with "href")
+     */
+    public ArrayList<Link> getAllLinks() {
+        By allLinksSelector = By.xpath("//a[@href!='']"); //Sometimes href="" (empty) is used to make link unclickable
+        ArrayList<Link> allLinks = new ArrayList<>();
+        ArrayList<WebElement> allLinks0 = (ArrayList<WebElement>) driver.findElements(allLinksSelector);
+        for(WebElement l : allLinks0) {
+            allLinks.add(new Link(l));
+        }
+        return allLinks;
     }
 }
