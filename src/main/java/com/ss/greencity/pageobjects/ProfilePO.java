@@ -10,7 +10,7 @@ import static com.ss.greencity.locators.ProfileLocators.*;
  *
  * An object of profile page
  */
-public class ProfilePO extends BasePageObject {
+public class ProfilePO extends BasePageObject implements ILoggedInPO {
 
     public ProfilePO(WebDriver driver) {
         super(driver);

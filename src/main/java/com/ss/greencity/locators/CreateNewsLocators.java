@@ -15,12 +15,13 @@ public enum CreateNewsLocators implements Locator {
     NEWS_BUTTON(By.xpath("//*[contains(text(), 'News')]")),
     PREVIEW_BUTTON(By.xpath("//*[contains(text(), 'Preview')]")),
     PUBLISH_BUTTON(By.xpath("//*[contains(text(), 'Publish')]")),
-    SOURS_FIELD(By.cssSelector("input.ng-untouched.ng-pristine.ng-valid")),
-    TITLE_FIELD(By.cssSelector("div.left-form-column > textarea.ng-untouched.ng-pristine.ng-invalid")),
-    WARNING_CONTENT(By.cssSelector("textarea.ng-touched.ng-dirty.ng-invalid")),
-    WARNING_SOURSE(By.cssSelector("input.ng-valid.field-warning.ng-dirty.ng-touched")),
+    SOURS_FIELD(By.xpath("//*[@class='left-form-column']//input")),
+    TITLE_FIELD(By.xpath("//*[@class='left-form-column']/textarea")),
+    WARNING_CONTENT(By.cssSelector("textarea.ng-invalid.ng-dirty.ng-touched")),
+    WARNING_SOURCE(By.cssSelector("input.ng-valid.ng-dirty.ng-touched.field-warning")),
     WARNING_TAGS(By.cssSelector("div.tags.ng-untouched.ng-pristine.ng-valid > p.warning")),
-    YES_CANCEL_BUTTON(By.cssSelector("primary-global-button"));
+    YES_CANCEL_BUTTON(By.cssSelector(".primary-global-button")),
+    PICTURE_UPLOAD_LINK(By.xpath("//*[@class='centered']//label"));
 
 
     private By path;

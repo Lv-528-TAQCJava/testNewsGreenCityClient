@@ -32,4 +32,8 @@ public class InputBox extends BaseElement {
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
     }
+
+    public String getValue() {
+        return element.getAttribute("value");
+    }
 }
