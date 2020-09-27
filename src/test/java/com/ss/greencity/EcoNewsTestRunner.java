@@ -44,7 +44,7 @@ public class EcoNewsTestRunner {
         driver.manage().timeouts().pageLoadTimeout(65, TimeUnit.SECONDS);
 
         waitsSwitcher = new WaitsSwitcher(driver);
-        waitsSwitcher.setImplicitWait();
+        waitsSwitcher.setImplicitWait(1);
     }
 
     @AfterClass

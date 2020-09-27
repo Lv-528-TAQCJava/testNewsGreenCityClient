@@ -18,7 +18,7 @@ public final class WaitsSwitcher {
 
     public WaitsSwitcher(WebDriver driver) {
         this.driver = driver;
-        defaultImplicitWait = 5;
+        defaultImplicitWait = 1;
         defaultExplicitWait = 5;
     }
     public WaitsSwitcher(WebDriver driver, long defaultWait) {
