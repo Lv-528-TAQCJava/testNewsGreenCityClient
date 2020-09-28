@@ -1,9 +1,12 @@
 package com.ss.greencity;
 
+import com.ss.greencity.locators.EcoNewsLocators;
+import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
 import com.ss.greencity.pageobjects.EcoNewsPO;
 import com.ss.greencity.pageobjects.NewsCardPO;
 import com.ss.greencity.util.Languages;
+import com.ss.greencity.util.PopUpWindowsCloser;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,6 +14,7 @@ import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Arrays;
 
@@ -29,11 +33,8 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
      */
     @Test
     public void numberOfItemsFoundTest() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         String numberOfItems = newsList.getItemsFound().getText();
         String ns = Arrays.asList(numberOfItems.split(" ")).get(0);
@@ -50,15 +51,14 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     public void openFirstNews(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
-        //closeSignUpForm(); //the form doesn't appear anymore
+        //PopUpWindowsCloser.closeSignUpForm(driver); //the form doesn't appear anymore
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue(lang.getCode() + ": Verifying that news content is not empty", text.length() > 0);
@@ -72,11 +72,8 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     public void checkAuthorAndDate(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
 
         NewsCardPO card = newsList.getFirstNewsCard();
         String dateInCard = card.getDate().getText();
@@ -84,7 +81,10 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         card.getClickableArea().click();
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
-        //closeSignUpForm();
+        //PopUpWindowsCloser.closeSignUpForm(driver);
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(NewsPageLocators.DATE.getPath()));
+
         Assert.assertEquals(lang.getCode() + ": Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
         Assert.assertTrue(lang.getCode() + ": Verifying that author is equal in a news card and in news page",
