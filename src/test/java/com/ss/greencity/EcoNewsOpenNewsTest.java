@@ -1,6 +1,7 @@
 package com.ss.greencity;
 
 import com.ss.greencity.locators.EcoNewsLocators;
+import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
 import com.ss.greencity.pageobjects.EcoNewsPO;
 import com.ss.greencity.pageobjects.NewsCardPO;
@@ -56,6 +57,8 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver); //the form doesn't appear anymore
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue(lang.getCode() + ": Verifying that news content is not empty", text.length() > 0);
@@ -79,6 +82,9 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
 
         EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver);
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(NewsPageLocators.DATE.getPath()));
+
         Assert.assertEquals(lang.getCode() + ": Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());
         Assert.assertTrue(lang.getCode() + ": Verifying that author is equal in a news card and in news page",
