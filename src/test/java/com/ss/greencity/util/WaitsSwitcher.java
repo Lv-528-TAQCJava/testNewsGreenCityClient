@@ -16,15 +16,20 @@ public final class WaitsSwitcher {
     private long defaultImplicitWait;
     private long defaultExplicitWait;
 
-    public WaitsSwitcher(WebDriver driver) {
+    public WaitsSwitcher(WebDriver driver, long defaultImplicitWait, long defaultExplicitWait) {
         this.driver = driver;
-        defaultImplicitWait = 1;
-        defaultExplicitWait = 5;
+        this.defaultImplicitWait = defaultImplicitWait;
+        this.defaultExplicitWait = defaultExplicitWait;
     }
     public WaitsSwitcher(WebDriver driver, long defaultWait) {
         this.driver = driver;
         defaultImplicitWait = defaultWait;
         defaultExplicitWait = defaultWait;
+    }
+    public WaitsSwitcher(WebDriver driver) {
+        this.driver = driver;
+        defaultImplicitWait = 1;
+        defaultExplicitWait = 5;
     }
 
     /**
@@ -49,7 +54,6 @@ public final class WaitsSwitcher {
             defaultImplicitWait = seconds;
         }
         driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
-        //System.out.println("+++ Implicit wait: " + defaultImplicitWait);
     }
     /**
      * A wrap for driver.manage().timeouts().implicitlyWait

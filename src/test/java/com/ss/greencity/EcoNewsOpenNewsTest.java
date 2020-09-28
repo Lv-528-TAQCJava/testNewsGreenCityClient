@@ -6,7 +6,6 @@ import com.ss.greencity.pageobjects.EcoNewsPO;
 import com.ss.greencity.pageobjects.NewsCardPO;
 import com.ss.greencity.util.Languages;
 import com.ss.greencity.util.PopUpWindowsCloser;
-import com.ss.greencity.util.WaitsSwitcher;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
