@@ -15,7 +15,7 @@ import static com.ss.greencity.locators.SignInLocators.*;
  *
  * An object of sign in page
  */
-public class SignInPO extends BasePageObject {
+public class SignInPO extends BasePageObject implements ILoggedInPO {
 
     private InputBox email;
     private InputBox password;

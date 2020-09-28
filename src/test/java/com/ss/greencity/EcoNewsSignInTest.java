@@ -4,7 +4,8 @@ import com.ss.greencity.pageobjects.*;
 import com.ss.greencity.util.GoogleWindowSwitch;
 import org.junit.Assert;
 import org.junit.Test;
-
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 
 import java.util.Set;
@@ -16,8 +17,16 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     ProfilePO profilePO = new ProfilePO(driver);
     ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
     GoogleSignInPO googleSignInPO = new GoogleSignInPO(driver);
-    HeaderSignedInPO headerSignedInPO = new HeaderSignedInPO(driver);
 
+
+
+
+    public void logOut(){
+        WebElement userHeaderButton = driver.findElement(By.cssSelector("div#user-avatar-wrapper ul"));
+        WebElement logOutButton = driver.findElement(By.xpath("//*[@id = 'user-avatar-wrapper']//a[contains(text(), ' Sign out ')]"));
+        userHeaderButton.click();
+        logOutButton.click();
+    }
 
     /**
      * Signing in user with invalid email
@@ -120,7 +129,8 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .setPassword("Aa12345_")
                 .clickSignInUserButton();
        String actualResult = profilePO.userNameField();
-       headerSignedInPO.signOut();
+       logOut();
+      // headerSignedInPO.signOut();
 
 
        Assert.assertEquals("User123", actualResult);
@@ -135,7 +145,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
         signInPO
                 .clickSignInButton()
                 .clickForgotPassword();
-        String actualResult = forgetPasswordPO.forgotPasswordText();
+        String actualResult = forgetPasswordPO.getforgotPasswordTitle();
 
 
         Assert.assertEquals("Problems sign in?", actualResult);
@@ -160,7 +170,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
         driver.switchTo().window(originalWindow);
         String actualResult = profilePO.userNameField();
         Assert.assertEquals("Prosto Leleka", actualResult);
-        headerSignedInPO.signOut();
+        logOut();
     }
 }
 
