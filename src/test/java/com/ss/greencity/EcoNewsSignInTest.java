@@ -1,9 +1,6 @@
 package com.ss.greencity;
 
-import com.ss.greencity.pageobjects.ForgetPasswordPO;
-import com.ss.greencity.pageobjects.GoogleSignInPO;
-import com.ss.greencity.pageobjects.ProfilePO;
-import com.ss.greencity.pageobjects.SignInPO;
+import com.ss.greencity.pageobjects.*;
 import com.ss.greencity.util.GoogleWindowSwitch;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,6 +16,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     ProfilePO profilePO = new ProfilePO(driver);
     ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
     GoogleSignInPO googleSignInPO = new GoogleSignInPO(driver);
+    HeaderSignedInPO headerSignedInPO = new HeaderSignedInPO(driver);
 
 
     /**
@@ -122,6 +120,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .setPassword("Aa12345_")
                 .clickSignInUserButton();
        String actualResult = profilePO.userNameField();
+       headerSignedInPO.signOut();
 
 
        Assert.assertEquals("User123", actualResult);
@@ -161,6 +160,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
         driver.switchTo().window(originalWindow);
         String actualResult = profilePO.userNameField();
         Assert.assertEquals("Prosto Leleka", actualResult);
+        headerSignedInPO.signOut();
     }
 }
 
