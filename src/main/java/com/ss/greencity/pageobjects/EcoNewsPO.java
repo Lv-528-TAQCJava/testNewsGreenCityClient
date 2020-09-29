@@ -1,6 +1,7 @@
 package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.EcoNewsLocators;
+import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
@@ -12,12 +13,12 @@ import org.openqa.selenium.WebElement;
  * The main part of a single piece of news page
  * https://ita-social-projects.github.io/GreenCityClient/#/news/3077
  */
-public class EcoNewsPO extends BasePageObject {
-    By newsTextSelector = By.cssSelector("div.news-text");
+public class EcoNewsPO extends BasePageObject implements IAnonymousPO, ILoggedInPO {
+    By newsTextSelector = NewsPageLocators.NEWS_TEXT.getPath();
     WebElement newsText;
-    By dateSelector = By.cssSelector("div.news-info-date");
+    By dateSelector = NewsPageLocators.DATE.getPath();
     WebElement date;
-    By authorSelector = By.cssSelector("div.news-info-author");
+    By authorSelector = NewsPageLocators.AUTHOR.getPath();
     WebElement author;
 
 

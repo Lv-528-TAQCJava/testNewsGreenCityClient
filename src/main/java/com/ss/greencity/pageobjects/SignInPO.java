@@ -7,20 +7,37 @@ import com.ss.greencity.pageelements.Link;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 import static com.ss.greencity.locators.SignInLocators.*;
+
 
 
 /**
  *
  * An object of sign in page
  */
-public class SignInPO extends BasePageObject {
+public class SignInPO extends BasePageObject implements ILoggedInPO {
+
+    private InputBox email;
+    private InputBox password;
+    private WebElement signInButton;
+    private WebElement imagePanel;
+    private Button signInUserButton;
+    private Button googleSignInButton;
+    private Link forgotPassword;
+    private Label alertEmailMessage;
+    private Label alertEmptyEmailMessage;
+    private Label alertEmptyPasswordMessage;
+    private Label alertPasswordMessage;
+    private Label alertBadEmailOrPasswordMessage;
 
     public SignInPO(WebDriver driver) {
         super(driver);
 
+    }
+
+    public WebElement getSignInButton(){
+        this.signInButton = driver.findElement(SIGN_IN_BTN.getPath());
+        return signInButton;
     }
 
     public SignInPO clickSignInButton() {
@@ -29,71 +46,93 @@ public class SignInPO extends BasePageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        WebElement signInButton = driver.findElement(SIGN_IN_BTN.getPath());
-        signInButton.click();
+        this.getSignInButton().click();
         return this;
+    }
+
+    public WebElement getImagePanel() {
+        imagePanel = driver.findElement(IMAGE_PANEL.getPath());
+        return imagePanel;
+    }
+
+    public SignInPO clickImagePanel() {
+        this.getImagePanel().click();
+        return this;
+    }
+
+    public InputBox getEmail(){
+        email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
+        return email;
     }
 
     public SignInPO setEmail(String value) {
-        InputBox email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
-        email.click();
-        email.setData(value);
+        this.getEmail().click().setData(value);
         return this;
+    }
+
+    public InputBox getPassword(){
+        password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
+        return password;
     }
 
     public SignInPO setPassword(String value) {
-        InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
-        password.click();
-        password.setData(value);
+        this.getPassword().click().setData(value);
         return this;
     }
 
-    public SignInPO PasswordClick() {
-        InputBox password = new InputBox(driver.findElement(PASSWORD_FIELD.getPath()));
-        password.click();
-        return this;
+    public Button getSignInUserButton(){
+        signInUserButton = new Button(driver.findElement(SIGN_IN_USER_BTN.getPath()));
+        return signInUserButton;
+
     }
 
     public SignInPO clickSignInUserButton() {
-        Button button = new Button(driver.findElement(SIGN_IN_USER_BTN.getPath()));
-        button.click();
+        this.getSignInUserButton().click();
         return this;
+    }
+
+    public Button getGoogleSignInButton(){
+        googleSignInButton = new Button(driver.findElement(GOOGLE_SIGN_IN_BTN.getPath()));
+        return googleSignInButton;
     }
 
     public SignInPO clickGoogleSignInButton() {
-        Button button = new Button(driver.findElement(GOOGLE_SIGN_IN_BTN.getPath()));
-        button.click();
+        this.getGoogleSignInButton().click();
         return this;
     }
 
+    public Link getForgotPassword(){
+        forgotPassword = new Link(driver.findElement(FORGOT_PASSWORD_BTN.getPath()));
+        return forgotPassword;
+    }
+
     public SignInPO clickForgotPassword() {
-        Link link = new Link(driver.findElement(FORGOT_PASSWORD_BTN.getPath()));
-        link.click();
+        this.getForgotPassword().click();
         return this;
     }
 
     public String alertEmailMessage() {
-        Label label= new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
-        return label.getText();
+        alertEmailMessage = new Label(driver.findElement(EMAIL_ALERT_MESSAGE.getPath()));
+        return alertEmailMessage.getText();
     }
 
     public String alertEmptyEmailMessage() {
-        Label label= new Label(driver.findElement(EMPTY_EMAIL_FIELD_ALERT_MESSAGE.getPath()));
-        return label.getText();
+        alertEmptyEmailMessage = new Label(driver.findElement(EMPTY_EMAIL_FIELD_ALERT_MESSAGE.getPath()));
+        return alertEmptyEmailMessage.getText();
     }
 
     public String alertEmptyPasswordMessage() {
-        Label label= new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
-        return label.getText();
+        alertEmptyPasswordMessage = new Label(driver.findElement(EMPTY_PASSWORD_FIELD_ALERT_MESSAGE.getPath()));
+        return alertEmptyPasswordMessage.getText();
     }
 
     public String alertPasswordMessage() {
-        Label label= new Label(driver.findElement(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
-        return label.getText();
+        alertPasswordMessage= new Label(driver.findElement(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
+        return alertPasswordMessage.getText();
     }
 
     public String alertBadEmailOrPasswordMessage() {
-        Label label = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
-        return  label.getText();
+        alertBadEmailOrPasswordMessage = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
+        return  alertBadEmailOrPasswordMessage.getText();
     }
 }

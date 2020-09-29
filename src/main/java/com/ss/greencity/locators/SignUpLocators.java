@@ -16,7 +16,8 @@ public enum SignUpLocators implements Locator {
     USERNAME_ALERT_MESSAGE(By.xpath(("//div[contains(text(),'name')]"))),
     PASSWORD_FIELD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'8 characters')]")),
     CONFIRM_PASSWORD_ALERT_MESSAGE(By.xpath("//div[contains(text(),'match')]")),
-    SIGNED_UP_USER_MESSAGE(By.xpath("//div/h1[contains(text(),'Welcome back!')]"));
+    SIGNED_UP_USER_MESSAGE(By.xpath("//div/h1[contains(text(),'Welcome back!')]")),
+    CLOSE_FORM_BUTTON(By.cssSelector("img.cross-btn"));
 
     private By path;
 
