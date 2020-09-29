@@ -15,7 +15,7 @@ import java.util.List;
  * An object of a news card (brief presentation of one of news pieces)
  * Mind that additional news cards load on scrolling!
  */
-public class NewsCardPO extends BasePageObject {
+public class NewsCardComponent extends BasePageObject {
     private Image image;
     private List<Label> categories;
     private Label heading;
@@ -25,7 +25,7 @@ public class NewsCardPO extends BasePageObject {
     private Button clickableArea; //in fact, all the card is a button
     private String className;
 
-    protected NewsCardPO(WebElement element) {
+    protected NewsCardComponent(WebElement element) {
         super(element);
         init();
     }

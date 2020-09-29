@@ -8,15 +8,15 @@ import org.openqa.selenium.WebElement;
 /**
  * Site header for not logged in users
  */
-public class HeaderAnonymousPO extends HeaderPO {
+public class HeaderAnonymousComponent extends HeaderComponent {
     private Button signIn;
     private Button signUp;
 
-    public HeaderAnonymousPO(WebDriver driver) {
+    public HeaderAnonymousComponent(WebDriver driver) {
         super(driver);
     }
 
-    public HeaderAnonymousPO(WebElement element) {
+    public HeaderAnonymousComponent(WebElement element) {
         super(element);
     }
 

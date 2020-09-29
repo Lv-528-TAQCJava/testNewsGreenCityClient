@@ -3,8 +3,6 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.locators.EcoNewsLocators;
 import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageelements.Button;
-import com.ss.greencity.pageelements.InputBox;
-import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * The main part of a single piece of news page
  * https://ita-social-projects.github.io/GreenCityClient/#/news/3077
  */
-public class EcoNewsPO extends BasePageObject implements IAnonymousPO, ILoggedInPO {
+public class EcoNewsArticlePO extends BasePageObject implements IAnonymousPO, ILoggedInPO {
     By newsTextSelector = NewsPageLocators.NEWS_TEXT.getPath();
     WebElement newsText;
     By dateSelector = NewsPageLocators.DATE.getPath();
@@ -22,7 +20,7 @@ public class EcoNewsPO extends BasePageObject implements IAnonymousPO, ILoggedIn
     WebElement author;
 
 
-    public EcoNewsPO(WebDriver driver) {
+    public EcoNewsArticlePO(WebDriver driver) {
         super(driver);
 
     }
@@ -39,12 +37,12 @@ public class EcoNewsPO extends BasePageObject implements IAnonymousPO, ILoggedIn
         author = driver.findElement(authorSelector);
         return author.getText(); //Mind that this starts with "by..."
     }
-    public EcoNewsPO clickCreateNewsButton(){
+    public EcoNewsArticlePO clickCreateNewsButton(){
         Button createNews = new Button(driver.findElement(EcoNewsLocators.CREATE_NEWS.getPath()));
         createNews.click();
         return this;
     }
-    public EcoNewsPO clickEcoNewsButton(){
+    public EcoNewsArticlePO clickEcoNewsButton(){
         Button ecoNewsButton = new Button((driver.findElement(EcoNewsLocators.NEWS_BUTTON.getPath())));
         ecoNewsButton.click();
         return this;

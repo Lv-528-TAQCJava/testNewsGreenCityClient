@@ -3,12 +3,10 @@ package com.ss.greencity;
 import com.ss.greencity.locators.EcoNewsLocators;
 import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.EcoNewsPO;
-import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.EcoNewsArticlePO;
+import com.ss.greencity.pageobjects.NewsCardComponent;
 import com.ss.greencity.util.Languages;
-import com.ss.greencity.util.PopUpWindowsCloser;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -55,7 +53,7 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
                 .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         newsList.getFirstNewsCard().getClickableArea().click();
 
-        EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        EcoNewsArticlePO pieceOfNews = new EcoNewsArticlePO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver); //the form doesn't appear anymore
         waitsSwitcher.setExplicitWait(ExpectedConditions
                 .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
@@ -75,12 +73,12 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
         waitsSwitcher.setExplicitWait(ExpectedConditions
                 .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
 
-        NewsCardPO card = newsList.getFirstNewsCard();
+        NewsCardComponent card = newsList.getFirstNewsCard();
         String dateInCard = card.getDate().getText();
         String authorInCard = card.getAuthor().getText();
         card.getClickableArea().click();
 
-        EcoNewsPO pieceOfNews = new EcoNewsPO(driver);
+        EcoNewsArticlePO pieceOfNews = new EcoNewsArticlePO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver);
         waitsSwitcher.setExplicitWait(ExpectedConditions
                 .presenceOfElementLocated(NewsPageLocators.DATE.getPath()));

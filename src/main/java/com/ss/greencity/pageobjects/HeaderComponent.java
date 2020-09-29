@@ -10,9 +10,9 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Site header, which appears on every page at top.
- * It is abstract, use HeaderAnonymousPO or HeaderSignedInPO
+ * It is abstract, use HeaderAnonymousComponent or HeaderSignedInComponent
  */
-public abstract class HeaderPO extends BasePageObject {
+public abstract class HeaderComponent extends BasePageObject {
     public String currentLanguage;
     protected Image logo;
     protected Button news;
@@ -23,17 +23,17 @@ public abstract class HeaderPO extends BasePageObject {
     protected Image searchBtn;
     protected DropdownList languageDropdown;
 
-    public HeaderPO(WebDriver driver) {
+    public HeaderComponent(WebDriver driver) {
         super(driver);
         element = driver.findElement(HeaderLocators.HEADER.getPath());
     }
 
-    public HeaderPO(WebElement element) {
+    public HeaderComponent(WebElement element) {
         super(element);
     }
 
 
-    public HeaderPO selectLanguage(Languages language) {
+    public HeaderComponent selectLanguage(Languages language) {
         DropdownList dropdown = getLanguageDropdown();
         dropdown.click();
         element.findElement(language.getPath()).click();
