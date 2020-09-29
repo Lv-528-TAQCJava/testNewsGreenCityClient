@@ -16,10 +16,6 @@ public class HeaderAnonymousComponent extends HeaderComponent {
         super(driver);
     }
 
-    public HeaderAnonymousComponent(WebElement element) {
-        super(element);
-    }
-
     public Button getSignIn() {
         signIn = new Button(element.findElement(HeaderLocators.SIGN_IN.getPath()));
         return signIn;

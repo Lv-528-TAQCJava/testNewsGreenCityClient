@@ -47,8 +47,6 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtEcoNewsTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/news");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         ArrayList<Link> links = newsList.getAllLinks();
         noBrokenLinks(links);
@@ -57,8 +55,6 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtNewsPageTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/news/3129");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
         EcoNewsArticlePO newsPage = new EcoNewsArticlePO(driver);
         ArrayList<Link> links = newsPage.getAllLinks();
         noBrokenLinks(links);
@@ -67,9 +63,11 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtWelcomeTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/welcome");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
+        //using the following since no page object for Welcome page created
+        WaitsSwitcher ws = new WaitsSwitcher(driver);
+        ws.setExplicitWait(ExpectedConditions
                 .presenceOfElementLocated(By.cssSelector("div.main-event div.main-event")));
-        Error404PO welcomePage = new Error404PO(driver); //using this since no page object for Welcome page created
+        Error404PO welcomePage = new Error404PO(driver);
         ArrayList<Link> links = welcomePage.getAllLinks();
         noBrokenLinks(links);
     }

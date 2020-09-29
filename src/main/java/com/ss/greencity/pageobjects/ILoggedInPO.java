@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
  */
 interface ILoggedInPO {
     default HeaderSignedInComponent getHeaderSignedIn(WebDriver driver) {
-        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver.findElement(HeaderLocators.HEADER.getPath()));
+        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
         return headerSignedIn;
     }
 }

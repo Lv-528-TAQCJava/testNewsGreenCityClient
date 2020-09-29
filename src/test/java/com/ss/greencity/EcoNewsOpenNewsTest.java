@@ -31,8 +31,6 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
      */
     @Test
     public void numberOfItemsFoundTest() {
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         String numberOfItems = newsList.getItemsFound().getText();
         String ns = Arrays.asList(numberOfItems.split(" ")).get(0);
@@ -49,14 +47,10 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     public void openFirstNews(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         newsList.getFirstNewsCard().getClickableArea().click();
 
         EcoNewsArticlePO pieceOfNews = new EcoNewsArticlePO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver); //the form doesn't appear anymore
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
         String text = pieceOfNews.getNewsText();
         System.out.println("Length of news text: " + text.length() + "\t" + text.substring(0, Math.min(text.length(), 100)));
         Assert.assertTrue(lang.getCode() + ": Verifying that news content is not empty", text.length() > 0);
@@ -70,8 +64,6 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
     public void checkAuthorAndDate(Languages lang) {
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         newsList.getHeaderAnonymous(newsList.getDriver()).selectLanguage(lang);
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
 
         NewsCardComponent card = newsList.getFirstNewsCard();
         String dateInCard = card.getDate().getText();
@@ -80,8 +72,6 @@ public class EcoNewsOpenNewsTest extends EcoNewsTestRunner {
 
         EcoNewsArticlePO pieceOfNews = new EcoNewsArticlePO(driver);
         //PopUpWindowsCloser.closeSignUpForm(driver);
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(NewsPageLocators.DATE.getPath()));
 
         Assert.assertEquals(lang.getCode() + ": Verifying that date is equal in a news card and in news page",
                 dateInCard, pieceOfNews.getDate());

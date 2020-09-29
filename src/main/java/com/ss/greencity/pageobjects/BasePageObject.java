@@ -2,6 +2,7 @@ package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.locators.HeaderLocators;
 import com.ss.greencity.pageelements.Link;
+import com.ss.greencity.util.WaitsSwitcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,13 +17,16 @@ public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebElement element;
     protected String url;
+    protected WaitsSwitcher waitsSwitcher;
 
     protected BasePageObject(WebDriver driver) {
         this.driver = driver;
+        waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
     }
 
     protected BasePageObject(WebElement element) {
         this.element = element;
+        waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
     }
 
     public WebDriver getDriver() {

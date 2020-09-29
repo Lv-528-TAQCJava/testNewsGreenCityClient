@@ -6,6 +6,7 @@ import com.ss.greencity.pageelements.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * The main part of a single piece of news page
@@ -26,23 +27,33 @@ public class EcoNewsArticlePO extends BasePageObject implements IAnonymousPO, IL
     }
 
     public String getNewsText() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(newsTextSelector));
         newsText = driver.findElement(newsTextSelector);
         return newsText.getText();
     }
     public String getDate() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(dateSelector));
         date = driver.findElement(dateSelector);
         return date.getText();
     }
     public String getAuthor() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(authorSelector));
         author = driver.findElement(authorSelector);
         return author.getText(); //Mind that this starts with "by..."
     }
     public EcoNewsArticlePO clickCreateNewsButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.CREATE_NEWS.getPath()));
         Button createNews = new Button(driver.findElement(EcoNewsLocators.CREATE_NEWS.getPath()));
         createNews.click();
         return this;
     }
     public EcoNewsArticlePO clickEcoNewsButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_BUTTON.getPath()));
         Button ecoNewsButton = new Button((driver.findElement(EcoNewsLocators.NEWS_BUTTON.getPath())));
         ecoNewsButton.click();
         return this;

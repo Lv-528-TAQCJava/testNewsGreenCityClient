@@ -15,10 +15,6 @@ public class HeaderSignedInComponent extends HeaderComponent {
         super(driver);
     }
 
-    public HeaderSignedInComponent(WebElement element) {
-        super(element);
-    }
-
     public DropdownList getUserProfile() {
         userProfile = new DropdownList(element.findElement(HeaderLocators.USER_PROFILE.getPath()));
         return userProfile;

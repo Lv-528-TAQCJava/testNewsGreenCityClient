@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
  */
 interface IAnonymousPO {
     default HeaderAnonymousComponent getHeaderAnonymous(WebDriver driver) {
-        HeaderAnonymousComponent headerAnon = new HeaderAnonymousComponent(driver.findElement(HeaderLocators.HEADER.getPath()));
+        HeaderAnonymousComponent headerAnon = new HeaderAnonymousComponent(driver);
         return headerAnon;
     }
 }

@@ -6,6 +6,7 @@ import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,9 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     }
 
     public Label getItemsFound() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_LIST.getPath()));
+        //if first news card appears, then definitely 'items found' number will be correct
         itemsFound = new Label(driver, EcoNewsLocators.ITEMS_FOUND);
         return itemsFound;
     }
@@ -52,6 +56,8 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     }
 
     public NewsCardComponent getFirstNewsCard() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_LIST.getPath()));
         firstNewsCard = new NewsCardComponent(driver.findElements(EcoNewsLocators.NEWS_LIST.getPath()).get(0));
         return firstNewsCard;
     }

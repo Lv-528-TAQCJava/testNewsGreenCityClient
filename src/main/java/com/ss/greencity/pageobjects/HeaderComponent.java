@@ -7,6 +7,7 @@ import com.ss.greencity.pageelements.Image;
 import com.ss.greencity.util.Languages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Site header, which appears on every page at top.
@@ -28,14 +29,12 @@ public abstract class HeaderComponent extends BasePageObject {
         element = driver.findElement(HeaderLocators.HEADER.getPath());
     }
 
-    public HeaderComponent(WebElement element) {
-        super(element);
-    }
-
 
     public HeaderComponent selectLanguage(Languages language) {
         DropdownList dropdown = getLanguageDropdown();
         dropdown.click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(language.getPath()));
         element.findElement(language.getPath()).click();
         currentLanguage = language.getCode();
 
@@ -43,6 +42,8 @@ public abstract class HeaderComponent extends BasePageObject {
     }
 
     public DropdownList getLanguageDropdown() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(HeaderLocators.LANGUAGE.getPath()));
         languageDropdown = new DropdownList(element.findElement(HeaderLocators.LANGUAGE.getPath()));
         return languageDropdown;
     }
