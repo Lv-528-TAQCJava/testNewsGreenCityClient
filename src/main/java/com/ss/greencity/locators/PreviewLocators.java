@@ -15,7 +15,8 @@ public enum PreviewLocators implements Locator {
     TAGS_EVENTS(By.xpath("//*[@class = 'tags']/div[contains(text(), 'events')]")),
     TAGS_INITIATIVES(By.xpath("//*[@class = 'tags']/div[contains(text(), 'initiatives')]")),
     TAGS_NEWS(By.xpath("//*[@class = 'tags']/div[contains(text(), ' news')]")),
-    TITLE(By.cssSelector(".news-title.word-wrap"));
+    TITLE(By.cssSelector(".news-title.word-wrap")),
+    PUBLISH_BUTTON(By.cssSelector(".primary-global-button.ng-star-inserted"));
 
 
     private By path;

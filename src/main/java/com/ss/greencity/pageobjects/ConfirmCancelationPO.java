@@ -28,4 +28,12 @@ public class ConfirmCancelationPO extends BasePageObject {
         cancel.click();
         return new EditProfilePO(driver);
     }
+    public CreateNewsPO clickContinueEditing(){
+        confirm.click();
+        return new CreateNewsPO(driver);
+    }
+    public EcoNewsPO clickYesCancelButton(){
+        cancel.click();
+        return new EcoNewsPO(driver);
+    }
 }

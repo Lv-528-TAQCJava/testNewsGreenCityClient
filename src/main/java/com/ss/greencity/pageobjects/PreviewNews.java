@@ -15,37 +15,56 @@ public class PreviewNews extends BasePageObject {
 
     private Label title;
     private Label content;
-    private Label sourceText;
-    private Label sourceTitleText;
+    private Label source;
+    private Label sourceTitle;
+    private Label date;
+    private Label author;
 
     private Link backToEditing;
 
     private Button newsTag;
+    private Button publishButton;
 
-    public String getTitleText(){
+    public Label getTitleLabel(){
         title = new Label(driver.findElement(TITLE.getPath()));
-        return title.getText();
+        return this.title;
     }
-    public String getContentText(){
+    public Label getContentLabel(){
         content = new Label(driver.findElement(CONTENT.getPath()));
-        return content.getText();
+        return this.content;
     }
-    public String getSourceText(){
-        sourceText = new Label(driver.findElement(SOURCE_TEXT.getPath()));
-        return sourceText.getText();
+    public Label getSourceLabel(){
+        source = new Label(driver.findElement(SOURCE_TEXT.getPath()));
+        return this.source;
     }
-    public String getSourceTitleText(){
-        sourceTitleText = new Label(driver.findElement(SOURCE_TITLE.getPath()));
-        return sourceTitleText.getText();
+    public Label getSourceTitleLabel(){
+        sourceTitle = new Label(driver.findElement(SOURCE_TITLE.getPath()));
+        return this.sourceTitle;
     }
-    public PreviewNews clickBackToEditingLink(){
+    public Label getDateLabel(){
+        date = new Label(driver.findElement(DATE.getPath()));
+        return this.date;
+    }
+    public Label getAuthorLabel(){
+        author = new Label(driver.findElement(AUTHOR.getPath()));
+        return this.author;
+    }
+    public Link getBackToEditingLink(){
         backToEditing = new Link(driver.findElement(BACK_TO_EDITING_LINK.getPath()));
-        backToEditing.click();
-        return this;
+        return this.backToEditing;
+    }
+    public CreateNewsPO clickBackToEditingLink(){
+        this.getBackToEditingLink().click();
+        return new CreateNewsPO(driver);
     }
     public Button getEducationTag(){
         newsTag = new Button(driver.findElement(TAGS_EDUCATION.getPath()));
         return newsTag;
+    }
+
+    public Button getPublishButton(){
+        publishButton = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
+        return publishButton;
     }
 
 }
