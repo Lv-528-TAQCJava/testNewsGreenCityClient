@@ -12,13 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.assertj.core.api.SoftAssertions;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
-
-import static org.junit.Assert.*;
 
 public class LanguageChangeTest extends EcoNewsTestRunner {
 
@@ -74,7 +71,6 @@ public class LanguageChangeTest extends EcoNewsTestRunner {
     public void switchToRussianTest() {
         HeaderAnonymousPO header = new HeaderAnonymousPO(driver);
         header.selectLanguage(Languages.RUSSIAN);
-
         HeaderAnonymousPO translatedHeader = new HeaderAnonymousPO(driver);
         EcoNewsListPO news = new EcoNewsListPO(driver);
         FooterPO footer = new FooterPO(driver);
