@@ -17,6 +17,17 @@ import java.util.List;
  */
 public class EcoNewsListPO extends BasePageObject {
     private final String scrollingScript = "window.scrollBy(0,document.body.scrollHeight)";
+
+    public Label getEcoNewsHeader() {
+        return ecoNewsHeader;
+    }
+
+    public Label getFilterBy() {
+        return filterBy;
+    }
+
+    private Label ecoNewsHeader;
+    private Label filterBy;
     private Label itemsFound;
     private NewsCardPO firstNewsCard;
     private List<Button> filters; //I'm not sure it's simple to use List here.
@@ -31,6 +42,8 @@ public class EcoNewsListPO extends BasePageObject {
     }
 
     private void init() {
+        ecoNewsHeader = new Label(driver.findElement(EcoNewsLocators.ECO_HEADER.getPath()));
+        filterBy = new Label (driver.findElement(EcoNewsLocators.FILTER_BY.getPath()));
         List<WebElement> filterButtons = driver.findElements(EcoNewsLocators.FILTERS_LIST.getPath());
         filters = new ArrayList<Button>();
         for(WebElement element : filterButtons) {

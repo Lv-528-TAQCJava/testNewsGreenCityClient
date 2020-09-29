@@ -19,9 +19,7 @@ public class Button extends BaseElement {
         super(element);
     }
 
-    public String getText() {
-        return this.element.getText();
-    }
+
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
     }
