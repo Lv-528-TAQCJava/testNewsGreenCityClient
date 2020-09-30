@@ -130,11 +130,15 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public String alertPasswordMessage() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
         alertPasswordMessage= new Label(driver.findElement(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
         return alertPasswordMessage.getText();
     }
 
     public String alertBadEmailOrPasswordMessage() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         alertBadEmailOrPasswordMessage = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         return  alertBadEmailOrPasswordMessage.getText();
     }
