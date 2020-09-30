@@ -1,21 +1,16 @@
 package com.ss.greencity;
 
 import com.ss.greencity.locators.EcoNewsLocators;
-import com.ss.greencity.locators.HeaderLocators;
 import com.ss.greencity.locators.NewsPageLocators;
 import com.ss.greencity.pageelements.Link;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.EcoNewsPO;
+import com.ss.greencity.pageobjects.EcoNewsArticlePO;
 import com.ss.greencity.pageobjects.Error404PO;
-import com.ss.greencity.util.Languages;
 import com.ss.greencity.util.WaitsSwitcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
-import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -52,8 +47,6 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtEcoNewsTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/news");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.FIRST_NEWS_CARD.getPath()));
         EcoNewsListPO newsList = new EcoNewsListPO(driver);
         ArrayList<Link> links = newsList.getAllLinks();
         noBrokenLinks(links);
@@ -62,9 +55,7 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtNewsPageTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/news/3129");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(NewsPageLocators.NEWS_TEXT.getPath()));
-        EcoNewsPO newsPage = new EcoNewsPO(driver);
+        EcoNewsArticlePO newsPage = new EcoNewsArticlePO(driver);
         ArrayList<Link> links = newsPage.getAllLinks();
         noBrokenLinks(links);
     }
@@ -72,9 +63,11 @@ public class BrokenLinksTest extends EcoNewsTestRunner {
     @Test
     public void noBrokenLinksAtWelcomeTest() {
         driver.navigate().to("https://ita-social-projects.github.io/GreenCityClient/#/welcome");
-        waitsSwitcher.setExplicitWait(ExpectedConditions
+        //using the following since no page object for Welcome page created
+        WaitsSwitcher ws = new WaitsSwitcher(driver);
+        ws.setExplicitWait(ExpectedConditions
                 .presenceOfElementLocated(By.cssSelector("div.main-event div.main-event")));
-        Error404PO welcomePage = new Error404PO(driver); //using this since no page object for Welcome page created
+        Error404PO welcomePage = new Error404PO(driver);
         ArrayList<Link> links = welcomePage.getAllLinks();
         noBrokenLinks(links);
     }

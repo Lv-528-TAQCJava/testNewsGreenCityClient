@@ -12,14 +12,14 @@ import static com.ss.greencity.locators.CreateNewsLocators.PUBLISH_BUTTON;
 public class CreateNewsTests extends EcoNewsTestRunner {
 
     CreateNewsPO createNewsPO = new CreateNewsPO(driver);
-    PreviewNews previewNews = new PreviewNews(driver);
-    EcoNewsPO ecoNewsPO = new EcoNewsPO(driver);
+    PreviewNewsPO previewNews = new PreviewNewsPO(driver);
+    EcoNewsArticlePO ecoNewsArticlePO = new EcoNewsArticlePO(driver);
     SignInPO signInPO = new SignInPO(driver);
 
     @Before
     public void setUpTest(){
         signInWithCorrectData();
-        ecoNewsPO.clickEcoNewsButton().clickCreateNewsButton();
+        ecoNewsArticlePO.clickEcoNewsButton().clickCreateNewsButton();
     }
     @After
     public void tearDownTest(){

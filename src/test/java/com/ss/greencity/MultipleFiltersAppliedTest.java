@@ -2,7 +2,7 @@ package com.ss.greencity;
 
 import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.NewsCardComponent;
 import org.junit.Test;
 
 import java.util.List;
@@ -26,10 +26,10 @@ public class MultipleFiltersAppliedTest extends EcoNewsTestRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<NewsCardPO> allNews = news.getAllNews();
+        List<NewsCardComponent> allNews = news.getAllNews();
         int correctlyTaggedCount = 0;
 
-        for (NewsCardPO newsCard : allNews) {
+        for (NewsCardComponent newsCard : allNews) {
             boolean isTagsCorrect = false;
             for (Label tag : newsCard.getTags()) {
                 for (String appliedTag : tags) {

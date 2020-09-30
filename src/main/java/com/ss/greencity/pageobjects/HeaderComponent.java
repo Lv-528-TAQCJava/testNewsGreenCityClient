@@ -7,12 +7,13 @@ import com.ss.greencity.pageelements.Image;
 import com.ss.greencity.util.Languages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Site header, which appears on every page at top.
- * It is abstract, use HeaderAnonymousPO or HeaderSignedInPO
+ * It is abstract, use HeaderAnonymousComponent or HeaderSignedInComponent
  */
-public abstract class HeaderPO extends BasePageObject {
+public abstract class HeaderComponent extends BasePageObject {
     public String currentLanguage;
     protected Image logo;
     protected Button news;
@@ -23,19 +24,17 @@ public abstract class HeaderPO extends BasePageObject {
     protected Image searchBtn;
     protected DropdownList languageDropdown;
 
-    public HeaderPO(WebDriver driver) {
+    public HeaderComponent(WebDriver driver) {
         super(driver);
         element = driver.findElement(HeaderLocators.HEADER.getPath());
     }
 
-    public HeaderPO(WebElement element) {
-        super(element);
-    }
 
-
-    public HeaderPO selectLanguage(Languages language) {
+    public HeaderComponent selectLanguage(Languages language) {
         DropdownList dropdown = getLanguageDropdown();
         dropdown.click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(language.getPath()));
         element.findElement(language.getPath()).click();
         currentLanguage = language.getCode();
 
@@ -43,6 +42,8 @@ public abstract class HeaderPO extends BasePageObject {
     }
 
     public DropdownList getLanguageDropdown() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(HeaderLocators.LANGUAGE.getPath()));
         languageDropdown = new DropdownList(element.findElement(HeaderLocators.LANGUAGE.getPath()));
         return languageDropdown;
     }

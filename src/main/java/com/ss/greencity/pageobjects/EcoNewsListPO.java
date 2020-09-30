@@ -3,10 +3,10 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.locators.EcoNewsLocators;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.Label;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     private Label ecoNewsHeader;
     private Label filterBy;
     private Label itemsFound;
-    private NewsCardPO firstNewsCard;
+    private NewsCardComponent firstNewsCard;
     private List<Button> filters;
 
     private Button galleryViewButton;
@@ -51,6 +51,9 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     }
 
     public Label getItemsFound() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_LIST.getPath()));
+        //if first news card appears, then definitely 'items found' number will be correct
         itemsFound = new Label(driver, EcoNewsLocators.ITEMS_FOUND);
         return itemsFound;
     }
@@ -65,8 +68,10 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
         return listViewButton;
     }
 
-    public NewsCardPO getFirstNewsCard() {
-        firstNewsCard = new NewsCardPO(driver.findElements(EcoNewsLocators.NEWS_LIST.getPath()).get(0));
+    public NewsCardComponent getFirstNewsCard() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_LIST.getPath()));
+        firstNewsCard = new NewsCardComponent(driver.findElements(EcoNewsLocators.NEWS_LIST.getPath()).get(0));
         return firstNewsCard;
     }
 
@@ -79,7 +84,7 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
         return filters;
     }
 
-    public List<NewsCardPO> getAllNews() {
+    public List<NewsCardComponent> getAllNews() {
         int allNewsCount;
         JavascriptExecutor js = (JavascriptExecutor) driver;
         List<WebElement> loadedNews;
@@ -89,9 +94,9 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
             loadedNews = driver.findElements(EcoNewsLocators.NEWS_LIST.getPath());
         } while (loadedNews.size() < allNewsCount);
 
-        List<NewsCardPO> allNews = new ArrayList<NewsCardPO>();
+        List<NewsCardComponent> allNews = new ArrayList<NewsCardComponent>();
         for(int i = 0; i < loadedNews.size(); i++) {
-            allNews.add(new NewsCardPO(loadedNews.get(i)));
+            allNews.add(new NewsCardComponent(loadedNews.get(i)));
         }
 
         return allNews;
