@@ -16,13 +16,15 @@ import static com.ss.greencity.locators.ForgetPasswordLocators.*;
  */
 public class ForgetPasswordPO extends BasePageObject {
 
+    private String forgotPasswordTitle;
+
     public ForgetPasswordPO(WebDriver driver) {
         super(driver);
 
     }
 
-    public String forgotPasswordText() {
-        Label label= new Label(driver.findElement(FORGET_PASSWORD_LABEL.getPath()));
-        return label.getText();
+    public String getforgotPasswordTitle() {
+        Label forgotPasswordTitle= new Label(driver.findElement(FORGET_PASSWORD_LABEL.getPath()));
+        return forgotPasswordTitle.getText();
     }
 }
