@@ -2,7 +2,7 @@ package com.ss.greencity;
 
 import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.NewsCardComponent;
 import org.junit.Test;
 
 import java.util.List;
@@ -25,10 +25,10 @@ public class OneFilterAppliedTest extends EcoNewsTestRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<NewsCardPO> allnews = news.getAllNews();
+        List<NewsCardComponent> allnews = news.getAllNews();
         int correctlyTaggedCount = 0;
 
-        for(NewsCardPO newsCard: allnews) {
+        for(NewsCardComponent newsCard: allnews) {
             for (Label tag : newsCard.getTags()) {
                 if(tag.getText().equals("ADS")) {
                     correctlyTaggedCount++;

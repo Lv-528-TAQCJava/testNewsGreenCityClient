@@ -6,9 +6,10 @@ import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.ss.greencity.locators.SignInLocators.*;
-
+import static com.ss.greencity.locators.SignUpLocators.SIGNED_UP_USER_MESSAGE;
 
 
 /**
@@ -36,6 +37,8 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public WebElement getSignInButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(SIGN_IN_BTN.getPath()));
         this.signInButton = driver.findElement(SIGN_IN_BTN.getPath());
         return signInButton;
     }
@@ -127,11 +130,15 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public String alertPasswordMessage() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
         alertPasswordMessage= new Label(driver.findElement(PASSWORD_LENGTH_ALERT_MESSAGE.getPath()));
         return alertPasswordMessage.getText();
     }
 
     public String alertBadEmailOrPasswordMessage() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         alertBadEmailOrPasswordMessage = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         return  alertBadEmailOrPasswordMessage.getText();
     }

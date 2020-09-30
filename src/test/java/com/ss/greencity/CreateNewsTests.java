@@ -2,13 +2,14 @@ package com.ss.greencity;
 
 import com.ss.greencity.pageobjects.*;
 import org.junit.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CreateNewsTests extends EcoNewsTestRunner {
 
     CreateNewsPO createNewsPO = new CreateNewsPO(driver);
-    PreviewNews previewNews = new PreviewNews(driver);
-    EcoNewsPO ecoNewsPO = new EcoNewsPO(driver);
+    PreviewNewsPO previewNews = new PreviewNewsPO(driver);
+    EcoNewsArticlePO ecoNewsArticlePO = new EcoNewsArticlePO(driver);
     SignInPO signInPO = new SignInPO(driver);
 
     @Before
@@ -21,58 +22,27 @@ public class CreateNewsTests extends EcoNewsTestRunner {
     public void tearDownTest(){
         createNewsPO.getHeaderSignedIn(driver).signOut();
     }
-
     @Test
     public void sourceFieldValidLinkTest(){
         createNewsPO.setSource("http://")
                 .setContent("1");
-        boolean isDisplayedSourceWarning;
-        try {
-            createNewsPO.getSourceWarning();
-            isDisplayedSourceWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedSourceWarning = false;
-        }
-        Assert.assertFalse(isDisplayedSourceWarning);
+        Assert.assertFalse(isSourceWarningPresent());
     }
     @Test
     public void sourceFieldInvalidLinkTest(){
         createNewsPO.setSource("htlm")
                 .setContent("1");
-        boolean isDisplayedSourceWarning;
-        try {
-            createNewsPO.getSourceWarning();
-            isDisplayedSourceWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedSourceWarning = false;
-        }
-        Assert.assertTrue(isDisplayedSourceWarning);
+        Assert.assertTrue(isSourceWarningPresent());
     }
     @Test
     public void contentFieldInvalidDataTest(){
-        createNewsPO.setContent("Less then 20")
-                .clickNewsTagButton();
-        boolean isDisplayedContentsWarning;
-        try {
-            createNewsPO.getContentWarning();
-            isDisplayedContentsWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedContentsWarning = false;
-        }
-        Assert.assertTrue(isDisplayedContentsWarning);
+        createNewsPO.setContent("Less then 20").clickNewsTagButton();
+        Assert.assertTrue(isContentWarningPresent());
     }
     @Test
     public void contentFieldValidDataTest(){
-        createNewsPO.setContent("More then 20 symbolsssssssss")
-                .clickNewsTagButton();
-        boolean isDisplayedContentsWarning;
-        try {
-            createNewsPO.getContentWarning();
-            isDisplayedContentsWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedContentsWarning = false;
-        }
-        Assert.assertFalse(isDisplayedContentsWarning);
+        createNewsPO.setContent("More then 20 symbolsssssssss").clickNewsTagButton();
+        Assert.assertFalse(isContentWarningPresent());
     }
     @Test
     public void moreThan3TagsTest(){
@@ -80,47 +50,32 @@ public class CreateNewsTests extends EcoNewsTestRunner {
                 .clickEventTagButton()
                 .clickEducationTagButton()
                 .clickInitiativeTagButton();
-        boolean isDisplayedTagsWarning;
-        try {
-            createNewsPO.getTagsWarning();
-            isDisplayedTagsWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedTagsWarning = false;
-        }
-        Assert.assertTrue(isDisplayedTagsWarning);
+        Assert.assertTrue(isTagsWarningPresent());
     }
     @Test
     public void lessThan3TagsTest(){
         createNewsPO.clickNewsTagButton()
                 .clickEventTagButton();
-        boolean isDisplayedTagsWarning;
-        try {
-            createNewsPO.getTagsWarning();
-            isDisplayedTagsWarning = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedTagsWarning = false;
-        }
-        Assert.assertFalse(isDisplayedTagsWarning);
+        Assert.assertFalse(isTagsWarningPresent());
     }
     @Test
     public void publishButtonEnableTest(){
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton()
                 .setContent("Valid: more than 20 symbols");
-        Assert.assertTrue(createNewsPO.isEnablePublishButton());
+        Assert.assertTrue(isPublishButtonEnable());
     }
     @Test
     public void publishButtonDisableTest(){
-        Assert.assertFalse(createNewsPO.isEnablePublishButton());
+        Assert.assertFalse(isPublishButtonEnable());
     }
     @Test
-    public void ContinueButtonTest(){
+    public void ContinueButton(){
         String createNewsUrl = driver.getCurrentUrl();
         createNewsPO.clickCancelButton()
-                .clickContinueEditing();
-        Assert.assertEquals(createNewsUrl,driver.getCurrentUrl());
+                    .clickContinueEditingButton();
+        Assert.assertEquals(createNewsUrl,driver.getCurrentUrl() );
     }
-
     @Test
     public void YesCancelButtonTest(){
         createNewsPO.clickCancelButton()
@@ -137,7 +92,8 @@ public class CreateNewsTests extends EcoNewsTestRunner {
     @Test
     public void previewContentTest(){
         String contentText = createNewsPO.setContent("Content field: more than 20 symbols").getContentText().trim();
-        String previewContentText = createNewsPO.goToPreviewNewsPage().getContentLabel().getText().trim();
+        createNewsPO.clickPreviewButton();
+        String previewContentText = previewNews.getContentText().trim();
         Assert.assertEquals(contentText, previewContentText);
     }
     @Test
@@ -192,7 +148,6 @@ public class CreateNewsTests extends EcoNewsTestRunner {
         } catch (NoSuchElementException e) {
             isPublishButtonPresent = false;
         }
-        Assert.assertTrue(isPublishButtonPresent);
     }
     @Test
     public void isPreviewPublishBtnPresentWithInValidDataTest() {
@@ -260,6 +215,9 @@ public class CreateNewsTests extends EcoNewsTestRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        }
-
+    }
+    public boolean isPublishButtonEnable(){
+        boolean isEnable = driver.findElement(PUBLISH_BUTTON.getPath()).isEnabled();
+        return isEnable;
+    }
 }

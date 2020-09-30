@@ -183,6 +183,8 @@ public class SignUpPO extends BasePageObject{
      }
 
      public Button getSignUpUserButton() {
+         waitsSwitcher.setExplicitWait(ExpectedConditions
+                 .presenceOfElementLocated(SIGN_UP_USER_BTN.getPath()));
          signUpUser = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
          return this.signUpUser;
      }
@@ -227,12 +229,14 @@ public class SignUpPO extends BasePageObject{
     }
 
     public String signedUpMessage() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+         waitsSwitcher.setExplicitWait(30, ExpectedConditions
+                 .visibilityOfElementLocated(SIGNED_UP_USER_MESSAGE.getPath()));
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         Label label = new Label(driver.findElement(SIGNED_UP_USER_MESSAGE.getPath()));
         return label.getText();
     }

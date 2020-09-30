@@ -1,7 +1,7 @@
 package com.ss.greencity;
 
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.NewsCardPO;
+import com.ss.greencity.pageobjects.NewsCardComponent;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class EcoNewsViewModeTest extends EcoNewsTestRunner {
         newsList.getListViewButton().click();
         String classAttribute = newsList.getListViewButton().getAttribute("class");
         Assert.assertEquals("list-view list-view-active", classAttribute);
-        NewsCardPO news = newsList.getFirstNewsCard();
+        NewsCardComponent news = newsList.getFirstNewsCard();
         Assert.assertEquals("list-view-li-active ng-star-inserted", news.getClassName());
     }
 

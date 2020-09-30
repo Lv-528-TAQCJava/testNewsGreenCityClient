@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class EcoNewsTestRunner {
     protected static WebDriver driver;
-    protected static WaitsSwitcher waitsSwitcher;
+    //protected static WaitsSwitcher waitsSwitcher;
     public EcoNewsTestRunner() {
 
     }
@@ -24,8 +24,8 @@ public class EcoNewsTestRunner {
         System.setProperty("webdriver.chrome.driver", webDriverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(1500, TimeUnit.MILLISECONDS);
-        waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
+        driver.manage().timeouts().implicitlyWait(1500, TimeUnit.MILLISECONDS);
+        //waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
         driver.manage().timeouts().pageLoadTimeout(65, TimeUnit.SECONDS);
     }
 

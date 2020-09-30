@@ -4,8 +4,8 @@ import com.ss.greencity.data.LocaleRepository;
 import com.ss.greencity.data.LocaleTexts;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageobjects.EcoNewsListPO;
-import com.ss.greencity.pageobjects.FooterPO;
-import com.ss.greencity.pageobjects.HeaderAnonymousPO;
+import com.ss.greencity.pageobjects.FooterComponent;
+import com.ss.greencity.pageobjects.HeaderAnonymousComponent;
 import com.ss.greencity.util.Languages;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class LanguageChangeTest extends EcoNewsTestRunner {
 
     private SoftAssertions softAssertions;
 
-    private void setAssertions(HeaderAnonymousPO header, EcoNewsListPO news, FooterPO footer,
+    private void setAssertions(HeaderAnonymousComponent header, EcoNewsListPO news, FooterComponent footer,
                                HashMap<LocaleTexts, String> locale) {
         List<Button> filters = news.getFilters();
         softAssertions.assertThat(header.getNews().getText()).isEqualTo(locale.get(LocaleTexts.ECO_NEWS));
@@ -58,22 +58,22 @@ public class LanguageChangeTest extends EcoNewsTestRunner {
 
     @Test
     public void switchToUkranianTest() {
-        HeaderAnonymousPO header = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent header = new HeaderAnonymousComponent(driver);
         header.selectLanguage(Languages.UKRAINIAN);
-        HeaderAnonymousPO translatedHeader = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent translatedHeader = new HeaderAnonymousComponent(driver);
         EcoNewsListPO news = new EcoNewsListPO(driver);
-        FooterPO footer = new FooterPO(driver);
+        FooterComponent footer = new FooterComponent(driver);
         HashMap<LocaleTexts, String> locale = LocaleRepository.getUaLabels();
         setAssertions(translatedHeader, news, footer, locale);
     }
 
     @Test
     public void switchToRussianTest() {
-        HeaderAnonymousPO header = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent header = new HeaderAnonymousComponent(driver);
         header.selectLanguage(Languages.RUSSIAN);
-        HeaderAnonymousPO translatedHeader = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent translatedHeader = new HeaderAnonymousComponent(driver);
         EcoNewsListPO news = new EcoNewsListPO(driver);
-        FooterPO footer = new FooterPO(driver);
+        FooterComponent footer = new FooterComponent(driver);
         HashMap<LocaleTexts, String> locale = LocaleRepository.getRuLabels();
         setAssertions(translatedHeader, news, footer, locale);
 
@@ -81,11 +81,11 @@ public class LanguageChangeTest extends EcoNewsTestRunner {
 
     @Test
     public void switchToEnglishTest() {
-        HeaderAnonymousPO header = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent header = new HeaderAnonymousComponent(driver);
         header.selectLanguage(Languages.ENGLISH);
-        HeaderAnonymousPO translatedHeader = new HeaderAnonymousPO(driver);
+        HeaderAnonymousComponent translatedHeader = new HeaderAnonymousComponent(driver);
         EcoNewsListPO news = new EcoNewsListPO(driver);
-        FooterPO footer = new FooterPO(driver);
+        FooterComponent footer = new FooterComponent(driver);
         HashMap<LocaleTexts, String> locale = LocaleRepository.getEngLables();
         setAssertions(translatedHeader, news, footer, locale);
     }
