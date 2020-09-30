@@ -17,10 +17,6 @@ public class Error404PO extends BasePageObject {
         super(driver);
     }
 
-    public Error404PO(WebElement element) {
-        super(element);
-    }
-
     public boolean pageDoesNotExist() {
         ArrayList<WebElement> error404 = (ArrayList<WebElement>) driver.findElements(headingWith404Selector);
         return error404.size() > 0;

@@ -17,7 +17,7 @@ public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebElement element;
     protected String url;
-    protected WaitsSwitcher waitsSwitcher;
+    protected WaitsSwitcher waitsSwitcher; //NB! Not available if constructor form element is used
 
     protected BasePageObject(WebDriver driver) {
         this.driver = driver;
@@ -26,7 +26,6 @@ public abstract class BasePageObject {
 
     protected BasePageObject(WebElement element) {
         this.element = element;
-        waitsSwitcher = new WaitsSwitcher(driver, 1, 5);
     }
 
     public WebDriver getDriver() {
