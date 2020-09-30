@@ -91,6 +91,9 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
 
     public SignInPO clickSignInUserButton() {
         this.getSignInUserButton().click();
+        //if there is no "forgot password" button, probably the form is closed and user is logged in
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .invisibilityOfElementLocated(FORGOT_PASSWORD_BTN.getPath()));
         return this;
     }
 

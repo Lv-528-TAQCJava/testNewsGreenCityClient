@@ -14,17 +14,17 @@ public class OneFilterAppliedTest extends EcoNewsTestRunner {
     @Test
     public void oneFilterAppliedTest() {
         EcoNewsListPO news = new EcoNewsListPO(driver);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         news.getFilterButton("Ads").click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         List<NewsCardComponent> allnews = news.getAllNews();
         int correctlyTaggedCount = 0;
 

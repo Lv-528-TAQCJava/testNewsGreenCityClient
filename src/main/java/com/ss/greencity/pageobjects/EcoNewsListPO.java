@@ -76,6 +76,8 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     }
 
     public List<Button> getFilters() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfAllElementsLocatedBy(EcoNewsLocators.FILTERS_LIST.getPath()));
         ArrayList<WebElement> filters0 = (ArrayList<WebElement>) driver.findElements(EcoNewsLocators.FILTERS_LIST.getPath());
         filters = new ArrayList<Button>();
         for (WebElement b: filters0) {
@@ -87,6 +89,8 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
     public List<NewsCardComponent> getAllNews() {
         int allNewsCount;
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.NEWS_LIST.getPath()));
         List<WebElement> loadedNews;
         do {
             allNewsCount = Integer.parseInt(getItemsFound().getText().replaceAll("[^0-9]", ""));
