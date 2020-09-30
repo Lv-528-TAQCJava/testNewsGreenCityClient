@@ -18,7 +18,8 @@ public class CommentsTest extends EcoNewsTestRunner {
         signInPO.clickSignInButton()
                 .setEmail("aliejua@gmail.com")
                 .setPassword("Aa12345_")
-                .clickSignInUserButton();
+                .clickSignInUserButton()
+                .waitForSingInFormClosed();
 
         System.out.println("Go to Eco News, open the first news card");
         HeaderSignedInComponent HeaderSignedInComponent = new HeaderSignedInComponent(driver);

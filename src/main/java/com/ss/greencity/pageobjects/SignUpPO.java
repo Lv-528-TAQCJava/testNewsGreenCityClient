@@ -178,13 +178,15 @@ public class SignUpPO extends BasePageObject{
      * Sign Up User button method
      */
      public SignUpPO clickSignUpUserButton() {
+         waitsSwitcher.setExplicitWait(ExpectedConditions
+                 .elementToBeClickable(SIGN_UP_USER_BTN.getPath()));
          this.getSignUpUserButton().click();
          return this;
      }
 
      public Button getSignUpUserButton() {
          waitsSwitcher.setExplicitWait(ExpectedConditions
-                 .presenceOfElementLocated(SIGN_UP_USER_BTN.getPath()));
+                 .visibilityOfElementLocated(SIGN_UP_USER_BTN.getPath()));
          signUpUser = new Button(driver.findElement(SIGN_UP_USER_BTN.getPath()));
          return this.signUpUser;
      }

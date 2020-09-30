@@ -127,7 +127,8 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .clickSignInButton()
                 .setEmail("aliejua@gmail.com")
                 .setPassword("Aa12345_")
-                .clickSignInUserButton();
+                .clickSignInUserButton()
+                .waitForSingInFormClosed();
        String actualResult = profilePO.userNameField();
        logOut();
       // HeaderSignedInComponent.signOut();
