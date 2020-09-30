@@ -8,6 +8,7 @@ import com.ss.greencity.pageobjects.EcoNewsArticlePO;
 import com.ss.greencity.pageobjects.Error404PO;
 import com.ss.greencity.util.WaitsSwitcher;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
  * Check whether pages specified in DataPoints has no
  */
 //@RunWith(Theories.class)
+@Ignore
 public class BrokenLinksTest extends EcoNewsTestRunner {
     @DataPoints
     public static final String[] pagesToCheck = {
