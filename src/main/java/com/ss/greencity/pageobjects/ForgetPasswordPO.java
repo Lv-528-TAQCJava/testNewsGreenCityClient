@@ -5,6 +5,7 @@ import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class ForgetPasswordPO extends BasePageObject {
     }
 
     public String getforgotPasswordTitle() {
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(FORGET_PASSWORD_LABEL.getPath()));
         Label forgotPasswordTitle= new Label(driver.findElement(FORGET_PASSWORD_LABEL.getPath()));
         return forgotPasswordTitle.getText();
     }

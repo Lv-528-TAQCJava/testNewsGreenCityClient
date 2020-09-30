@@ -10,7 +10,6 @@ import java.util.function.Function;
 
 /**
  * A class intended to help easily switching between implicit and explicit waits
- * TODO move to base page object
  */
 public final class WaitsSwitcher {
     private WebDriver driver;
