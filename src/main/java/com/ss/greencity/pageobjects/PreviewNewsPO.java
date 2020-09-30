@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 
 import static com.ss.greencity.locators.PreviewLocators.*;
 
-public class PreviewNews extends BasePageObject {
+public class PreviewNewsPO extends BasePageObject {
 
-    public PreviewNews(WebDriver driver){
+    public PreviewNewsPO(WebDriver driver){
         super(driver);
     }
 
@@ -38,7 +38,7 @@ public class PreviewNews extends BasePageObject {
         sourceTitleText = new Label(driver.findElement(SOURCE_TITLE.getPath()));
         return sourceTitleText.getText();
     }
-    public PreviewNews clickBackToEditingLink(){
+    public PreviewNewsPO clickBackToEditingLink(){
         backToEditing = new Link(driver.findElement(BACK_TO_EDITING_LINK.getPath()));
         backToEditing.click();
         return this;

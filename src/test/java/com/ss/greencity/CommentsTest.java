@@ -19,13 +19,13 @@ public class CommentsTest extends EcoNewsTestRunner {
                 .clickSignInUserButton();
 
         System.out.println("Go to Eco News, open the first news card");
-        HeaderSignedInPO headerSignedInPO = new HeaderSignedInPO(driver);
+        HeaderSignedInComponent HeaderSignedInComponent = new HeaderSignedInComponent(driver);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        headerSignedInPO.getNews().click();
+        HeaderSignedInComponent.getNews().click();
         EcoNewsListPO newsListPO = new EcoNewsListPO(driver);
         newsListPO.getFirstNewsCard().getClickableArea().click();
 
@@ -45,8 +45,8 @@ public class CommentsTest extends EcoNewsTestRunner {
         Assert.assertEquals(timeNow, actualResult);
 
         System.out.println("Sign out");
-        headerSignedInPO = new HeaderSignedInPO(driver);
-        headerSignedInPO.signOut();
+        HeaderSignedInComponent = new HeaderSignedInComponent(driver);
+        HeaderSignedInComponent.signOut();
 
         System.out.println("Go to Eco News, open the first news card");
         try {
@@ -54,8 +54,8 @@ public class CommentsTest extends EcoNewsTestRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        HeaderAnonymousPO headerAnonymousPO = new HeaderAnonymousPO(driver);
-        headerAnonymousPO.getNews().click();
+        HeaderAnonymousComponent HeaderAnonymousComponent = new HeaderAnonymousComponent(driver);
+        HeaderAnonymousComponent.getNews().click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

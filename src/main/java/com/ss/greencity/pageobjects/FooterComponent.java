@@ -5,7 +5,7 @@ import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
 import org.openqa.selenium.WebDriver;
 
-public class FooterPO extends BasePageObject {
+public class FooterComponent extends BasePageObject {
 
     public Link getHome() {
         return home;
@@ -44,7 +44,7 @@ public class FooterPO extends BasePageObject {
     protected Label followUs;
 
 
-    public FooterPO(WebDriver driver) {
+    public FooterComponent(WebDriver driver) {
         super(driver);
         init();
     }

@@ -130,7 +130,7 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
                 .clickSignInUserButton();
        String actualResult = profilePO.userNameField();
        logOut();
-      // headerSignedInPO.signOut();
+      // HeaderSignedInComponent.signOut();
 
 
        Assert.assertEquals("User123", actualResult);

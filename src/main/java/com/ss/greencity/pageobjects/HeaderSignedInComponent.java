@@ -8,15 +8,11 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 
-public class HeaderSignedInPO extends HeaderPO {
+public class HeaderSignedInComponent extends HeaderComponent {
     private DropdownList userProfile;
 
-    public HeaderSignedInPO(WebDriver driver) {
+    public HeaderSignedInComponent(WebDriver driver) {
         super(driver);
-    }
-
-    public HeaderSignedInPO(WebElement element) {
-        super(element);
     }
 
     public DropdownList getUserProfile() {
@@ -24,12 +20,12 @@ public class HeaderSignedInPO extends HeaderPO {
         return userProfile;
     }
 
-    public EcoNewsPO selectProfile() {
+    public EcoNewsArticlePO selectProfile() {
         DropdownList dropdown = getUserProfile();
         dropdown.click();
         ArrayList<Button> buttons = dropdown.getItems();
         buttons.get(1).click();
-        return new EcoNewsPO(driver);
+        return new EcoNewsArticlePO(driver);
     }
 
     public void signOut() {
