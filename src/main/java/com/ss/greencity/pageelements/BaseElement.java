@@ -25,4 +25,8 @@ public abstract class BaseElement {
     protected  BaseElement(WebElement element) {
         this.element = element;
     }
+
+    public String getText(){
+        return element.getText();
+    }
 }

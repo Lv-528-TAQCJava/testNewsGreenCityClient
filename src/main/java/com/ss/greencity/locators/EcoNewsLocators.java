@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
  */
 public enum EcoNewsLocators implements Locator {
 
+    ECO_HEADER(By.cssSelector(".main-header")),
+    FILTER_BY(By.xpath("//ul[@class='ul-eco-buttons']/preceding-sibling::span")),
     ITEMS_FOUND(By.cssSelector("div.main-wrapper")), //block with number of found news
     FILTERS_LIST(By.cssSelector("ul.ul-eco-buttons>a")), //list of buttons "Filter by"
     NEWS_LIST(By.cssSelector("ul.list>li")), //list of loaded news cards. Mind that they load on scrolling

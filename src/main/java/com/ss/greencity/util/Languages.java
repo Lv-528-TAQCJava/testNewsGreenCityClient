@@ -3,9 +3,9 @@ package com.ss.greencity.util;
 import org.openqa.selenium.By;
 
 public enum Languages {
-    ENGLISH("En", By.xpath("//div[@class='switcher-wrapper']/ul/li[normalize-space()='Ru']")),
+    ENGLISH("En", By.xpath("//div[@class='switcher-wrapper']/ul/li[normalize-space()='En']")),
     UKRAINIAN("Uk", By.xpath("//div[@class='switcher-wrapper']/ul/li[normalize-space()='Uk']")),
-    RUSSIAN("Ru", By.xpath("//div[@class='switcher-wrapper']/ul/li[normalize-space()='En']"));
+    RUSSIAN("Ru", By.xpath("//div[@class='switcher-wrapper']/ul/li[normalize-space()='Ru']"));
 
     Languages(String langCode, By path) {
         this.code = langCode;

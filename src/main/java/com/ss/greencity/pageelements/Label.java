@@ -19,11 +19,6 @@ public class Label extends BaseElement {
     public Label(WebElement element) {
         super(element);
     }
-
-    public String getText() {
-        return this.element.getText();
-    }
-
     public String getAttribute(String attribute) {
         return this.element.getAttribute(attribute);
     }
