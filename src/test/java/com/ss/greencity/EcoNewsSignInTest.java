@@ -16,12 +16,6 @@ import static com.ss.greencity.pageobjects.SignInPO.*;
 public class EcoNewsSignInTest extends EcoNewsTestRunner {
 
     SignInPO signInPO = new SignInPO(driver);
-    ProfilePO profilePO = new ProfilePO(driver);
-    ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
-    GoogleSignInPO googleSignInPO = new GoogleSignInPO(driver);
-
-
-
 
     public void logOut(){
         WebElement userHeaderButton = driver.findElement(By.cssSelector("div#user-avatar-wrapper ul"));
