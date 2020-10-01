@@ -21,7 +21,6 @@ import java.util.ArrayList;
  * Check whether pages specified in DataPoints has no
  */
 //@RunWith(Theories.class)
-@Ignore
 public class BrokenLinksTest extends EcoNewsTestRunner {
     @DataPoints
     public static final String[] pagesToCheck = {

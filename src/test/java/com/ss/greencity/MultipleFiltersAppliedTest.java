@@ -13,19 +13,19 @@ public class MultipleFiltersAppliedTest extends EcoNewsTestRunner {
     @Test
     public void multipleFiltersAppliedTest() {
         EcoNewsListPO news = new EcoNewsListPO(driver);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         String[] tags = {"Education", "Initiatives"};
         news.getFilterButton(tags[0]).click();
         news.getFilterButton(tags[1]).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         List<NewsCardComponent> allNews = news.getAllNews();
         int correctlyTaggedCount = 0;
 

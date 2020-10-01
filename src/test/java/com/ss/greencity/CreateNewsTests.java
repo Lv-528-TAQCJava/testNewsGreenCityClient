@@ -143,11 +143,11 @@ public class CreateNewsTests extends EcoNewsTestRunner {
         signInPO.setEmail("denys.skurskyi@gmail.com")
                 .setPassword("AaBb_123")
                 .clickSignInUserButton();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
     public void logOut(){
         WebElement userHeaderButton = driver.findElement(By.cssSelector("div#user-avatar-wrapper ul"));

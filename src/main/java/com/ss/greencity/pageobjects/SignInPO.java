@@ -94,6 +94,16 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
         return this;
     }
 
+    /**
+     * For successful sign in scenarios
+     */
+    public SignInPO waitForSingInFormClosed() {
+        //if there is no "forgot password" button, probably the form is closed and user is logged in
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .invisibilityOfElementLocated(FORGOT_PASSWORD_BTN.getPath()));
+        return this;
+    }
+
     public Button getGoogleSignInButton(){
         googleSignInButton = new Button(driver.findElement(GOOGLE_SIGN_IN_BTN.getPath()));
         return googleSignInButton;
