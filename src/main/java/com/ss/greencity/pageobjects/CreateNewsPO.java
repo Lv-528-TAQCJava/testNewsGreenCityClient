@@ -5,6 +5,7 @@ import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.ss.greencity.locators.CreateNewsLocators.*;
 
@@ -29,7 +30,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     private Label contentWarning;
     private Label tagsWarning;
     private Label pictureUpload;
-
 
 
     public CreateNewsPO(WebDriver driver){
@@ -57,6 +57,8 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getTitleInputBox(){
+      waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(TITLE_FIELD.getPath()));
         return titleField;
     }
     public CreateNewsPO setTitle(String value){
@@ -68,6 +70,9 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getSourceInputBox(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(SOURS_FIELD.getPath()));
+        sourceField = new InputBox(driver.findElement(SOURS_FIELD.getPath()));
         return sourceField;
     }
     public CreateNewsPO setSource(String value){
@@ -79,6 +84,9 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getContentInputBox(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(CONTENT.getPath()));
+        contentField = new InputBox(driver.findElement(CONTENT.getPath()));
         return contentField;
     }
     public CreateNewsPO setContent(String value){
@@ -94,21 +102,30 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return newsTagButton;
     }
     public CreateNewsPO clickNewsTagButton(){
-        this.getNewsTagButton().click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(NEWS_BUTTON.getPath()));
+        newsButton = new Button(driver.findElement(NEWS_BUTTON.getPath()));
+        newsButton.click();
         return this;
     }
     public Button getEventTagButton(){
         return eventTagButton;
     }
     public CreateNewsPO clickEventTagButton(){
-        this.getEventTagButton().click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EVENTS_BUTTON.getPath()));
+        events = new Button(driver.findElement(EVENTS_BUTTON.getPath()));
+        events.click();
         return this;
     }
     public Button getEducationTagButton(){
         return educationTagButton;
     }
     public CreateNewsPO clickEducationTagButton(){
-        this.getEducationTagButton().click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
+        education = new Button(driver.findElement(EDUCATION_BUTTON.getPath()));
+        education.click();
         return this;
     }
 
@@ -116,14 +133,17 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return initiativeTagButton;
     }
     public CreateNewsPO clickInitiativeTagButton(){
-        this.getInitiativeTagButton().click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(INITIATIVE_BUTTON.getPath()));
+        initiative = new Button(driver.findElement(INITIATIVE_BUTTON.getPath()));
+        initiative.click();
         return this;
     }
-    public Button getAdsTagButton(){
-        return adsTagButton;
-    }
-    public CreateNewsPO clickAdsTagButtonTagButton(){
-        this.getAdsTagButton().click();
+    public CreateNewsPO clickAdsTagButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(ADS_BUTTON.getPath()));
+        ads = new Button(driver.findElement(ADS_BUTTON.getPath()));
+        ads.click();
         return this;
     }
 
@@ -139,25 +159,42 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     public String getAuthorText(){
         return this.getAuthorLabel().getText();
     }
-    public Button getCancelButton(){
-        return  cancel;
-    }
-    public ConfirmCancelationPO clickCancelButton(){
-        this.getCancelButton().click();
-        return new ConfirmCancelationPO(driver);
-    }
     public Button getPreviewButton(){
         return preview;
-    }
-    public PreviewNewsPO goToPreviewNewsPage(){
-        this.getPreviewButton().click();
-        return new PreviewNewsPO(driver);
     }
     public Button getPublishButton(){
         return publish;
     }
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(DATE.getPath()));
+        date = new Label(driver.findElement(DATE.getPath()));
+        return date.getText();
+    }
+    public String getAuthorText(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(AUTHOR.getPath()));
+        author = new Label(driver.findElement(AUTHOR.getPath()));
+        return author.getText();
+    }
+    public CreateNewsPO clickCancelButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(CANCEL_BUTTON.getPath()));
+        cancel = new Button(driver.findElement(CANCEL_BUTTON.getPath()));
+        cancel.click();
+        return this;
+    }
+    public PreviewNewsPO goToPreviewNewsPage(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(PREVIEW_BUTTON.getPath()));
+        preview = new Button(driver.findElement(PREVIEW_BUTTON.getPath()));
+        preview.click();
+        return new PreviewNewsPO(driver);
+    }
     public CreateNewsPO clickPublishButton(){
-        this.getPublishButton().click();
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
+        publish = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
+        publish.click();
         return this;
     }
 
