@@ -57,7 +57,7 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getTitleInputBox(){
-      waitsSwitcher.setExplicitWait(ExpectedConditions
+        waitsSwitcher.setExplicitWait(ExpectedConditions
                 .visibilityOfElementLocated(TITLE_FIELD.getPath()));
         return titleField;
     }
@@ -97,104 +97,93 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return this.getContentInputBox().getAttribute("value");
     }
 
-
     public Button getNewsTagButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(NEWS_BUTTON.getPath()));
         return newsTagButton;
     }
     public CreateNewsPO clickNewsTagButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(NEWS_BUTTON.getPath()));
-        newsButton = new Button(driver.findElement(NEWS_BUTTON.getPath()));
-        newsButton.click();
+        getNewsTagButton().click();
         return this;
     }
     public Button getEventTagButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EVENTS_BUTTON.getPath()));
         return eventTagButton;
     }
     public CreateNewsPO clickEventTagButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(EVENTS_BUTTON.getPath()));
-        events = new Button(driver.findElement(EVENTS_BUTTON.getPath()));
-        events.click();
+        getEventTagButton().click();
         return this;
     }
     public Button getEducationTagButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
         return educationTagButton;
     }
     public CreateNewsPO clickEducationTagButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
-        education = new Button(driver.findElement(EDUCATION_BUTTON.getPath()));
-        education.click();
+        getEducationTagButton().click();
         return this;
     }
 
     public Button getInitiativeTagButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(INITIATIVE_BUTTON.getPath()));
         return initiativeTagButton;
     }
     public CreateNewsPO clickInitiativeTagButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(INITIATIVE_BUTTON.getPath()));
-        initiative = new Button(driver.findElement(INITIATIVE_BUTTON.getPath()));
-        initiative.click();
+        getInitiativeTagButton().click();
         return this;
     }
-    public CreateNewsPO clickAdsTagButton(){
+    public Button getAdsTagButton() {
         waitsSwitcher.setExplicitWait(ExpectedConditions
                 .visibilityOfElementLocated(ADS_BUTTON.getPath()));
-        ads = new Button(driver.findElement(ADS_BUTTON.getPath()));
-        ads.click();
+        return adsTagButton;
+    }
+    public CreateNewsPO clickAdsTagButton(){
+        getAdsTagButton().click();
         return this;
     }
 
     public Label getDateLabel(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(DATE.getPath()));
         return date;
     }
     public String getDateText(){
         return this.getDateLabel().getText();
     }
     public Label getAuthorLabel(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(AUTHOR.getPath()));
         return author;
     }
     public String getAuthorText(){
         return this.getAuthorLabel().getText();
     }
     public Button getPreviewButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(PREVIEW_BUTTON.getPath()));
         return preview;
     }
     public Button getPublishButton(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
         return publish;
     }
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(DATE.getPath()));
-        date = new Label(driver.findElement(DATE.getPath()));
-        return date.getText();
-    }
-    public String getAuthorText(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(AUTHOR.getPath()));
-        author = new Label(driver.findElement(AUTHOR.getPath()));
-        return author.getText();
-    }
-    public CreateNewsPO clickCancelButton(){
+
+    public ConfirmCancelationPO clickCancelButton(){
         waitsSwitcher.setExplicitWait(ExpectedConditions
                 .visibilityOfElementLocated(CANCEL_BUTTON.getPath()));
         cancel = new Button(driver.findElement(CANCEL_BUTTON.getPath()));
         cancel.click();
-        return this;
+        return new ConfirmCancelationPO(driver);
     }
     public PreviewNewsPO goToPreviewNewsPage(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(PREVIEW_BUTTON.getPath()));
-        preview = new Button(driver.findElement(PREVIEW_BUTTON.getPath()));
-        preview.click();
+        getPreviewButton().click();
         return new PreviewNewsPO(driver);
     }
     public CreateNewsPO clickPublishButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .visibilityOfElementLocated(EDUCATION_BUTTON.getPath()));
-        publish = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
-        publish.click();
+        getPublishButton().click();
         return this;
     }
 
