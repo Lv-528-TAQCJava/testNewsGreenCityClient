@@ -64,6 +64,8 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public InputBox getEmail(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .visibilityOfElementLocated(EMAIL_FIELD.getPath()));
         email= new InputBox(driver.findElement(EMAIL_FIELD.getPath()));
         return email;
     }
@@ -151,5 +153,17 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
                 .visibilityOfElementLocated(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         alertBadEmailOrPasswordMessage = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         return  alertBadEmailOrPasswordMessage.getText();
+    }
+    public ProfilePO signIn(String email, String password){
+        clickSignInButton()
+                .setEmail(email)
+                .setPassword(password)
+                .clickSignInUserButton();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new ProfilePO(driver);
     }
 }

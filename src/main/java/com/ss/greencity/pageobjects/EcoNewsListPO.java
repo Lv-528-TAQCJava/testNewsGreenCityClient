@@ -34,6 +34,7 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
 
     private Button galleryViewButton;
     private Button listViewButton;
+    private Button createNews;
 
     public EcoNewsListPO(WebDriver driver) {
         super(driver);
@@ -42,6 +43,7 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
 
     private void init() {
         ecoNewsHeader = new Label(driver.findElement(EcoNewsLocators.ECO_HEADER.getPath()));
+        createNews = new Button(driver.findElement(EcoNewsLocators.CREATE_NEWS.getPath()));
         filterBy = new Label (driver.findElement(EcoNewsLocators.FILTER_BY.getPath()));
         List<WebElement> filterButtons = driver.findElements(EcoNewsLocators.FILTERS_LIST.getPath());
         filters = new ArrayList<Button>();
@@ -112,5 +114,12 @@ public class EcoNewsListPO extends BasePageObject implements IAnonymousPO, ILogg
                 return button;
         }
         return null;
+    }
+    public CreateNewsPO goToCreateNewsPage(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(EcoNewsLocators.CREATE_NEWS.getPath()));
+        createNews = new Button(driver.findElement(EcoNewsLocators.CREATE_NEWS.getPath()));
+        createNews.click();
+        return new CreateNewsPO(driver);
     }
 }

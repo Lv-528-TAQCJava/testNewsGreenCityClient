@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 
 public enum CreateNewsLocators implements Locator {
     ADS_BUTTON(By.xpath("//*[contains(text(), 'Ads')]")),
-    AUTHOR(By.cssSelector("div.date > p:nth-of-type(2) > span:nth-of-type(2)")),
+    AUTHOR(By.xpath("//*[contains(text(), 'Author:')]/following-sibling::span")),
     CANCEL_BUTTON(By.xpath("//*[contains(text(), 'Cancel')]")),
     CONTENT(By.name("main-area")),
-    CONTINUE_EDIT_BUTTON(By.cssSelector(".secondary-global-button")),
-    DATE(By.cssSelector("div.date > p:nth-of-type(1) > span:nth-of-type(2)")),
+    DATE(By.xpath("//*[contains(text(), 'Date:')]/following-sibling::span")),
     EDUCATION_BUTTON(By.xpath("//*[contains(text(), 'Education')]")),
     EVENTS_BUTTON(By.xpath("//*[contains(text(), 'Events')]")),
     INITIATIVE_BUTTON(By.xpath("//*[contains(text(), 'Initiative')]")),
@@ -20,7 +19,6 @@ public enum CreateNewsLocators implements Locator {
     WARNING_CONTENT(By.cssSelector("textarea.ng-invalid.ng-dirty.ng-touched")),
     WARNING_SOURCE(By.cssSelector("input.ng-valid.ng-dirty.ng-touched.field-warning")),
     WARNING_TAGS(By.cssSelector("div.tags.ng-untouched.ng-pristine.ng-valid > p.warning")),
-    YES_CANCEL_BUTTON(By.cssSelector(".primary-global-button")),
     PICTURE_UPLOAD_LINK(By.xpath("//*[@class='centered']//label"));
 
 

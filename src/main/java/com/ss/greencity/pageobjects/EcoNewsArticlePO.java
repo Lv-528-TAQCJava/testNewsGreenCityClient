@@ -44,19 +44,5 @@ public class EcoNewsArticlePO extends BasePageObject implements IAnonymousPO, IL
         author = driver.findElement(authorSelector);
         return author.getText(); //Mind that this starts with "by..."
     }
-    public EcoNewsArticlePO clickCreateNewsButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.CREATE_NEWS.getPath()));
-        Button createNews = new Button(driver.findElement(EcoNewsLocators.CREATE_NEWS.getPath()));
-        createNews.click();
-        return this;
-    }
-    public EcoNewsArticlePO clickEcoNewsButton(){
-        waitsSwitcher.setExplicitWait(ExpectedConditions
-                .presenceOfElementLocated(EcoNewsLocators.NEWS_BUTTON.getPath()));
-        Button ecoNewsButton = new Button((driver.findElement(EcoNewsLocators.NEWS_BUTTON.getPath())));
-        ecoNewsButton.click();
-        return this;
-    }
 
 }

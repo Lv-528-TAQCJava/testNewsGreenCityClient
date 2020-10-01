@@ -26,4 +26,8 @@ public class Button extends BaseElement {
     public void click() {
         this.element.click();
     }
+    public boolean isEnable(){
+        return this.element.isEnabled();
+    }
+
 }
