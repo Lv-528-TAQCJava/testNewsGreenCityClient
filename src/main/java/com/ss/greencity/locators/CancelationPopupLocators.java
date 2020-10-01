@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 
 public enum CancelationPopupLocators implements Locator {
 
-    //CANCEL_BUTTON(By.cssSelector(".secondary-global-button")),
-    //CONFIRM_BUTTON(By.cssSelector(".primary-global-button"));
     CANCEL_BUTTON(By.cssSelector(".primary-global-button")),
     CONFIRM_BUTTON(By.cssSelector(".secondary-global-button"));
     CancelationPopupLocators(By path) {

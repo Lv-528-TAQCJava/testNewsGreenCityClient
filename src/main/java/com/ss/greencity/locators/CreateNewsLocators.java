@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 
 public enum CreateNewsLocators implements Locator {
     ADS_BUTTON(By.xpath("//*[contains(text(), 'Ads')]")),
-    AUTHOR(By.xpath("//*[@class = 'date']//p[2]//span[2]")),
+    AUTHOR(By.xpath("//*[contains(text(), 'Author:')]/following-sibling::span")),
     CANCEL_BUTTON(By.xpath("//*[contains(text(), 'Cancel')]")),
     CONTENT(By.name("main-area")),
-    DATE(By.xpath("//*[@class = 'date']//p[1]//span[2]")),
+    DATE(By.xpath("//*[contains(text(), 'Date:')]/following-sibling::span")),
     EDUCATION_BUTTON(By.xpath("//*[contains(text(), 'Education')]")),
     EVENTS_BUTTON(By.xpath("//*[contains(text(), 'Events')]")),
     INITIATIVE_BUTTON(By.xpath("//*[contains(text(), 'Initiative')]")),

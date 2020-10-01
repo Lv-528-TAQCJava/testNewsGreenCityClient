@@ -32,8 +32,8 @@ public class ConfirmCancelationPO extends BasePageObject {
         confirm.click();
         return new CreateNewsPO(driver);
     }
-    public EcoNewsPO clickYesCancelButton(){
+    public EcoNewsListPO clickYesCancelButton(){
         cancel.click();
-        return new EcoNewsPO(driver);
+        return new EcoNewsListPO(driver);
     }
 }

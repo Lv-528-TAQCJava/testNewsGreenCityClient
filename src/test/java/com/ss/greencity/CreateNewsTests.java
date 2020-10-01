@@ -2,102 +2,117 @@ package com.ss.greencity;
 
 import com.ss.greencity.pageobjects.*;
 import org.junit.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 
 public class CreateNewsTests extends EcoNewsTestRunner {
 
-    CreateNewsPO createNewsPO = new CreateNewsPO(driver);
+    CreateNewsPO createNewsPO;
     PreviewNewsPO previewNews = new PreviewNewsPO(driver);
-    EcoNewsArticlePO ecoNewsArticlePO = new EcoNewsArticlePO(driver);
-    SignInPO signInPO = new SignInPO(driver);
+    SignInPO signInPO;
+    HeaderSignedInComponent headerSignedInComponent;
 
     @Before
     public void setUpTest(){
-        signIn();
-        ecoNewsPO.clickEcoNewsButton().clickCreateNewsButton();
+        signInPO = new SignInPO(driver);
+        signInPO.signIn("denys.skurskyi@gmail.com", "AaBb_123")
+                .getHeaderSignedIn(driver)
+                .goToEcoNewsPage()
+                .goToCreateNewsPage();
     }
 
     @After
     public void tearDownTest(){
-        createNewsPO.getHeaderSignedIn(driver).signOut();
+        headerSignedInComponent = new HeaderSignedInComponent(driver);
+        headerSignedInComponent.signOut();
     }
+
     @Test
     public void sourceFieldValidLinkTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setSource("http://")
                 .setContent("1");
-        Assert.assertFalse(isSourceWarningPresent());
+        Assert.assertNull(createNewsPO.getSourceWarning());
     }
     @Test
     public void sourceFieldInvalidLinkTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setSource("htlm")
                 .setContent("1");
-        Assert.assertTrue(isSourceWarningPresent());
+        Assert.assertNotNull(createNewsPO.getSourceWarning());
     }
     @Test
     public void contentFieldInvalidDataTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setContent("Less then 20").clickNewsTagButton();
-        Assert.assertTrue(isContentWarningPresent());
+        Assert.assertNotNull(createNewsPO.getContentWarning());
     }
     @Test
     public void contentFieldValidDataTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setContent("More then 20 symbolsssssssss").clickNewsTagButton();
-        Assert.assertFalse(isContentWarningPresent());
+        Assert.assertNull(createNewsPO.getContentWarning());
     }
     @Test
     public void moreThan3TagsTest(){
+        createNewsPO = new CreateNewsPO(driver);
                 createNewsPO.clickNewsTagButton()
                 .clickEventTagButton()
                 .clickEducationTagButton()
                 .clickInitiativeTagButton();
-        Assert.assertTrue(isTagsWarningPresent());
+        Assert.assertNotNull(createNewsPO.getTagsWarning());
     }
     @Test
     public void lessThan3TagsTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.clickNewsTagButton()
                 .clickEventTagButton();
-        Assert.assertFalse(isTagsWarningPresent());
+        Assert.assertNull(createNewsPO.getTagsWarning());
     }
     @Test
     public void publishButtonEnableTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton()
                 .setContent("Valid: more than 20 symbols");
-        Assert.assertTrue(isPublishButtonEnable());
+        Assert.assertTrue(createNewsPO.getPublishButton().isEnable());
     }
     @Test
     public void publishButtonDisableTest(){
-        Assert.assertFalse(isPublishButtonEnable());
+        createNewsPO = new CreateNewsPO(driver);
+        Assert.assertFalse(createNewsPO.getPublishButton().isEnable());
     }
     @Test
     public void ContinueButton(){
-        String createNewsUrl = driver.getCurrentUrl();
-        createNewsPO.clickCancelButton()
-                    .clickContinueEditingButton();
-        Assert.assertEquals(createNewsUrl,driver.getCurrentUrl() );
+        createNewsPO = new CreateNewsPO(driver);
+        String createNewsUrl = createNewsPO.getUrl();
+        String urlAfterClickContinueEditingButton = createNewsPO.clickCancelButton()
+                    .clickContinueEditing().getUrl();
+        Assert.assertEquals(createNewsUrl,urlAfterClickContinueEditingButton );
     }
     @Test
     public void YesCancelButtonTest(){
-        createNewsPO.clickCancelButton()
-                    .clickYesCancelButton();
-        Assert.assertEquals("https://ita-social-projects.github.io/GreenCityClient/#/news",driver.getCurrentUrl() );
+        createNewsPO = new CreateNewsPO(driver);
+        String urlAfterClickYesCancelButton = createNewsPO.clickCancelButton()
+                    .clickYesCancelButton().getUrl();
+        Assert.assertEquals("https://ita-social-projects.github.io/GreenCityClient/#/news",urlAfterClickYesCancelButton );
     }
     @Test
     public void previewTitleTest(){
-       // String titleText = createNewsPO.setTitle("Title").getTitleText();
-       // String previewTitleText = createNewsPO.goToPreviewNewsPage().getTitleLabel().getText();
-       // Assert.assertEquals(titleText,previewTitleText);
-        Assert.assertEquals(createNewsPO.setTitle("Title").getTitleText(), createNewsPO.goToPreviewNewsPage().getTitleLabel().getText());
+        createNewsPO = new CreateNewsPO(driver);
+        String titleText = createNewsPO.setTitle("Title").getTitleText();
+        String previewTitleText = createNewsPO.goToPreviewNewsPage().getTitleLabel().getText();
+        Assert.assertEquals(titleText,previewTitleText);
     }
     @Test
     public void previewContentTest(){
+        createNewsPO = new CreateNewsPO(driver);
         String contentText = createNewsPO.setContent("Content field: more than 20 symbols").getContentText().trim();
-        createNewsPO.clickPreviewButton();
-        String previewContentText = previewNews.getContentText().trim();
+        createNewsPO.goToPreviewNewsPage();
+        String previewContentText = previewNews.getContentLabel().getText().trim();
         Assert.assertEquals(contentText, previewContentText);
     }
     @Test
     public void previewSourceTextTest(){
+        createNewsPO = new CreateNewsPO(driver);
         String sourceText = createNewsPO.setSource("http://google.com").getSourceText();
         createNewsPO.goToPreviewNewsPage();
         String previewSourceText = previewNews.getSourceLabel().getText();
@@ -105,6 +120,7 @@ public class CreateNewsTests extends EcoNewsTestRunner {
     }
     @Test
     public void previewBackToEditingLinkTest(){
+        createNewsPO = new CreateNewsPO(driver);
         String createNewsUrl = driver.getCurrentUrl();
         createNewsPO.goToPreviewNewsPage()
                 .clickBackToEditingLink();
@@ -112,68 +128,61 @@ public class CreateNewsTests extends EcoNewsTestRunner {
     }
     @Test
     public void previewBackToEditingSaveChangesTest() {
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton().clickEducationTagButton().clickInitiativeTagButton()
                 .setSource("http://google.com")
                 .setContent("Valid: more than 20 symbols")
                 .goToPreviewNewsPage()
-                .clickBackToEditingLink();
+                .clickBackToEditingLink().getTitleText();
+        createNewsPO = new CreateNewsPO(driver);
         Assert.assertEquals("Title", createNewsPO.getTitleText());
         Assert.assertEquals("http://google.com", createNewsPO.getSourceText());
         Assert.assertEquals("Valid: more than 20 symbols", createNewsPO.getContentText());
     }
     @Test
     public void previewBackToEditingByBrowserBackButtonSaveChangesTest() {
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton().clickEducationTagButton().clickInitiativeTagButton()
                 .setSource("http://google.com")
                 .setContent("Valid: more than 20 symbols")
                 .goToPreviewNewsPage();
         driver.navigate().back();
+        createNewsPO = new CreateNewsPO(driver);
         Assert.assertEquals("Title", createNewsPO.getTitleText());
-        Assert.assertEquals("http://google.com", createNewsPO.getSourceText());
-        Assert.assertEquals("Valid: more than 20 symbols", createNewsPO.getContentText());
     }
     @Test
     public void isPreviewPublishBtnPresentWithValidDataTest() {
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton().clickEducationTagButton().clickInitiativeTagButton()
                 .setSource("http://google.com")
                 .setContent("Valid: more than 20 symbols")
                 .goToPreviewNewsPage();
-        boolean isPublishButtonPresent;
-        try {
-            previewNews.getPublishButton();
-            isPublishButtonPresent = true;
-        } catch (NoSuchElementException e) {
-            isPublishButtonPresent = false;
-        }
+        Assert.assertNotNull(previewNews.getPublishButton()); //Bug
     }
     @Test
-    public void isPreviewPublishBtnPresentWithInValidDataTest() {
+    public void isPreviewPublishBtnPresentWithInvalidDataTest() {
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.setTitle("Title")
                 .clickNewsTagButton().clickEducationTagButton().clickInitiativeTagButton()
                 .setSource("http://google.com")
                 .setContent("Invalid")
                 .goToPreviewNewsPage();
-        boolean isPublishButtonPresent;
-        try {
-            previewNews.getPublishButton();
-            isPublishButtonPresent = true;
-        } catch (NoSuchElementException e) {
-            isPublishButtonPresent = false;
-        }
-        Assert.assertFalse(isPublishButtonPresent);
+        Assert.assertNull(previewNews.getPublishButton());
     }
     @Test
     public void previewDateTest(){
+        createNewsPO = new CreateNewsPO(driver);
         String createNewsDate = createNewsPO.getDateText();
         createNewsPO.goToPreviewNewsPage();
         String previewDate = previewNews.getDateLabel().getText();
-        Assert.assertEquals(createNewsDate, previewDate);
+        Assert.assertEquals(createNewsDate, previewDate); // Think it's a bug
     }
     @Test
     public void previewAuthorTest(){
+        createNewsPO = new CreateNewsPO(driver);
         String createNewsAuthor = "by " + createNewsPO.getAuthorText();
         createNewsPO.goToPreviewNewsPage();
         String previewAuthor = previewNews.getAuthorLabel().getText();
@@ -181,43 +190,16 @@ public class CreateNewsTests extends EcoNewsTestRunner {
     }
     @Test
     public void previewTagsPresentTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.clickEducationTagButton()
                 .goToPreviewNewsPage();
-        boolean isDisplayedEducationTag;
-        try {
-            previewNews.getEducationTag();
-            isDisplayedEducationTag = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedEducationTag = false;
-        }
-        Assert.assertTrue(isDisplayedEducationTag);
+        Assert.assertNotNull(previewNews.getEducationTag());
     }
     @Test
     public void pictureLinkPresentAfterPreviewTest(){
+        createNewsPO = new CreateNewsPO(driver);
         createNewsPO.goToPreviewNewsPage().clickBackToEditingLink();
-        boolean isDisplayedPictureUploadLink;
-        try {
-            createNewsPO.getPictureUploadLink();
-            isDisplayedPictureUploadLink = true;
-        } catch (NoSuchElementException e) {
-            isDisplayedPictureUploadLink = false;
-        }
-        Assert.assertTrue(isDisplayedPictureUploadLink); //Bug
+        Assert.assertNotNull(createNewsPO.getPictureUploadLink()); //Bug
     }
 
-    public void signIn(){
-        signInPO.clickSignInButton();
-        signInPO.setEmail("denys.skurskyi@gmail.com")
-                .setPassword("AaBb_123")
-                .clickSignInUserButton();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    public boolean isPublishButtonEnable(){
-        boolean isEnable = driver.findElement(PUBLISH_BUTTON.getPath()).isEnabled();
-        return isEnable;
-    }
 }

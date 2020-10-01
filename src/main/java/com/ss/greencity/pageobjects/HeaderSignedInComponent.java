@@ -1,10 +1,12 @@
 package com.ss.greencity.pageobjects;
 
+import com.ss.greencity.locators.EcoNewsLocators;
 import com.ss.greencity.locators.HeaderLocators;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.DropdownList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 
@@ -34,4 +36,10 @@ public class HeaderSignedInComponent extends HeaderComponent {
         ArrayList<Button> buttons = dropdown.getItems();
         buttons.get(3).click();
     }
+    public EcoNewsListPO goToEcoNewsPage(){
+        waitsSwitcher.setExplicitWait(ExpectedConditions
+                .presenceOfElementLocated(HeaderLocators.NEWS.getPath())).click();
+        return new EcoNewsListPO(driver);
+    }
+
 }

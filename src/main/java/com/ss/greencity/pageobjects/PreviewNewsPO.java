@@ -3,6 +3,7 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static com.ss.greencity.locators.PreviewLocators.*;
@@ -58,12 +59,18 @@ public class PreviewNewsPO extends BasePageObject {
         return new CreateNewsPO(driver);
     }
     public Button getEducationTag(){
-        newsTag = new Button(driver.findElement(TAGS_EDUCATION.getPath()));
+        try{
+            newsTag = new Button(driver.findElement(TAGS_EDUCATION.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return newsTag;
     }
 
     public Button getPublishButton(){
-        publishButton = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
+        try{
+            publishButton = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return publishButton;
     }
 

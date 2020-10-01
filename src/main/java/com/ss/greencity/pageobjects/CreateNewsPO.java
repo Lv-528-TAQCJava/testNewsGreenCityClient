@@ -3,6 +3,7 @@ package com.ss.greencity.pageobjects;
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static com.ss.greencity.locators.CreateNewsLocators.*;
@@ -21,8 +22,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     private Button cancel;
     private Button preview;
     private Button publish;
-    private Button continueEditing;
-    private Button yesCancel;
 
     private Label date;
     private Label author;
@@ -35,10 +34,29 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
 
     public CreateNewsPO(WebDriver driver){
         super(driver);
+        init();
+    }
+    private void init(){
+        titleField = new InputBox(driver.findElement(TITLE_FIELD.getPath()));
+        sourceField = new InputBox(driver.findElement(SOURS_FIELD.getPath()));
+        contentField = new InputBox(driver.findElement(CONTENT.getPath()));
+
+        newsTagButton = new Button(driver.findElement(NEWS_BUTTON.getPath()));
+        eventTagButton = new Button(driver.findElement(EVENTS_BUTTON.getPath()));
+        educationTagButton = new Button(driver.findElement(EDUCATION_BUTTON.getPath()));
+        initiativeTagButton = new Button(driver.findElement(INITIATIVE_BUTTON.getPath()));
+        adsTagButton = new Button(driver.findElement(ADS_BUTTON.getPath()));
+
+        date = new Label(driver.findElement(DATE.getPath()));
+        author = new Label(driver.findElement(AUTHOR.getPath()));
+
+        cancel = new Button(driver.findElement(CANCEL_BUTTON.getPath()));
+        preview = new Button(driver.findElement(PREVIEW_BUTTON.getPath()));
+        publish = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
+
     }
 
     public InputBox getTitleInputBox(){
-        titleField = new InputBox(driver.findElement(TITLE_FIELD.getPath()));
         return titleField;
     }
     public CreateNewsPO setTitle(String value){
@@ -50,7 +68,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getSourceInputBox(){
-        sourceField = new InputBox(driver.findElement(SOURS_FIELD.getPath()));
         return sourceField;
     }
     public CreateNewsPO setSource(String value){
@@ -62,7 +79,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public InputBox getContentInputBox(){
-        contentField = new InputBox(driver.findElement(CONTENT.getPath()));
         return contentField;
     }
     public CreateNewsPO setContent(String value){
@@ -75,7 +91,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
 
 
     public Button getNewsTagButton(){
-        newsTagButton = new Button(driver.findElement(NEWS_BUTTON.getPath()));
         return newsTagButton;
     }
     public CreateNewsPO clickNewsTagButton(){
@@ -83,7 +98,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return this;
     }
     public Button getEventTagButton(){
-        eventTagButton = new Button(driver.findElement(EVENTS_BUTTON.getPath()));
         return eventTagButton;
     }
     public CreateNewsPO clickEventTagButton(){
@@ -91,7 +105,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return this;
     }
     public Button getEducationTagButton(){
-        educationTagButton = new Button(driver.findElement(EDUCATION_BUTTON.getPath()));
         return educationTagButton;
     }
     public CreateNewsPO clickEducationTagButton(){
@@ -100,7 +113,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public Button getInitiativeTagButton(){
-        initiativeTagButton = new Button(driver.findElement(INITIATIVE_BUTTON.getPath()));
         return initiativeTagButton;
     }
     public CreateNewsPO clickInitiativeTagButton(){
@@ -108,7 +120,6 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return this;
     }
     public Button getAdsTagButton(){
-        adsTagButton = new Button(driver.findElement(ADS_BUTTON.getPath()));
         return adsTagButton;
     }
     public CreateNewsPO clickAdsTagButtonTagButton(){
@@ -117,21 +128,18 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
     }
 
     public Label getDateLabel(){
-        date = new Label(driver.findElement(DATE.getPath()));
         return date;
     }
     public String getDateText(){
         return this.getDateLabel().getText();
     }
     public Label getAuthorLabel(){
-        author = new Label(driver.findElement(AUTHOR.getPath()));
         return author;
     }
     public String getAuthorText(){
         return this.getAuthorLabel().getText();
     }
     public Button getCancelButton(){
-        cancel = new Button(driver.findElement(CANCEL_BUTTON.getPath()));
         return  cancel;
     }
     public ConfirmCancelationPO clickCancelButton(){
@@ -139,42 +147,49 @@ public class CreateNewsPO extends BasePageObject implements IAnonymousPO, ILogge
         return new ConfirmCancelationPO(driver);
     }
     public Button getPreviewButton(){
-        preview = new Button(driver.findElement(PREVIEW_BUTTON.getPath()));
         return preview;
     }
-    public PreviewNews goToPreviewNewsPage(){
+    public PreviewNewsPO goToPreviewNewsPage(){
         this.getPreviewButton().click();
-        return new PreviewNews(driver);
+        return new PreviewNewsPO(driver);
     }
     public Button getPublishButton(){
-        publish = new Button(driver.findElement(PUBLISH_BUTTON.getPath()));
         return publish;
     }
     public CreateNewsPO clickPublishButton(){
         this.getPublishButton().click();
         return this;
     }
-    public boolean isEnablePublishButton(){
-        return this.getPublishButton().isEnable();
-    }
 
     public Label getSourceWarning(){
-        warningSource = new Label(driver.findElement(WARNING_SOURCE.getPath()));
+       try{
+            warningSource = new Label(driver.findElement(WARNING_SOURCE.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return warningSource;
     }
 
     public Label getContentWarning(){
-        contentWarning = new Label(driver.findElement(WARNING_CONTENT.getPath()));
+        try{
+            contentWarning = new Label(driver.findElement(WARNING_CONTENT.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return contentWarning;
     }
 
     public Label getTagsWarning(){
-        tagsWarning = new Label(driver.findElement(WARNING_TAGS.getPath()));
+        try{
+            tagsWarning = new Label(driver.findElement(WARNING_TAGS.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return tagsWarning;
     }
 
     public Label getPictureUploadLink(){
-        pictureUpload = new Label(driver.findElement(PICTURE_UPLOAD_LINK.getPath()));
+        try{
+            pictureUpload = new Label(driver.findElement(PICTURE_UPLOAD_LINK.getPath()));
+        }catch (NoSuchElementException e){
+        }
         return pictureUpload;
     }
 
