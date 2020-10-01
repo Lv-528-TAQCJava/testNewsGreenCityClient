@@ -4,8 +4,11 @@ import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
+import com.ss.greencity.util.GoogleWindowSwitch;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.Set;
 
 import static com.ss.greencity.locators.SignInLocators.*;
 
@@ -29,10 +32,17 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     private Label alertEmptyPasswordMessage;
     private Label alertPasswordMessage;
     private Label alertBadEmailOrPasswordMessage;
+    private  Set<String> oldWindowsSet;
+    private static String originalWindow;
+    private String newWindow;
 
     public SignInPO(WebDriver driver) {
         super(driver);
 
+    }
+
+    public static String getOriginalWindow() {
+        return originalWindow;
     }
 
     public WebElement getSignInButton(){
@@ -97,7 +107,11 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public SignInPO clickGoogleSignInButton() {
+        originalWindow = driver.getWindowHandle();
+        oldWindowsSet = driver.getWindowHandles();
         this.getGoogleSignInButton().click();
+        newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet, driver);
+        driver.switchTo().window(newWindow);
         return this;
     }
 
@@ -134,5 +148,22 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     public String alertBadEmailOrPasswordMessage() {
         alertBadEmailOrPasswordMessage = new Label(driver.findElement(INCORRECT_EMAIL_OR_PASSWORD_ALERT_MASSAGE.getPath()));
         return  alertBadEmailOrPasswordMessage.getText();
+    }
+
+    public ProfilePO getProfilePO (){
+        return new ProfilePO(driver);
+    }
+
+    public GoogleSignInPO getGoogleSignInPO (){
+        return new GoogleSignInPO(driver);
+    }
+
+    public ForgetPasswordPO getForgetPasswordPO (){
+        return new ForgetPasswordPO(driver);
+    }
+
+    public SignInPO switchWindow(String window){
+        driver.switchTo().window(window);
+        return this;
     }
 }

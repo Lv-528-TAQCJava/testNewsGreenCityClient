@@ -2,9 +2,13 @@ package com.ss.greencity.pageobjects;
 
 import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
+import com.ss.greencity.util.GoogleWindowSwitch;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Set;
+
 import static com.ss.greencity.locators.GoogleSignInLocators.*;
+import static com.ss.greencity.pageobjects.SignInPO.getOriginalWindow;
 
 public class GoogleSignInPO extends BasePageObject {
 
@@ -55,7 +59,15 @@ public class GoogleSignInPO extends BasePageObject {
 
     public GoogleSignInPO clickPasswordNextBTN(){
         this.getPasswordNextBtn().click();
+        getSignInPO().switchWindow(getOriginalWindow());
         return this;
+    }
+    public ProfilePO getProfilePO (){
+        return new ProfilePO(driver);
+    }
+
+    public SignInPO getSignInPO(){
+        return  new SignInPO(driver);
     }
 
 }
