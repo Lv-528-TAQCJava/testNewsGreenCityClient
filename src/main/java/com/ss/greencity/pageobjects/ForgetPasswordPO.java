@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.ss.greencity.locators.ForgetPasswordLocators.*;
 
+
 /**
  *
  * An object of forget password page
@@ -23,6 +24,7 @@ public class ForgetPasswordPO extends BasePageObject {
     private Button submitLoginBTN;
     private Button googleSignInBTN;
     private Link backToSignInLink;
+    private WebElement imagePanel;
 
 
     public ForgetPasswordPO(WebDriver driver) {
@@ -63,11 +65,29 @@ public class ForgetPasswordPO extends BasePageObject {
         return this;
     }
     public InputBox getEmailInputField(){
-        this.emailInputField = new InputBox((driver.findElement(EMAIL_FIELD.getPath())));
+        this.emailInputField = new InputBox((driver.findElement(EMAIL_INPUT_FIELD.getPath())));
         return emailInputField;
     }
     public ForgetPasswordPO setEmail(String value){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.getEmailInputField().click().setData(value);
         return this;
+    }
+    public WebElement getImagePanel() {
+        imagePanel = driver.findElement(IMAGE_PANEL.getPath());
+        return imagePanel;
+    }
+
+    public ForgetPasswordPO clickImagePanel() {
+        this.getImagePanel().click();
+        return this;
+    }
+
+    public SignInPO getSignInPO(){
+        return  new SignInPO(driver);
     }
 }

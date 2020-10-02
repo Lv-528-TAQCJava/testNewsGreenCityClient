@@ -32,6 +32,7 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     private Label alertEmptyPasswordMessage;
     private Label alertPasswordMessage;
     private Label alertBadEmailOrPasswordMessage;
+    private Label SignInTitle;
     private  Set<String> oldWindowsSet;
     private static String originalWindow;
     private String newWindow;
@@ -39,6 +40,16 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     public SignInPO(WebDriver driver) {
         super(driver);
 
+    }
+
+    public String  getSignInTitle (){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        SignInTitle = new Label(driver.findElement(SIGN_IN_TITLE.getPath()));
+        return SignInTitle.getText();
     }
 
     public static String getOriginalWindow() {
