@@ -11,15 +11,11 @@ import org.openqa.selenium.WebElement;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import static com.ss.greencity.pageobjects.SignInPO.*;
+
 public class EcoNewsSignInTest extends EcoNewsTestRunner {
 
     SignInPO signInPO = new SignInPO(driver);
-    ProfilePO profilePO = new ProfilePO(driver);
-    ForgetPasswordPO forgetPasswordPO = new ForgetPasswordPO(driver);
-    GoogleSignInPO googleSignInPO = new GoogleSignInPO(driver);
-
-
-
 
     public void logOut(){
         WebElement userHeaderButton = driver.findElement(By.cssSelector("div#user-avatar-wrapper ul"));
@@ -123,17 +119,15 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
    @Test
     public void signInValidDataTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                 signInPO
+       String actualResult = signInPO
                 .clickSignInButton()
                 .setEmail("aliejua@gmail.com")
                 .setPassword("Aa12345_")
                 .clickSignInUserButton()
-                .waitForSingInFormClosed();
-       String actualResult = profilePO.userNameField();
+                .waitForSingInFormClosed()
+                .getProfilePO()
+                .userNameField();
        logOut();
-      // HeaderSignedInComponent.signOut();
-
-
        Assert.assertEquals("User123", actualResult);
     }
 
@@ -143,10 +137,11 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void forgotPasswordLinkTest() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        signInPO
+        String actualResult = signInPO
                 .clickSignInButton()
-                .clickForgotPassword();
-        String actualResult = forgetPasswordPO.getforgotPasswordTitle();
+                .clickForgotPassword()
+                .getForgetPasswordPO()
+                .getforgotPasswordTitle();
 
 
         Assert.assertEquals("Problems sign in?", actualResult);
@@ -157,19 +152,16 @@ public class EcoNewsSignInTest extends EcoNewsTestRunner {
     @Test
     public void signInGoogleIdTest()  {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        signInPO.clickSignInButton();
-        String originalWindow = driver.getWindowHandle();
-        final Set<String> oldWindowsSet = driver.getWindowHandles();
-        signInPO.clickGoogleSignInButton();
-        String newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet, driver);
-        driver.switchTo().window(newWindow);
-        googleSignInPO
+        String actualResult = signInPO
+                .clickSignInButton()
+                .clickGoogleSignInButton()
+                .getGoogleSignInPO()
                 .setEmail_Phone("LelekaTestAcc@gmail.com")
                 .clickEmailNextBTN()
                 .setPassword("Test1234_")
-                .clickPasswordNextBTN();
-        driver.switchTo().window(originalWindow);
-        String actualResult = profilePO.userNameField();
+                .clickPasswordNextBTN()
+                .getProfilePO()
+                .userNameField();
         Assert.assertEquals("Prosto Leleka", actualResult);
         logOut();
     }

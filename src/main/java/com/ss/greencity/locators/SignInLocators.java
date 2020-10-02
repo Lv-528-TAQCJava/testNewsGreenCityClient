@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public enum SignInLocators implements Locator {
     SIGN_IN_BTN(By.cssSelector("li.sign-in-link.tertiary-global-button.last-nav-item")),
+    SIGN_IN_TITLE(By.cssSelector("div > div.right-side > h1")),
     EMAIL_FIELD(By.cssSelector("input[name='email']")),
     IMAGE_PANEL(By.cssSelector("img[class=main-picture]")),
     PASSWORD_FIELD(By.cssSelector("input[name='form-control password-signin']")),

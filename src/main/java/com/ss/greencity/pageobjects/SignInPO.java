@@ -4,9 +4,12 @@ import com.ss.greencity.pageelements.Button;
 import com.ss.greencity.pageelements.InputBox;
 import com.ss.greencity.pageelements.Label;
 import com.ss.greencity.pageelements.Link;
+import com.ss.greencity.util.GoogleWindowSwitch;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.Set;
 
 import static com.ss.greencity.locators.SignInLocators.*;
 import static com.ss.greencity.locators.SignUpLocators.SIGNED_UP_USER_MESSAGE;
@@ -30,10 +33,28 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     private Label alertEmptyPasswordMessage;
     private Label alertPasswordMessage;
     private Label alertBadEmailOrPasswordMessage;
+    private Label SignInTitle;
+    private  Set<String> oldWindowsSet;
+    private static String originalWindow;
+    private String newWindow;
 
     public SignInPO(WebDriver driver) {
         super(driver);
 
+    }
+
+    public String  getSignInTitle (){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        SignInTitle = new Label(driver.findElement(SIGN_IN_TITLE.getPath()));
+        return SignInTitle.getText();
+    }
+
+    public static String getOriginalWindow() {
+        return originalWindow;
     }
 
     public WebElement getSignInButton(){
@@ -112,7 +133,11 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
     }
 
     public SignInPO clickGoogleSignInButton() {
+        originalWindow = driver.getWindowHandle();
+        oldWindowsSet = driver.getWindowHandles();
         this.getGoogleSignInButton().click();
+        newWindow = GoogleWindowSwitch.WindowsHandling(oldWindowsSet, driver);
+        driver.switchTo().window(newWindow);
         return this;
     }
 
@@ -165,5 +190,22 @@ public class SignInPO extends BasePageObject implements ILoggedInPO {
             e.printStackTrace();
         }
         return new ProfilePO(driver);
+    }
+
+    public ProfilePO getProfilePO (){
+        return new ProfilePO(driver);
+    }
+
+    public GoogleSignInPO getGoogleSignInPO (){
+        return new GoogleSignInPO(driver);
+    }
+
+    public ForgetPasswordPO getForgetPasswordPO (){
+        return new ForgetPasswordPO(driver);
+    }
+
+    public SignInPO switchWindow(String window){
+        driver.switchTo().window(window);
+        return this;
     }
 }
